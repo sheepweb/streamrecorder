@@ -110,7 +110,7 @@ export function MobileBar() {
       fullWidth
       value={currentValue}
       onChange={handleChange}
-      styles={{ label: { height: 54 } }}
+      styles={{ label: { height: 46, padding: "4px" } }}
       data={[
         {
           value: "/dashboard",

@@ -23,7 +23,7 @@ export function Shell({
   // mount and headerHeight is fix for SSR and the video player page
   const mounted = useMounted();
   const headerHeight = useMatches({
-    base: 63,
+    base: 55,
     sm: 0,
   });
 
