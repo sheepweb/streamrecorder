@@ -261,9 +261,9 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
 
   return (
     <form onSubmit={form.onSubmit(handleSubmit)}>
-      <Grid gutter="xl">
+      <Grid gutter="xl" overflow="hidden">
         {/* Right side - Form */}
-        <Grid.Col span={{ base: 12, md: 8 }}>
+        <Grid.Col span={{ base: 12, md: 8 }} order={{ base: 2, sm: 1 }}>
           <Stack gap="lg">
             {/* Creator Info - Publishing to this account */}
             {creatorInfo && (
@@ -472,7 +472,7 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
                 href="/my-clips"
                 variant="light"
                 color="gray"
-                size="lg"
+                size="md"
                 leftSection={<IconArrowLeft size={18} />}
               >
                 {t("cancel")}
@@ -487,7 +487,7 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
                   <Button
                     type="submit"
                     loading={loading}
-                    size="lg"
+                    size="md"
                     disabled={isPublishDisabled}
                     fullWidth
                   >
@@ -498,7 +498,7 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
             </Group>
           </Stack>
         </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 4 }}>
+        <Grid.Col span={{ base: 12, md: 4 }} order={{ base: 1, sm: 2 }}>
           <Card withBorder radius="md">
             <AspectRatio ratio={9 / 16}>
               <video

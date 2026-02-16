@@ -39,6 +39,7 @@ export default async function Page({ searchParams }: PageProps) {
       },
       "pagination[limit]": limit,
       "pagination[start]": (pageNumber - 1) * limit,
+      sort: "createdAt:desc",
       locale,
     })
     .catch(() => null);

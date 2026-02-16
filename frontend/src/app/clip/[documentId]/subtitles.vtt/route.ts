@@ -12,8 +12,9 @@ interface Transcript {
   segments: SubtitleEntry[];
 }
 
-const MAX_LINE_WIDTH = 40;
-const MAX_SEGMENT_CHARS = 80; // Max characters per subtitle segment
+const MAX_LINE_WIDTH = 42;
+const MAX_LINES = 2;
+const MAX_CHARS_PER_CUE = MAX_LINE_WIDTH * MAX_LINES; // ~84 chars max per cue
 
 function getCharWidth(char: string): number {
   const code = char.charCodeAt(0);
@@ -35,7 +36,7 @@ function getStringWidth(str: string): number {
   return [...str].reduce((width, char) => width + getCharWidth(char), 0);
 }
 
-function wrapText(text: string, maxWidth: number, locale: string): string {
+function wrapText(text: string, maxWidth: number, locale: string): string[] {
   const segmenter = new Intl.Segmenter(locale, { granularity: "word" });
   const segments = [...segmenter.segment(text)];
 
@@ -54,46 +55,67 @@ function wrapText(text: string, maxWidth: number, locale: string): string {
   }
 
   if (currentLine.trim()) lines.push(currentLine.trim());
-  return lines.join("\n");
+  return lines;
 }
 
 /**
- * Split long Whisper segments into smaller, readable chunks
+ * Split segments into chunks that fit in MAX_LINES lines
  */
-function splitLongSegments(segments: SubtitleEntry[]): SubtitleEntry[] {
+function splitIntoChunks(
+  text: string,
+  start: number,
+  end: number,
+  locale: string,
+): SubtitleEntry[] {
+  const lines = wrapText(text, MAX_LINE_WIDTH, locale);
+  const duration = end - start;
+
+  // If fits in MAX_LINES, return as-is
+  if (lines.length <= MAX_LINES) {
+    return [{ text: lines.join("\n"), start, end }];
+  }
+
+  // Split into chunks of MAX_LINES lines each
+  const chunks: SubtitleEntry[] = [];
+  const totalLines = lines.length;
+  let currentTime = start;
+
+  for (let i = 0; i < totalLines; i += MAX_LINES) {
+    const chunkLines = lines.slice(i, i + MAX_LINES);
+    const chunkText = chunkLines.join("\n");
+
+    // Distribute time proportionally
+    const chunkDuration = (chunkLines.length / totalLines) * duration;
+
+    chunks.push({
+      text: chunkText,
+      start: currentTime,
+      end: currentTime + chunkDuration,
+    });
+
+    currentTime += chunkDuration;
+  }
+
+  return chunks;
+}
+
+/**
+ * Split long Whisper segments into smaller, readable chunks (max 2 lines each)
+ */
+function splitLongSegments(
+  segments: SubtitleEntry[],
+  locale: string,
+): SubtitleEntry[] {
   const result: SubtitleEntry[] = [];
 
   for (const segment of segments) {
-    const { text, start, end } = segment;
-    const duration = end - start;
-
-    // If segment is short enough, keep it
-    if (text.length <= MAX_SEGMENT_CHARS) {
-      result.push(segment);
-      continue;
-    }
-
-    // Split by sentences (. ! ?)
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text];
-    const totalLength = sentences.reduce((sum, s) => sum + s.length, 0);
-
-    let currentTime = start;
-
-    for (const sentence of sentences) {
-      const trimmed = sentence.trim();
-      if (!trimmed) continue;
-
-      // Distribute time proportionally by text length
-      const sentenceDuration = (trimmed.length / totalLength) * duration;
-
-      result.push({
-        text: trimmed,
-        start: currentTime,
-        end: currentTime + sentenceDuration,
-      });
-
-      currentTime += sentenceDuration;
-    }
+    const chunks = splitIntoChunks(
+      segment.text,
+      segment.start,
+      segment.end,
+      locale,
+    );
+    result.push(...chunks);
   }
 
   return result;
@@ -102,16 +124,15 @@ function splitLongSegments(segments: SubtitleEntry[]): SubtitleEntry[] {
 function jsonToVtt(subtitles: SubtitleEntry[], locale: string): string {
   let vtt = "WEBVTT\n\n";
 
-  // Split long segments first
-  const processedSubtitles = splitLongSegments(subtitles);
+  // Split long segments into max 2-line chunks
+  const processedSubtitles = splitLongSegments(subtitles, locale);
 
   processedSubtitles.forEach((entry) => {
     const startTime = secondsToVtt(entry.start);
     const endTime = secondsToVtt(entry.end);
-    const wrappedText = wrapText(entry.text, MAX_LINE_WIDTH, locale);
 
     vtt += `${startTime} --> ${endTime} line:85%\n`;
-    vtt += `${wrappedText}\n\n`;
+    vtt += `${entry.text}\n\n`;
   });
 
   return vtt;

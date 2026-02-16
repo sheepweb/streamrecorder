@@ -48,8 +48,8 @@ export function MobileBar() {
   };
 
   const currentValue = (() => {
-    if (pathname.startsWith("/search")) return "search";
-    if (pathname.startsWith("/dashboard")) return "dashboard";
+    if (pathname.startsWith("/search")) return "/search";
+    if (pathname.startsWith("/dashboard")) return "/dashboard";
 
     const section = navigation.find((section) =>
       section.links?.some((link) => pathname.startsWith(link.url || "")),
@@ -113,7 +113,7 @@ export function MobileBar() {
       styles={{ label: { height: 54 } }}
       data={[
         {
-          value: "dashboard",
+          value: "/dashboard",
           label: (
             <Stack gap={2} align="center">
               <IconLayoutDashboard
@@ -128,7 +128,7 @@ export function MobileBar() {
         },
         ...links,
         {
-          value: "search",
+          value: "/search",
           label: (
             <Stack gap={2} align="center">
               <IconLink
