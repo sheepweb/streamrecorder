@@ -165,6 +165,40 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
   }
 
   if (creatorError) {
+    // Special handling for no TikTok connection
+    if (creatorError === "No TikTok connection") {
+      return (
+        <Stack gap="md" align="center" py="xl">
+          <Alert
+            icon={<IconAlertCircle size={16} />}
+            color="orange"
+            title={t("noTiktokConnection.title")}
+          >
+            <Stack gap="xs">
+              <Text size="sm">{t("noTiktokConnection.description")}</Text>
+              <Text size="sm" c="dimmed">
+                {t("noTiktokConnection.hint")}
+              </Text>
+            </Stack>
+          </Alert>
+          <Group>
+            <Button
+              component={Link}
+              href="/my-clips"
+              variant="light"
+              color="gray"
+              leftSection={<IconArrowLeft size={16} />}
+            >
+              {t("backToClips")}
+            </Button>
+            <Button component={Link} href="/settings">
+              {t("noTiktokConnection.goToSettings")}
+            </Button>
+          </Group>
+        </Stack>
+      );
+    }
+
     return (
       <Stack gap="md">
         <Alert icon={<IconAlertCircle size={16} />} color="red">
@@ -405,11 +439,13 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
 
             <Divider />
 
-            {/* Music Usage Confirmation Declaration */}
+            {/* Terms of Service and Music Usage Confirmation Declaration */}
             <Text size="md" c="dimmed" ta="center">
-              {form.values.brandOrganicToggle
-                ? t("brandedContentConfirmationPrefix")
-                : t("musicConfirmationPrefix")}{" "}
+              {t("confirmationPrefix")}{" "}
+              <Anchor href="/terms" target="_blank">
+                {t("termsOfServiceLink")}
+              </Anchor>
+              {", "}
               {form.values.brandOrganicToggle && (
                 <>
                   <Anchor

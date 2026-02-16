@@ -27,12 +27,6 @@ export default function PaginationControls({
   if (total <= 1) return null;
 
   return (
-    <Pagination
-      value={page}
-      onChange={handleChange}
-      total={total}
-      mt="xl"
-      {...props}
-    />
+    <Pagination value={page} onChange={handleChange} total={total} {...props} />
   );
 }

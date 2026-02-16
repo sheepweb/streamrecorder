@@ -9,12 +9,11 @@ import {
   Button,
   Card,
   Flex,
-  Group,
   Progress,
   Stack,
   Title,
 } from "@mantine/core";
-import { IconBrandTiktok, IconEdit, IconTrash } from "@tabler/icons-react";
+import { IconBrandTiktok } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -161,7 +160,7 @@ export function ClipCard({ clip, locale }: ClipCardProps) {
         {/* Action buttons */}
         <Stack gap="xs">
           {renderTikTokStatus()}
-
+          {/*
           <Group grow>
             <Button
               size="sm"
@@ -181,7 +180,7 @@ export function ClipCard({ clip, locale }: ClipCardProps) {
             >
               {t("actions.delete")}
             </Button>
-          </Group>
+          </Group> */}
         </Stack>
       </Stack>
     </Card>

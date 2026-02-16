@@ -27,6 +27,9 @@ export default async function Page({ searchParams }: PageProps) {
   const t = await getTranslations("protected.myClips");
   const locale = await getLocale();
 
+  const pageNumber = parseInt(page || "1", 10);
+  const limit = 12;
+
   const response = await api.clip
     .meGetClips({
       populate: {
@@ -34,8 +37,9 @@ export default async function Page({ searchParams }: PageProps) {
           populate: { avatar: true },
         },
       },
-      "pagination[pageSize]": 12,
-      "pagination[page]": parseInt(page || "1", 10),
+      "pagination[limit]": limit,
+      "pagination[start]": (pageNumber - 1) * limit,
+      locale,
     })
     .catch(() => null);
 
@@ -65,7 +69,7 @@ export default async function Page({ searchParams }: PageProps) {
         {!clips || clips.length === 0 ? (
           <EmptyState />
         ) : (
-          <Stack gap="xl">
+          <Stack gap="md">
             {totalPages > 1 && (
               <Center>
                 <PaginationControls total={totalPages} size="lg" />

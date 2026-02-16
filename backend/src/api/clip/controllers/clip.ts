@@ -7,16 +7,27 @@ const toCamelCase = (obj: Record<string, any>) =>
 export default factories.createCoreController(
   "api::clip.clip",
   ({ strapi }) => {
-    // Shared helper to get follower IDs for user
-    const getFollowerIds = async (userId: number) => {
-      const followers = await strapi
-        .documents("api::follower.follower")
-        .findMany({
-          filters: { owner: { id: userId } },
-          fields: ["id"],
+    // Shared helper to get follower documentIds for user
+    const getFollowerDocumentIds = async (userDocumentId: string) => {
+      const user = await strapi
+        .documents("plugin::users-permissions.user")
+        .findOne({
+          documentId: userDocumentId,
+          populate: { followers: { fields: ["documentId"] } },
         });
-      return followers.map((f) => f.id);
+      return user?.followers?.map((f) => f.documentId) || [];
     };
+
+    // Old version - get followers by owner
+    // const getFollowerIds = async (userId: number) => {
+    //   const followers = await strapi
+    //     .documents("api::follower.follower")
+    //     .findMany({
+    //       filters: { owner: { id: userId } },
+    //       fields: ["id"],
+    //     });
+    //   return followers.map((f) => f.id);
+    // };
 
     // Shared helper to attach clip shares to clips
     const attachClipShares = async (clips: any[], userId: number) => {
@@ -57,9 +68,9 @@ export default factories.createCoreController(
           return ctx.unauthorized();
         }
 
-        const followerIds = await getFollowerIds(user.id);
+        const followerDocumentIds = await getFollowerDocumentIds(user.documentId);
 
-        if (followerIds.length === 0) {
+        if (followerDocumentIds.length === 0) {
           return {
             data: [],
             meta: {
@@ -68,21 +79,47 @@ export default factories.createCoreController(
           };
         }
 
-        ctx.query = {
-          ...ctx.query,
-          filters: {
-            ...((ctx.query.filters as object) || {}),
-            follower: { id: { $in: followerIds } },
-          },
+        const { query } = ctx;
+        const filters = {
+          ...((query.filters as object) || {}),
+          follower: { documentId: { $in: followerDocumentIds } },
         };
 
-        const result = await super.find(ctx);
+        // Extract pagination params (Strapi Document Service uses limit/start directly)
+        const pagination = (query.pagination || {}) as Record<string, unknown>;
+        const limit = Number(pagination.limit) || Number(pagination.pageSize) || 25;
+        const start = Number(pagination.start) || 0;
 
-        if (result.data?.length > 0) {
-          result.data = await attachClipShares(result.data, user.id);
-        }
+        const results = await strapi.documents("api::clip.clip").findMany({
+          ...query,
+          filters,
+          limit,
+          start,
+        });
 
-        return result;
+        // Count using Document Service with same filters (no pagination)
+        const allForCount = await strapi.documents("api::clip.clip").findMany({
+          filters,
+          fields: ["id"],
+        });
+        const total = allForCount.length;
+
+        const data =
+          results.length > 0
+            ? await attachClipShares(results, user.id)
+            : results;
+
+        return {
+          data,
+          meta: {
+            pagination: {
+              page: Math.floor(start / limit) + 1,
+              pageSize: limit,
+              pageCount: Math.ceil(total / limit),
+              total,
+            },
+          },
+        };
       },
 
       async meFindOne(ctx) {
@@ -92,29 +129,30 @@ export default factories.createCoreController(
         }
 
         const { id } = ctx.params;
-        const followerIds = await getFollowerIds(user.id);
+        const followerDocumentIds = await getFollowerDocumentIds(user.documentId);
 
-        if (followerIds.length === 0) {
+        if (followerDocumentIds.length === 0) {
           return ctx.notFound();
         }
 
-        ctx.query = {
-          ...ctx.query,
-          filters: {
-            ...((ctx.query.filters as object) || {}),
-            follower: { id: { $in: followerIds } },
-            documentId: id,
-          },
-          pagination: { limit: 1 },
+        const { query } = ctx;
+        const filters = {
+          ...((query.filters as object) || {}),
+          follower: { documentId: { $in: followerDocumentIds } },
+          documentId: id,
         };
 
-        const result = await super.find(ctx);
+        const results = await strapi.documents("api::clip.clip").findMany({
+          ...query,
+          filters,
+          limit: 1,
+        });
 
-        if (!result.data?.length) {
+        if (!results.length) {
           return ctx.notFound();
         }
 
-        const [clip] = await attachClipShares(result.data, user.id);
+        const [clip] = await attachClipShares(results, user.id);
         return { data: clip };
       },
 
