@@ -84,17 +84,17 @@ export default function FollowerItem({ follower }: Props) {
               </Group>
 
               <Group gap="xs">
-                <Text size="sm" c="dimmed" suppressHydrationWarning>
+                <Text size="xs" c="dimmed" suppressHydrationWarning>
                   {t("followers.addedAgo", {
                     time: safeRelativeTime(format, follower.createdAt, {
                       now,
                     }),
                   })}
                 </Text>
-                <Text size="xs" color="dimmed">
+                <Text size="xs" c="dimmed">
                   |
                 </Text>
-                <Text size="sm" c="dimmed" suppressHydrationWarning>
+                <Text size="xs" c="dimmed" suppressHydrationWarning>
                   {t("recordings.videoCount", {
                     count: follower.totalRecordings!,
                   })}

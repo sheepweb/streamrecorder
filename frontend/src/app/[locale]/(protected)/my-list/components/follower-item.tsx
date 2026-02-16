@@ -70,11 +70,18 @@ export default function FollowerItem({ follower, isOpen }: Props) {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
     // Scroll to top of accordion item when pagination changes
-    accordionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    accordionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   return (
-    <Accordion.Item ref={accordionRef} key={follower.documentId} value={follower.username}>
+    <Accordion.Item
+      ref={accordionRef}
+      key={follower.documentId}
+      value={follower.username}
+    >
       <AccordionControl follower={follower}>
         <Group gap="xs">
           <Box pos="relative">
@@ -118,7 +125,7 @@ export default function FollowerItem({ follower, isOpen }: Props) {
           <Stack gap={2}>
             <Group gap="xs">
               <Anchor component={Link} href={getProfileUrl(follower)} size="md">
-                <Text size="lg" truncate maw={isMobile ? 100 : 200} fw="bold">
+                <Text size="lg" truncate maw={isMobile ? 140 : 200} fw="bold">
                   {follower.username}
                 </Text>
               </Anchor>
@@ -128,23 +135,21 @@ export default function FollowerItem({ follower, isOpen }: Props) {
             </Group>
 
             <Group gap="xs">
-              <Group gap={4}>
-                <Text size="sm" c="dimmed" suppressHydrationWarning>
-                  {t("followers.addedAgo", {
-                    time: safeRelativeTime(format, follower.createdAt, {
-                      now,
-                    }),
-                  })}
-                </Text>
-                <Text size="xs" color="dimmed">
-                  |
-                </Text>
-                <Text size="sm" c="dimmed" suppressHydrationWarning>
-                  {t("recordings.videoCount", {
-                    count: follower.totalRecordings!,
-                  })}
-                </Text>
-              </Group>
+              <Text size="xs" c="dimmed" suppressHydrationWarning>
+                {t("followers.addedAgo", {
+                  time: safeRelativeTime(format, follower.createdAt, {
+                    now,
+                  }),
+                })}
+              </Text>
+              <Text size="xs" c="dimmed">
+                |
+              </Text>
+              <Text size="xs" c="dimmed" suppressHydrationWarning>
+                {t("recordings.videoCount", {
+                  count: follower.totalRecordings!,
+                })}
+              </Text>
             </Group>
           </Stack>
         </Group>
