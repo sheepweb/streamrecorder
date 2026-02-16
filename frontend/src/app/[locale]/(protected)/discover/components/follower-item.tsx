@@ -46,7 +46,7 @@ export default function FollowerItem({ follower }: Props) {
 
   const mawTruncate = useMatches({
     base: 200,
-    md: 120,
+    md: 100,
   });
 
   return (
@@ -55,7 +55,7 @@ export default function FollowerItem({ follower }: Props) {
         <Flex justify="space-between">
           <Group gap="xs">
             <Anchor component={Link} href={getProfileUrl(follower)}>
-              <Avatar size="md">
+              <Avatar size="lg">
                 {follower.avatar?.url && (
                   <Image
                     src={generateAvatarUrl(follower.avatar?.url)}
@@ -69,11 +69,7 @@ export default function FollowerItem({ follower }: Props) {
 
             <Stack gap={2}>
               <Group gap="xs">
-                <Anchor
-                  component={Link}
-                  href={getProfileUrl(follower)}
-                  size="md"
-                >
+                <Anchor component={Link} href={getProfileUrl(follower)}>
                   <Text size="lg" truncate maw={mawTruncate} fw="bold">
                     {follower.username}
                   </Text>
@@ -83,7 +79,7 @@ export default function FollowerItem({ follower }: Props) {
                 ) : null}
               </Group>
 
-              <Group gap="xs">
+              <Stack gap="0">
                 <Text size="xs" c="dimmed" suppressHydrationWarning>
                   {t("followers.addedAgo", {
                     time: safeRelativeTime(format, follower.createdAt, {
@@ -91,15 +87,12 @@ export default function FollowerItem({ follower }: Props) {
                     }),
                   })}
                 </Text>
-                <Text size="xs" c="dimmed">
-                  |
-                </Text>
                 <Text size="xs" c="dimmed" suppressHydrationWarning>
                   {t("recordings.videoCount", {
                     count: follower.totalRecordings!,
                   })}
                 </Text>
-              </Group>
+              </Stack>
             </Stack>
           </Group>
 

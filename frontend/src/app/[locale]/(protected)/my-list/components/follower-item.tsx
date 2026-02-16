@@ -86,7 +86,7 @@ export default function FollowerItem({ follower, isOpen }: Props) {
         <Group gap="xs">
           <Box pos="relative">
             <Avatar
-              size={isMobile ? "md" : "lg"}
+              size="lg"
               style={
                 follower?.owner?.id === user?.id
                   ? {
@@ -125,7 +125,7 @@ export default function FollowerItem({ follower, isOpen }: Props) {
           <Stack gap={2}>
             <Group gap="xs">
               <Anchor component={Link} href={getProfileUrl(follower)} size="md">
-                <Text size="lg" truncate maw={isMobile ? 140 : 200} fw="bold">
+                <Text size="lg" truncate maw={isMobile ? 100 : 200} fw="bold">
                   {follower.username}
                 </Text>
               </Anchor>
@@ -134,7 +134,7 @@ export default function FollowerItem({ follower, isOpen }: Props) {
               ) : null}
             </Group>
 
-            <Group gap="xs">
+            <Stack gap="0">
               <Text size="xs" c="dimmed" suppressHydrationWarning>
                 {t("followers.addedAgo", {
                   time: safeRelativeTime(format, follower.createdAt, {
@@ -142,15 +142,12 @@ export default function FollowerItem({ follower, isOpen }: Props) {
                   }),
                 })}
               </Text>
-              <Text size="xs" c="dimmed">
-                |
-              </Text>
               <Text size="xs" c="dimmed" suppressHydrationWarning>
                 {t("recordings.videoCount", {
                   count: follower.totalRecordings!,
                 })}
               </Text>
-            </Group>
+            </Stack>
           </Stack>
         </Group>
       </AccordionControl>
