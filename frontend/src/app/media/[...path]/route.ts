@@ -1,4 +1,5 @@
 import api from "@/lib/api";
+import { FINGERPRINT_COOKIE, MAX_PUBLIC_VIEWS } from "@/lib/constants";
 import publicApi from "@/lib/public-api";
 import { getToken } from "@/lib/token";
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
@@ -13,9 +14,6 @@ const s3 = new S3Client({
     secretAccessKey: process.env.S3_SECRET_KEY!,
   },
 });
-
-const FINGERPRINT_COOKIE = "_pxvid";
-const MAX_PUBLIC_VIEWS = 3; // TODO: Change to 5 for production
 
 // Files that bypass access control (placeholders)
 const PUBLIC_FILES = [
@@ -118,7 +116,36 @@ export async function GET(
         }
       }
 
-      // Basic user not following - deny
+      // Basic user not following - check view limit by user ID
+      const userId = (user?.data as any)?.documentId;
+      if (userId) {
+        const userFingerprint = `user:${userId}`;
+
+        const { data: viewsData } = await publicApi.visitorView.getVisitorViews({
+          filters: {
+            fingerprint: { $eq: userFingerprint },
+          },
+          populate: "recording",
+          "pagination[limit]": MAX_PUBLIC_VIEWS + 1,
+        });
+
+        const viewedRecordings = new Set(
+          viewsData.data?.map((v) => v.recording?.documentId).filter(Boolean),
+        );
+
+        const alreadyViewed = viewedRecordings.has(recording.documentId);
+
+        if (alreadyViewed || viewedRecordings.size < MAX_PUBLIC_VIEWS) {
+          const command = new GetObjectCommand({
+            Bucket: process.env.MEDIA_BUCKET!,
+            Key: filePath,
+          });
+          const signedUrl = await getSignedUrl(s3, command, { expiresIn: 1800 });
+          return Response.redirect(signedUrl);
+        }
+      }
+
+      // Basic user not following, limit exceeded - deny
       return new Response("Forbidden", { status: 403 });
     }
 
