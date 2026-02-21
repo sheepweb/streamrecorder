@@ -36,9 +36,9 @@
       "cancel": "İptal"
     },
     "createWithAI": "AI ile klip oluştur",
-    "addToWatchLater": "Sonraya İzlemeye Ekle",
+    "addToWatchLater": "Sonraya İzlemeye Kaydet",
     "removeFromWatchLater": "Sonraya İzlemeden Kaldır",
-    "addedToWatchLater": "Sonraya İzlemeye Eklendi",
+    "addedToWatchLater": "Sonraya İzlemeye Kaydedildi",
     "removedFromWatchLater": "Sonraya İzlemeden Kaldırıldı"
   },
   "followers": {

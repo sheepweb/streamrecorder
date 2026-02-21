@@ -36,9 +36,9 @@
       "cancel": "취소"
     },
     "createWithAI": "AI로 클립 만들기",
-    "addToWatchLater": "나중에 볼 목록에 추가",
+    "addToWatchLater": "나중에 볼 동영상에 저장",
     "removeFromWatchLater": "나중에 볼 목록에서 삭제",
-    "addedToWatchLater": "나중에 볼 목록에 추가됨",
+    "addedToWatchLater": "나중에 볼 동영상에 저장됨",
     "removedFromWatchLater": "나중에 볼 목록에서 삭제됨"
   },
   "followers": {

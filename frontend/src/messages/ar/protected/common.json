@@ -34,9 +34,9 @@
       "cancel": "إلغاء"
     },
     "createWithAI": "إنشاء مقاطع بالذكاء الاصطناعي",
-    "addToWatchLater": "إضافة إلى شاهد لاحقاً",
+    "addToWatchLater": "حفظ في شاهد لاحقاً",
     "removeFromWatchLater": "إزالة من شاهد لاحقاً",
-    "addedToWatchLater": "تمت الإضافة إلى شاهد لاحقاً",
+    "addedToWatchLater": "تم الحفظ في شاهد لاحقاً",
     "removedFromWatchLater": "تمت الإزالة من شاهد لاحقاً"
   },
   "followers": {
