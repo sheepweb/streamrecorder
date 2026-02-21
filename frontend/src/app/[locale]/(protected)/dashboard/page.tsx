@@ -1,5 +1,5 @@
 import { FollowerTypeIcon } from "@/app/[locale]/(protected)/components/follower-type-icon";
-import { ImageSpritePreview } from "@/app/[locale]/(protected)/components/image-sprite-preview";
+import RecordingItem from "@/app/[locale]/(protected)/components/recording-item";
 import { getProfileUrl } from "@/app/components/open-social";
 import { generateAvatarUrl } from "@/app/lib/avatar-url";
 import { streamingPlatforms } from "@/app/lib/streaming-platforms";
@@ -233,12 +233,7 @@ export default async function Page() {
 
                 <SimpleGrid cols={{ base: 2, sm: 2, md: 4 }} spacing="md">
                   {platform.recordings.map((rec) => (
-                    <ImageSpritePreview
-                      key={rec.documentId}
-                      recording={rec}
-                      username={rec.follower?.username || ""}
-                      type={platform.type}
-                    />
+                    <RecordingItem key={rec.documentId} recording={rec} />
                   ))}
                 </SimpleGrid>
 
@@ -299,12 +294,7 @@ export default async function Page() {
 
           <SimpleGrid cols={{ base: 2, sm: 2, md: 4 }} spacing="md">
             {platform.recordings.map((rec) => (
-              <ImageSpritePreview
-                key={rec.documentId}
-                recording={rec}
-                username={rec.follower?.username || ""}
-                type={platform.type}
-              />
+              <RecordingItem key={rec.documentId} recording={rec} />
             ))}
           </SimpleGrid>
 

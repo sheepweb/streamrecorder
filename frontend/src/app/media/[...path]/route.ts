@@ -25,17 +25,17 @@ const PUBLIC_FILES = [
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ path: string[] }> },
+  _context: { params: Promise<{ path: string[] }> },
 ) {
-  const { path } = await params;
-  const filePath = path.join("/");
+  const filePath = new URL(request.url).pathname.replace(/^\/media\//, "");
+  const s3Key = decodeURIComponent(filePath);
 
   try {
     // Allow placeholder files without access control
     if (PUBLIC_FILES.includes(filePath)) {
       const command = new GetObjectCommand({
         Bucket: process.env.MEDIA_BUCKET!,
-        Key: filePath,
+        Key: s3Key,
       });
       const signedUrl = await getSignedUrl(s3, command, { expiresIn: 1800 });
       return Response.redirect(signedUrl);
@@ -91,7 +91,7 @@ export async function GET(
       ) {
         const command = new GetObjectCommand({
           Bucket: process.env.MEDIA_BUCKET!,
-          Key: filePath,
+          Key: s3Key,
         });
         const signedUrl = await getSignedUrl(s3, command, { expiresIn: 1800 });
         return Response.redirect(signedUrl);
@@ -107,7 +107,7 @@ export async function GET(
         if (isFollowing) {
           const command = new GetObjectCommand({
             Bucket: process.env.MEDIA_BUCKET!,
-            Key: filePath,
+            Key: s3Key,
           });
           const signedUrl = await getSignedUrl(s3, command, {
             expiresIn: 1800,
@@ -121,13 +121,15 @@ export async function GET(
       if (userId) {
         const userFingerprint = `user:${userId}`;
 
-        const { data: viewsData } = await publicApi.visitorView.getVisitorViews({
-          filters: {
-            fingerprint: { $eq: userFingerprint },
+        const { data: viewsData } = await publicApi.visitorView.getVisitorViews(
+          {
+            filters: {
+              fingerprint: { $eq: userFingerprint },
+            },
+            populate: "recording",
+            "pagination[limit]": MAX_PUBLIC_VIEWS + 1,
           },
-          populate: "recording",
-          "pagination[limit]": MAX_PUBLIC_VIEWS + 1,
-        });
+        );
 
         const viewedRecordings = new Set(
           viewsData.data?.map((v) => v.recording?.documentId).filter(Boolean),
@@ -138,9 +140,11 @@ export async function GET(
         if (alreadyViewed || viewedRecordings.size < MAX_PUBLIC_VIEWS) {
           const command = new GetObjectCommand({
             Bucket: process.env.MEDIA_BUCKET!,
-            Key: filePath,
+            Key: s3Key,
           });
-          const signedUrl = await getSignedUrl(s3, command, { expiresIn: 1800 });
+          const signedUrl = await getSignedUrl(s3, command, {
+            expiresIn: 1800,
+          });
           return Response.redirect(signedUrl);
         }
       }
@@ -157,7 +161,7 @@ export async function GET(
       // No fingerprint, allow (first visit)
       const command = new GetObjectCommand({
         Bucket: process.env.MEDIA_BUCKET!,
-        Key: filePath,
+        Key: s3Key,
       });
       const signedUrl = await getSignedUrl(s3, command, { expiresIn: 1800 });
       return Response.redirect(signedUrl);
@@ -181,7 +185,7 @@ export async function GET(
     if (alreadyViewed || viewedRecordings.size < MAX_PUBLIC_VIEWS) {
       const command = new GetObjectCommand({
         Bucket: process.env.MEDIA_BUCKET!,
-        Key: filePath,
+        Key: s3Key,
       });
       const signedUrl = await getSignedUrl(s3, command, { expiresIn: 1800 });
       return Response.redirect(signedUrl);

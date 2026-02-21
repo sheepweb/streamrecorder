@@ -56,9 +56,10 @@ export async function generateMetadata({
   }
 
   const platformName = type.charAt(0).toUpperCase() + type.slice(1);
+  const creatorName = decodeURIComponent(follower.username || "unknown");
   const translation = {
-    nickname: follower.nickname || "",
-    username: follower.username,
+    nickname: decodeURIComponent(follower.nickname || ""),
+    username: decodeURIComponent(follower.username || ""),
     platform: platformName,
   };
   const title = t("meta.title", translation);
@@ -91,7 +92,7 @@ export async function generateMetadata({
         )}`,
       ],
     },
-    alternates: generateAlternates(`/${type}/${follower.username}`, locale),
+    alternates: generateAlternates(`/${type}/${creatorName}`, locale),
   };
 }
 
@@ -119,7 +120,7 @@ export default async function Page({ params }: PageProps) {
   const countryName = getCountryName(follower.countryCode);
 
   const profileUrl = generateProfileUrl(follower, true);
-
+  const creatorName = decodeURIComponent(follower.username || "Unknown");
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const platformName = type.charAt(0).toUpperCase() + type.slice(1);
 
@@ -147,7 +148,7 @@ export default async function Page({ params }: PageProps) {
         position: 3,
         item: {
           "@id": profileUrl,
-          name: follower.nickname || `@${follower.username}`,
+          name: follower.nickname || `@${creatorName}`,
         },
       },
     ],
@@ -160,11 +161,9 @@ export default async function Page({ params }: PageProps) {
     mainEntity: {
       "@type": "Person",
       "@id": `${profileUrl}#person`,
-      name: follower.username,
-      identifier: follower.username,
-      alternateName: [follower.nickname, `@${follower.username}`].filter(
-        Boolean,
-      ),
+      name: creatorName,
+      identifier: creatorName,
+      alternateName: [follower.nickname, `@${creatorName}`].filter(Boolean),
       description: follower.tagline || follower.description,
       image: generateAvatarUrl(follower.avatar?.url, true),
       url: profileUrl,
@@ -192,7 +191,7 @@ export default async function Page({ params }: PageProps) {
   const faqSchema = follower.faq?.length
     ? {
         "@type": "FAQPage",
-        name: `FAQ - ${follower.nickname || follower.username}`,
+        name: `FAQ - ${creatorName}`,
         mainEntity: follower.faq.map((item: { q: string; a: string }) => ({
           "@type": "Question",
           name: item.q,
@@ -240,7 +239,7 @@ export default async function Page({ params }: PageProps) {
               {follower.avatar?.url && (
                 <Image
                   src={generateAvatarUrl(follower.avatar?.url)}
-                  alt={follower.nickname || follower.username}
+                  alt={creatorName}
                   width={100}
                   height={100}
                 />
@@ -249,7 +248,7 @@ export default async function Page({ params }: PageProps) {
 
             <Stack gap="xs">
               <Group>
-                <Title order={1}>{follower.username}</Title>
+                <Title order={1}>{creatorName}</Title>
                 {follower.nickname && (
                   <Title order={2} size="lg" fw={400} c="dimmed">
                     {follower.nickname}
@@ -299,10 +298,7 @@ export default async function Page({ params }: PageProps) {
                       </Text>
                     </Stack>
                   ))}
-                  <SignupCta
-                    username={follower.username}
-                    recordings={recordings}
-                  />
+                  <SignupCta username={creatorName} recordings={recordings} />
                 </SimpleGrid>
               )}
             </Stack>
