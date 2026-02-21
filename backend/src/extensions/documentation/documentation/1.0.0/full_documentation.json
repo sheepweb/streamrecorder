@@ -20,7 +20,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-02-21T01:45:25.000Z"
+    "x-generation-date": "2026-02-21T03:01:08.700Z"
   },
   "servers": [
     {
@@ -9235,6 +9235,7 @@
                           "enum": [
                             "active",
                             "cancelled",
+                            "trialing",
                             "expired"
                           ],
                           "nullable": true

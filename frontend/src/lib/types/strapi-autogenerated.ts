@@ -6749,6 +6749,7 @@ export enum ActivityGenderEnum {
 export enum ActivitySubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -6783,6 +6784,7 @@ export enum AiRequestGenderEnum {
 export enum AiRequestSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -6844,6 +6846,7 @@ export enum AiTaskGenderEnum {
 export enum AiTaskSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -6898,6 +6901,7 @@ export enum ClipGenderEnum {
 export enum ClipSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -6937,6 +6941,7 @@ export enum ClipShareGenderEnum {
 export enum ClipShareSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -6994,6 +6999,7 @@ export enum FollowerGenderEnum1 {
 export enum FollowerSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -7031,6 +7037,7 @@ export enum MemeGenderEnum {
 export enum MemeSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -7059,6 +7066,7 @@ export enum RecordingGenderEnum {
 export enum RecordingSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -7098,6 +7106,7 @@ export enum SourceGenderEnum {
 export enum SourceSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -7131,6 +7140,7 @@ export enum TiktokGenderEnum {
 export enum TiktokSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -7158,6 +7168,7 @@ export enum VisitorViewGenderEnum {
 export enum VisitorViewSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 
@@ -8083,6 +8094,7 @@ export type UsersDeleteData = UsersPermissionsUser;
 export enum SubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
+  Trialing = "trialing",
   Expired = "expired",
 }
 

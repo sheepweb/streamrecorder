@@ -822,7 +822,7 @@ export default ({ env }) => ({
                     },
                     subscriptionStatus: {
                       type: "string",
-                      enum: ["active", "cancelled", "expired"],
+                      enum: ["active", "cancelled", "trialing", "expired"],
                       nullable: true,
                     },
                     billingPeriod: {
@@ -837,7 +837,8 @@ export default ({ env }) => ({
                     freemius: {
                       type: "string",
                       nullable: true,
-                      description: "JSON string with Freemius subscription data",
+                      description:
+                        "JSON string with Freemius subscription data",
                     },
                     stripe: {
                       type: "string",
