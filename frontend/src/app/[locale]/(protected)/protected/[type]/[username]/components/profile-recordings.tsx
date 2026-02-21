@@ -1,6 +1,7 @@
 "use client";
 
 import { ImageSpritePreview } from "@/app/[locale]/(protected)/components/image-sprite-preview";
+import { RecordingMenu } from "@/app/[locale]/(protected)/components/recording-menu";
 import {
   FollowerTypeEnum,
   SourceStateEnum,
@@ -93,20 +94,27 @@ export default function ProfileRecordings() {
                 type={params.type}
               />
 
-              <Text size="xs" suppressHydrationWarning>
-                {isRecording
-                  ? t("recordings.liveAgo", {
-                      time: safeRelativeTime(format, rec.createdAt, {
-                        style: "narrow",
-                        now,
-                      }),
-                    })
-                  : t("recordings.recordedAgo", {
-                      time: safeRelativeTime(format, rec.createdAt, {
-                        now,
-                      }),
-                    })}
-              </Text>
+              <Group justify="space-between">
+                <Text size="xs" suppressHydrationWarning>
+                  {isRecording
+                    ? t("recordings.liveAgo", {
+                        time: safeRelativeTime(format, rec.createdAt, {
+                          style: "narrow",
+                          now,
+                        }),
+                      })
+                    : t("recordings.recordedAgo", {
+                        time: safeRelativeTime(format, rec.createdAt, {
+                          now,
+                        }),
+                      })}
+                </Text>
+                <RecordingMenu
+                  recording={rec}
+                  username={params.username}
+                  type={params.type}
+                />
+              </Group>
             </Stack>
           );
         })}

@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProfileUrl } from "../../../components/open-social";
 import { ImageSpritePreview } from "./image-sprite-preview";
+import { RecordingMenu } from "./recording-menu";
 
 interface Props {
   recording: Recording;
@@ -31,38 +32,45 @@ export default function RecordingItem({ recording }: Props) {
         </Grid.Col>
       )}
       <Grid.Col span={12}>
-        <Group gap="xs">
-          <Anchor component={Link} href={getProfileUrl(recording.follower)}>
-            <Avatar size={38}>
-              {recording.follower?.avatar?.url && (
-                <Image
-                  src={generateAvatarUrl(recording.follower?.avatar?.url)}
-                  alt={"Avatar"}
-                  width={38}
-                  height={38}
-                />
-              )}
-            </Avatar>
-          </Anchor>
-          <Stack gap="0">
-            <Anchor
-              component={Link}
-              href={getProfileUrl(recording.follower)}
-              size="md"
-              truncate
-              maw={110}
-              display="inline-block"
-            >
-              {recording.follower?.username}
+        <Group gap="xs" justify="space-between">
+          <Group gap="xs">
+            <Anchor component={Link} href={getProfileUrl(recording.follower)}>
+              <Avatar size={38}>
+                {recording.follower?.avatar?.url && (
+                  <Image
+                    src={generateAvatarUrl(recording.follower?.avatar?.url)}
+                    alt={"Avatar"}
+                    width={38}
+                    height={38}
+                  />
+                )}
+              </Avatar>
             </Anchor>
-            <Text size="xs" suppressHydrationWarning>
-              {t("recordedAgo", {
-                time: safeRelativeTime(format, recording.updatedAt, {
-                  now,
-                }),
-              })}
-            </Text>
-          </Stack>
+            <Stack gap="0">
+              <Anchor
+                component={Link}
+                href={getProfileUrl(recording.follower)}
+                size="md"
+                truncate
+                maw={110}
+                display="inline-block"
+              >
+                {recording.follower?.username}
+              </Anchor>
+              <Text size="xs" suppressHydrationWarning>
+                {t("recordedAgo", {
+                  time: safeRelativeTime(format, recording.updatedAt, {
+                    now,
+                  }),
+                })}
+              </Text>
+            </Stack>
+          </Group>
+          <RecordingMenu
+            recording={recording}
+            username={recording.follower?.username}
+            type={recording.follower?.type}
+          />
         </Group>
       </Grid.Col>
     </Grid>

@@ -26,7 +26,12 @@ export default async function DashboardLayout({
 
   const user =
     await api.usersPermissionsUsersRoles.getUsersPermissionsUsersRoles({
-      populate: "role",
+      populate: {
+        role: true,
+        followers: {
+          fields: ["id", "documentId"],
+        },
+      },
     });
 
   const role = user?.data?.role || null;

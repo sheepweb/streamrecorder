@@ -35,7 +35,9 @@
       "confirm": "Delete",
       "cancel": "Cancel"
     },
-    "createWithAI": "Create clips with AI"
+    "createWithAI": "Create clips with AI",
+    "addToWatchLater": "Watch later",
+    "removeFromWatchLater": "Remove from Watch later"
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",

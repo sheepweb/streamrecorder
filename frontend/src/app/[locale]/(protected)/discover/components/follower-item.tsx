@@ -21,6 +21,7 @@ import {
 import Link from "next/link";
 
 import { ImageSpritePreview } from "@/app/[locale]/(protected)/components/image-sprite-preview";
+import { RecordingMenu } from "@/app/[locale]/(protected)/components/recording-menu";
 import { getProfileUrl } from "@/app/components/open-social";
 import { generateAvatarUrl } from "@/app/lib/avatar-url";
 import { safeRelativeTime } from "@/app/lib/safe-relative-time";
@@ -129,7 +130,7 @@ export default function FollowerItem({ follower }: Props) {
                       type={follower.type}
                     />
 
-                    <div>
+                    <Group justify="space-between">
                       <Text size="xs" suppressHydrationWarning>
                         {isRecording
                           ? t("recordings.liveAgo", {
@@ -144,7 +145,12 @@ export default function FollowerItem({ follower }: Props) {
                               }),
                             })}
                       </Text>
-                    </div>
+                      <RecordingMenu
+                        recording={rec}
+                        username={follower.username}
+                        type={follower.type}
+                      />
+                    </Group>
                   </Stack>
                 );
               })}

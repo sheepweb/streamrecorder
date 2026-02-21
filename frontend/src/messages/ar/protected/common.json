@@ -35,7 +35,9 @@
       "confirm": "حذف",
       "cancel": "إلغاء"
     },
-    "createWithAI": "إنشاء مقاطع بالذكاء الاصطناعي"
+    "createWithAI": "إنشاء مقاطع بالذكاء الاصطناعي",
+    "addToWatchLater": "شاهد لاحقاً",
+    "removeFromWatchLater": "إزالة من شاهد لاحقاً"
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",

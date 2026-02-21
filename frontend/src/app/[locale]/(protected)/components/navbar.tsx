@@ -17,6 +17,7 @@ import {
 } from "@mantine/core";
 import {
   IconBrandSafari,
+  IconClock,
   IconCrown,
   IconHome,
   IconLayoutSidebarLeftCollapse,
@@ -84,6 +85,12 @@ export const navigation = [
         labelKey: "links.myClips",
         url: "/my-clips",
         icon: IconScissors,
+        color: null,
+      },
+      {
+        labelKey: "links.watchLater",
+        url: "/watch-later",
+        icon: IconClock,
         color: null,
       },
       {
@@ -279,9 +286,6 @@ export function Navbar({
           <Anchor href="/terms" size="md" c="dimmed">
             {tFooter("legal.terms")}
           </Anchor>
-          <Text size="sm" c="dimmed">
-            @2026 LiveStreamRecorder
-          </Text>
         </Stack>
       )}
 
