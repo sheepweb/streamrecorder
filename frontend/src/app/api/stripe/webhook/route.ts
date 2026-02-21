@@ -3,9 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getRoleIdByName, updateUserSubscription } from "../../freemius/utils";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
-
 // Find user by Stripe customer ID
 async function findUserByStripeCustomerId(customerId: string) {
   try {
@@ -28,6 +25,9 @@ async function findUserByStripeCustomerId(customerId: string) {
 }
 
 export async function POST(request: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
+
   try {
     const body = await request.text();
     const signature = request.headers.get("stripe-signature");

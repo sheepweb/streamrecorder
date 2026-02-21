@@ -2,15 +2,14 @@ import api from "@/lib/api";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
-const PRICE_IDS: Record<string, string> = {
-  monthly: process.env.STRIPE_PRICE_MONTHLY!,
-  annual: process.env.STRIPE_PRICE_ANNUAL!,
-  lifetime: process.env.STRIPE_PRICE_LIFETIME!,
-};
-
 export async function POST(request: NextRequest) {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  const PRICE_IDS: Record<string, string> = {
+    monthly: process.env.STRIPE_PRICE_MONTHLY!,
+    annual: process.env.STRIPE_PRICE_ANNUAL!,
+    lifetime: process.env.STRIPE_PRICE_LIFETIME!,
+  };
+
   try {
     // Verify authenticated user - don't trust client-provided userId/email
     const currentUser =

@@ -6,8 +6,6 @@ import publicApi from "@/lib/public-api";
 import { revalidatePath } from "next/cache";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 interface ActivateStripeResult {
   success: boolean;
   error?: string;
@@ -16,6 +14,8 @@ interface ActivateStripeResult {
 export async function activateStripePremium(
   sessionId: string,
 ): Promise<ActivateStripeResult> {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
   try {
     // Get logged-in user
     const { data: user } =
@@ -116,6 +116,8 @@ interface CancelStripeResult {
 }
 
 export async function cancelStripeSubscription(): Promise<CancelStripeResult> {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
   try {
     // Get logged-in user
     const { data: user } =
