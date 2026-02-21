@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "Giriş Yap",
+    "description": "Kayıtlarınıza ve takip ettiğiniz yayıncılara erişmek için LiveStreamRecorder hesabınıza giriş yapın."
+  },
+  "title": "Tekrar hoş geldiniz",
+  "subtitle": "Hesabınıza devam etmek için giriş yapın",
+  "email": {
+    "label": "E-posta adresi",
+    "placeholder": "siz@ornek.com"
+  },
+  "password": {
+    "label": "Şifre",
+    "placeholder": "Şifrenizi girin"
+  },
+  "forgotPassword": "Şifremi unuttum",
+  "submit": {
+    "default": "Giriş yap",
+    "loading": "Giriş yapılıyor..."
+  },
+  "register": {
+    "text": "Hesabınız yok mu?",
+    "link": "Hesap oluşturun"
+  }
+}

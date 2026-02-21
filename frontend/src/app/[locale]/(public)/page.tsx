@@ -1,5 +1,6 @@
 import { generateProfileUrl } from "@/app/lib/profile-url";
 import { generateAlternates } from "@/app/lib/seo";
+import { getAlternateOgLocales, getOgLocale } from "@/i18n/routing";
 import publicApi from "@/lib/public-api";
 import {
   Button,
@@ -36,8 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
       description: t("ogDescription"),
       type: "website",
       siteName: "Live Stream Recorder",
-      locale: locale === "ar" ? "ar_SA" : "en_US",
-      alternateLocale: locale === "ar" ? "en_US" : "ar_SA",
+      locale: getOgLocale(locale),
+      alternateLocale: getAlternateOgLocales(locale),
       images: [
         {
           url: "/og-image.png",

@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Hesap Oluştur",
+    "description": "Favori içerik üreticilerinizin canlı yayınlarını otomatik olarak kaydetmek için ücretsiz bir LiveStreamRecorder hesabı oluşturun."
+  },
+  "title": "Hesap oluşturun",
+  "subtitle": "Bize katılın ve keşfetmeye başlayın",
+  "username": {
+    "label": "Kullanıcı adı",
+    "placeholder": "Bir kullanıcı adı seçin"
+  },
+  "email": {
+    "label": "E-posta adresi",
+    "placeholder": "siz@ornek.com"
+  },
+  "password": {
+    "label": "Şifre",
+    "placeholder": "Bir şifre oluşturun",
+    "hint": "Şifre en az 6 karakter olmalıdır"
+  },
+  "terms": {
+    "agree": "Kabul ediyorum:",
+    "link": "Şartlar ve Koşullar"
+  },
+  "submit": {
+    "default": "Hesap oluştur",
+    "loading": "Hesap oluşturuluyor..."
+  },
+  "login": {
+    "text": "Zaten hesabınız var mı?",
+    "link": "Giriş yapın"
+  }
+}

@@ -39,7 +39,7 @@ export default function WatchLaterList({ initialIds }: Props) {
   });
 
   // Only show loading on initial load, not when removing items
-  if (isLoading && !recordings?.length && watchLater.length > 0) {
+  if (isLoading && !recordings && watchLater.length > 0) {
     return (
       <Stack align="center" py="xl">
         <Loader size="lg" />

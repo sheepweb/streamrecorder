@@ -13,7 +13,7 @@
   "search": {
     "actionButton": "ابحث",
     "submitButton": "ابحث",
-    "placeholder": "ابحث...",
+    "placeholder": "أدخل رابط البث أو @اسم_المستخدم",
     "searching": "جاري البحث في {platform}...",
     "pasteButton": "لصق",
     "pasteError": "الصق يدوياً باستخدام Ctrl+V أو الضغط المطول",

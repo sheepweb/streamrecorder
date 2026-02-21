@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "로그인",
+    "description": "LiveStreamRecorder 계정에 로그인하여 녹화 영상과 팔로우한 스트리머를 확인하세요."
+  },
+  "title": "다시 오신 것을 환영합니다",
+  "subtitle": "계정에 로그인하여 계속하세요",
+  "email": {
+    "label": "이메일 주소",
+    "placeholder": "example@email.com"
+  },
+  "password": {
+    "label": "비밀번호",
+    "placeholder": "비밀번호를 입력하세요"
+  },
+  "forgotPassword": "비밀번호를 잊으셨나요?",
+  "submit": {
+    "default": "로그인",
+    "loading": "로그인 중..."
+  },
+  "register": {
+    "text": "계정이 없으신가요?",
+    "link": "회원가입"
+  }
+}

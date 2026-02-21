@@ -22,6 +22,8 @@ export const navConfig = {
   languages: [
     { code: "en", label: "English" },
     { code: "ar", label: "العربية" },
+    { code: "tr", label: "Türkçe" },
+    { code: "ko", label: "한국어" },
   ],
   featuredCreators: [
     { key: "browse", label: "Browse All", href: "/creators/all" },
