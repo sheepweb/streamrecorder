@@ -44,6 +44,7 @@ export async function POST(request: NextRequest) {
       process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     const sessionConfig: Stripe.Checkout.SessionCreateParams = {
+      allow_promotion_codes: true,
       billing_address_collection: "auto",
       customer_email: userEmail,
       line_items: [
