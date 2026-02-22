@@ -29,10 +29,16 @@ export default async function Page({
     initialPageParam: 1,
   });
 
+  const dehydratedState = dehydrate(queryClient);
+  dehydratedState.queries = dehydratedState.queries.map((q) => ({
+    ...q,
+    state: { ...q.state, dataUpdatedAt: 0 },
+  }));
+
   const filterOptions = await getFollowerFilters();
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydratedState}>
       <Stack w="100%">
         <Group justify="space-between" w="100%">
           <Stack gap={2}>

@@ -23,17 +23,22 @@ export default async function Page({
 
   const queryClient = new QueryClient();
 
-  const initialData = await fetchRecordings(filters, 1);
-  queryClient.setQueryData(
-    ["explore", filters],
-    { pages: [initialData], pageParams: [1] },
-    { updatedAt: 0 },
-  );
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["explore", filters],
+    queryFn: ({ pageParam }) => fetchRecordings(filters, pageParam),
+    initialPageParam: 1,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
+  dehydratedState.queries = dehydratedState.queries.map((q) => ({
+    ...q,
+    state: { ...q.state, dataUpdatedAt: 0 },
+  }));
 
   const filterOptions = await getFollowerFilters();
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
+    <HydrationBoundary state={dehydratedState}>
       <Stack w="100%">
         <Group justify="space-between" w="100%">
           <Stack gap={2}>

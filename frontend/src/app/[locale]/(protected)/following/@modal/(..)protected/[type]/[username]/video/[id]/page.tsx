@@ -28,7 +28,6 @@ export default function RecordingModal() {
     hasNextPage,
     isFetchingNextPage,
     isLoading,
-    isFetching,
   } = useInfiniteQuery({
     queryKey: ["following", filters],
     queryFn: ({ pageParam }) => fetchRecordings(filters, pageParam),
@@ -64,7 +63,7 @@ export default function RecordingModal() {
 
   const videoExists = recordings.some((r) => r.documentId === params.id);
 
-  if (isLoading || (isFetching && !videoExists)) {
+  if (isLoading) {
     return (
       <Modal.Root opened={true} onClose={handleClose} fullScreen>
         <Modal.Content>
