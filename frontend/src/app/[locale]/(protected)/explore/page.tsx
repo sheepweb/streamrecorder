@@ -23,11 +23,12 @@ export default async function Page({
 
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchInfiniteQuery({
-    queryKey: ["explore", filters],
-    queryFn: ({ pageParam }) => fetchRecordings(filters, pageParam),
-    initialPageParam: 1,
-  });
+  const initialData = await fetchRecordings(filters, 1);
+  queryClient.setQueryData(
+    ["explore", filters],
+    { pages: [initialData], pageParams: [1] },
+    { updatedAt: 0 },
+  );
 
   const filterOptions = await getFollowerFilters();
 

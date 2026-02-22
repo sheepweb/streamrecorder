@@ -74,8 +74,12 @@ export function VideoScrollPlayer({
     [recordings, initialId],
   );
 
-  // Handle not found case
-  const isNotFound = recordings.length > 0 && initialIndex === -1;
+  // Handle not found case — only fire when there are no more pages to load
+  const isNotFound =
+    recordings.length > 0 &&
+    initialIndex === -1 &&
+    !hasNextPage &&
+    !isFetchingNextPage;
 
   useEffect(() => {
     if (isNotFound && onNotFound) {
