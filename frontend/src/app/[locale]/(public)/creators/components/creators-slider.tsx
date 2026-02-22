@@ -52,7 +52,7 @@ export function CreatorsSlider({
                       {creator.nickname || "unknown"}
                     </Text>
                     <Text size="xs" style={{ color: "#64748b" }}>
-                      @{creator.username}
+                      @{decodeURIComponent(creator.username)}
                     </Text>
                   </div>
                   <div style={{ minHeight: 24 }}>
