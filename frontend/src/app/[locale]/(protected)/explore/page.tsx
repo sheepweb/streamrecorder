@@ -21,9 +21,7 @@ export default async function Page({
   const t = await getTranslations("protected.explore");
   const filters = await followingParamsCache.parse(searchParams);
 
-  console.log("[explore/page.tsx] filters:", JSON.stringify(filters, null, 2));
-
-  const queryClient = new QueryClient();
+const queryClient = new QueryClient();
 
   const initialData = await fetchRecordings(filters, 1);
   queryClient.setQueryData(
