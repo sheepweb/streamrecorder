@@ -1,6 +1,15 @@
 import { getToken } from "@/lib/token";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("protected.dashboard");
+  return {
+    title: `${t("title")} | LiveStreamRecorder`,
+  };
+}
 
 import { getUser } from "@/app/actions/user";
 import { buildRulesFromStrapi } from "@/app/lib/ability";
