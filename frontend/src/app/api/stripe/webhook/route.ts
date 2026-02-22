@@ -145,7 +145,7 @@ export async function POST(request: NextRequest) {
 
         const user = await findUserByStripeCustomerId(customerId);
         if (user?.id) {
-          const basicRoleId = await getRoleIdByName("basic");
+          const basicRoleId = await getRoleIdByName("authenticated");
 
           await updateUserSubscription(user.id.toString(), {
             subscriptionStatus: SubscriptionStatusEnum.Expired,
@@ -255,7 +255,7 @@ export async function POST(request: NextRequest) {
 
         const user = await findUserByStripeCustomerId(customerId);
         if (user?.id) {
-          const basicRoleId = await getRoleIdByName("basic");
+          const basicRoleId = await getRoleIdByName("authenticated");
 
           // Reset user to basic - clear all subscription data
           await publicApi.usersPermissionsUsersRoles.usersUpdate(

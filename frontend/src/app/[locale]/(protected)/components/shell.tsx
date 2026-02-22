@@ -2,8 +2,11 @@
 
 import { useNavbarCollapsed } from "@/app/hooks/use-navbar-collapsed";
 import { IsNewProvider } from "@/app/providers/is-new-provider";
-import { AppShell, useMatches } from "@mantine/core";
+import { useUser } from "@/app/providers/user-provider";
+import { AppShell, Button, Flex, Text, useMatches } from "@mantine/core";
 import { useDisclosure, useMounted } from "@mantine/hooks";
+import { IconCrown } from "@tabler/icons-react";
+import { useTranslations } from "next-intl";
 import { MobileBar } from "./mobilebar";
 import { Navbar } from "./navbar";
 
@@ -17,6 +20,9 @@ export function Shell({
   children: React.ReactNode;
   initialCollapsed?: boolean;
 }) {
+  const t = useTranslations("protected.premium");
+  const user = useUser();
+  const isBasic = user?.role?.type === "authenticated";
   const [opened, { close, open }] = useDisclosure(false);
   const { collapsed, toggle } = useNavbarCollapsed(initialCollapsed);
 
@@ -30,6 +36,7 @@ export function Shell({
   return (
     <IsNewProvider>
       <AppShell
+        header={isBasic ? { height: 50 } : undefined}
         styles={{
           footer: !headerHeight
             ? {
@@ -40,7 +47,6 @@ export function Shell({
             transition: "width 200ms ease",
           },
         }}
-        layout="alt"
         footer={{
           height: mounted ? headerHeight : 0,
           collapsed: headerHeight === 0,
@@ -52,7 +58,41 @@ export function Shell({
         }}
         padding={{ base: "xs", sm: "md" }}
       >
-        <AppShell.Header></AppShell.Header>
+        {isBasic && (
+          <AppShell.Header
+            style={{
+              background: "linear-gradient(150deg, #6366f1, #a855f7)",
+              borderBottom: "none",
+            }}
+          >
+            <Flex
+              direction="row"
+              justify="center"
+              align="center"
+              h="100%"
+              px="md"
+              gap="md"
+            >
+              <Text
+                c="white"
+                fw="600"
+                size={headerHeight === 0 ? "md" : "sm"}
+                truncate
+              >
+                {t("descriptionShort")}
+              </Text>
+              <Button
+                variant="outline"
+                radius="md"
+                size={headerHeight === 0 ? "sm" : "xs"}
+                color="white"
+                rightSection={<IconCrown color="gold" />}
+              >
+                {t("title")}
+              </Button>
+            </Flex>
+          </AppShell.Header>
+        )}
         <AppShell.Navbar>
           <Navbar
             opened={opened}

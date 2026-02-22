@@ -168,7 +168,7 @@ export async function POST(request: NextRequest) {
       case "subscription.renewal.failed.last": {
         const expiredUser = await findUserByFreemiusUserId(user.id);
         if (expiredUser?.id) {
-          const basicRoleId = await getRoleIdByName("basic");
+          const basicRoleId = await getRoleIdByName("authenticated");
 
           await updateUserSubscription(expiredUser.id.toString(), {
             subscriptionStatus: SubscriptionStatusEnum.Expired,

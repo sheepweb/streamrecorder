@@ -113,9 +113,7 @@ export default function Filters({ filterOptions }: Props) {
   const { getCountryName, getLanguageName } = useIntlNames();
   const t = useTranslations("protected.filters");
   const [opened, { open, close }] = useDisclosure(false);
-  const [filters, setFilters] = useQueryStates(followingParsers, {
-    shallow: true,
-  });
+  const [filters, setFilters] = useQueryStates(followingParsers);
   const [searchValue, setSearchValue] = useState(filters.search || "");
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
