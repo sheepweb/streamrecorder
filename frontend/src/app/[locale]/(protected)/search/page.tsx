@@ -6,7 +6,7 @@ import {
   UserSearchResult,
 } from "@/app/actions/check-user";
 import { follow } from "@/app/actions/followers";
-import { UpgradeModal } from "@/app/[locale]/(protected)/components/upgrade-modal";
+import { CreatorUpgradeModal } from "@/app/[locale]/(protected)/components/creator-upgrade-modal";
 import { getProfileUrl } from "@/app/components/open-social";
 import { trackEvent } from "@/app/lib/analytics";
 import { parseUsername } from "@/app/lib/parse-username";
@@ -418,7 +418,7 @@ export default function Page() {
 
   return (
     <>
-      <UpgradeModal opened={upgradeOpened} onClose={closeUpgrade} />
+      <CreatorUpgradeModal opened={upgradeOpened} onClose={closeUpgrade} />
 
       <Stack w="100%">
       <Group justify="space-between" w="100%">

@@ -8,7 +8,7 @@ import { notifications } from "@mantine/notifications";
 import { IconCheck, IconUsersPlus } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import { useTransition } from "react";
-import { UpgradeModal } from "./upgrade-modal";
+import { CreatorUpgradeModal } from "./creator-upgrade-modal";
 
 export default function FollowButton({
   username,
@@ -61,7 +61,7 @@ export default function FollowButton({
 
   return (
     <>
-      <UpgradeModal opened={upgradeOpened} onClose={closeUpgrade} />
+      <CreatorUpgradeModal opened={upgradeOpened} onClose={closeUpgrade} />
 
       <Tooltip label={t("follow.tooltip")}>
         <ActionIcon

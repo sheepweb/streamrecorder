@@ -16,6 +16,7 @@ import {
   Stack,
   Text,
   Title,
+  useMatches,
 } from "@mantine/core";
 import {
   IconBell,
@@ -33,14 +34,23 @@ import { useTranslations } from "next-intl";
 
 const DISCOUNT_CODE = "FIRST25";
 
-interface UpgradeModalProps {
+interface CreatorUpgradeModalProps {
   opened: boolean;
   onClose: () => void;
 }
 
-export function UpgradeModal({ opened, onClose }: UpgradeModalProps) {
+export function CreatorUpgradeModal({
+  opened,
+  onClose,
+}: CreatorUpgradeModalProps) {
   const t = useTranslations("protected.common");
   const tp = useTranslations("protected.premium");
+
+  const isMobile = useMatches({ base: true, sm: false });
+  const handleClose = () => {
+    trackEvent("creator_upgrade_modal_close");
+    onClose();
+  };
 
   const features = [
     { icon: IconUsers, label: tp("premiumRecord100"), color: "#a78bfa" },
@@ -56,11 +66,11 @@ export function UpgradeModal({ opened, onClose }: UpgradeModalProps) {
   return (
     <Modal
       opened={opened}
-      onClose={onClose}
+      onClose={handleClose}
       padding={0}
       withCloseButton={false}
       radius="lg"
-      size="md"
+      size="lg"
       centered
       styles={{
         content: {
@@ -70,11 +80,10 @@ export function UpgradeModal({ opened, onClose }: UpgradeModalProps) {
     >
       {/* Gradient header */}
       <Box
-        p="xl"
+        p={isMobile ? "md" : "xl"}
         style={{
           background: "linear-gradient(135deg, #6366f1 0%, #a855f7 100%)",
-          borderRadius:
-            "var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0",
+          borderRadius: "var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0",
           position: "relative",
         }}
       >
@@ -84,20 +93,21 @@ export function UpgradeModal({ opened, onClose }: UpgradeModalProps) {
           right={12}
           variant="subtle"
           color="white"
-          onClick={() => {
-            trackEvent("upgrade_modal_close");
-            onClose();
-          }}
+          onClick={handleClose}
         >
           <IconX size={18} />
         </ActionIcon>
 
         <Stack align="center" gap="xs">
           <IconCrown size={44} color="#fbbf24" />
-          <Title order={2} c="white" ta="center" size="h3">
+          <Title order={2} c="white" ta="center" size={isMobile ? "h4" : "h2"}>
             {t("followers.upgradeModalHeadline")}
           </Title>
-          <Text c="rgba(255,255,255,0.85)" ta="center" size="sm">
+          <Text
+            c="rgba(255,255,255,0.85)"
+            ta="center"
+            size={isMobile ? "sm" : "lg"}
+          >
             {t("followers.max3Message")}
           </Text>
         </Stack>
@@ -134,9 +144,11 @@ export function UpgradeModal({ opened, onClose }: UpgradeModalProps) {
           <Flex justify="space-between" align="center" gap="sm" wrap="nowrap">
             <Stack gap={2}>
               <Group gap="xs">
-                <Badge color="violet" variant="filled" size="sm">
-                  25% OFF
-                </Badge>
+                {!isMobile ? (
+                  <Badge color="violet" variant="filled" size="sm">
+                    25% OFF
+                  </Badge>
+                ) : null}
                 <Text size="sm" fw={600}>
                   {t("followers.upgradeModalDiscount")}
                 </Text>
@@ -172,11 +184,11 @@ export function UpgradeModal({ opened, onClose }: UpgradeModalProps) {
           component={Link}
           href="/premium"
           onClick={() => {
-            trackEvent("upgrade_modal_click");
+            trackEvent("creator_upgrade_modal_click");
             onClose();
           }}
           fullWidth
-          size="lg"
+          size={isMobile ? "md" : "lg"}
           radius="md"
           leftSection={<IconCrown size={18} color="#fbbf24" />}
           style={{

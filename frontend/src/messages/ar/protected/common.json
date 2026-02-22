@@ -37,7 +37,8 @@
     "addToWatchLater": "حفظ في شاهد لاحقاً",
     "removeFromWatchLater": "إزالة من شاهد لاحقاً",
     "addedToWatchLater": "تم الحفظ في شاهد لاحقاً",
-    "removedFromWatchLater": "تمت الإزالة من شاهد لاحقاً"
+    "removedFromWatchLater": "تمت الإزالة من شاهد لاحقاً",
+    "videoLimitMessage": "وصلت إلى الحد الأقصى لمشاهدات الفيديو المجانية."
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",
