@@ -32,6 +32,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQueryStates } from "nuqs";
 import { useState } from "react";
 import { PLATFORM_OPTIONS, typeIcons } from "../../components/filters-types";
@@ -112,12 +113,25 @@ interface Props {
 export default function Filters({ filterOptions }: Props) {
   const { getCountryName, getLanguageName } = useIntlNames();
   const t = useTranslations("protected.filters");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [opened, { open, close }] = useDisclosure(false);
-  const [filters, setFilters] = useQueryStates(followingParsers);
+  const [filters] = useQueryStates(followingParsers);
   const [searchValue, setSearchValue] = useState(filters.search || "");
 
+  const navigate = (updates: Record<string, string | null>) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(updates).forEach(([key, value]) => {
+      if (value === null) params.delete(key);
+      else params.set(key, value);
+    });
+    const qs = params.toString();
+    router.push(qs ? `${pathname}?${qs}` : pathname);
+  };
+
   const debouncedSearch = useDebouncedCallback((value: string) => {
-    setFilters({ search: value || null });
+    navigate({ search: value || null });
   }, 400);
 
   const handleSearchChange = (value: string) => {
@@ -134,19 +148,13 @@ export default function Filters({ filterOptions }: Props) {
   ].filter(Boolean).length;
 
   const clearFilters = () => {
-    setFilters({
-      gender: null,
-      country: null,
-      language: null,
-      type: null,
-      dateRange: null,
-      sort: FollowingSortOptions.updatedAtDesc,
-    });
+    router.push(pathname);
+    setSearchValue("");
   };
 
   const clearSearch = () => {
     setSearchValue("");
-    setFilters({ search: null });
+    navigate({ search: null });
   };
 
   // Custom render for country options
@@ -230,7 +238,7 @@ export default function Filters({ filterOptions }: Props) {
                   <IconX
                     size={16}
                     style={{ cursor: "pointer" }}
-                    onClick={() => setFilters({ type: null })}
+                    onClick={() => navigate({ type: null })}
                   />
                 }
               >
@@ -246,7 +254,7 @@ export default function Filters({ filterOptions }: Props) {
                   <IconX
                     size={16}
                     style={{ cursor: "pointer" }}
-                    onClick={() => setFilters({ gender: null })}
+                    onClick={() => navigate({ gender: null })}
                   />
                 }
               >
@@ -262,7 +270,7 @@ export default function Filters({ filterOptions }: Props) {
                   <IconX
                     size={16}
                     style={{ cursor: "pointer" }}
-                    onClick={() => setFilters({ country: null })}
+                    onClick={() => navigate({ country: null })}
                   />
                 }
               >
@@ -277,7 +285,7 @@ export default function Filters({ filterOptions }: Props) {
                   <IconX
                     size={16}
                     style={{ cursor: "pointer" }}
-                    onClick={() => setFilters({ language: null })}
+                    onClick={() => navigate({ language: null })}
                   />
                 }
               >
@@ -293,7 +301,7 @@ export default function Filters({ filterOptions }: Props) {
                   <IconX
                     size={16}
                     style={{ cursor: "pointer" }}
-                    onClick={() => setFilters({ dateRange: null })}
+                    onClick={() => navigate({ dateRange: null })}
                   />
                 }
               >
@@ -343,7 +351,7 @@ export default function Filters({ filterOptions }: Props) {
               {Object.values(FollowingSortOptions).map((sortValue) => (
                 <UnstyledButton
                   key={sortValue}
-                  onClick={() => setFilters({ sort: sortValue })}
+                  onClick={() => navigate({ sort: sortValue })}
                   style={(theme) => ({
                     padding: theme.spacing.xs,
                     borderRadius: theme.radius.md,
@@ -380,7 +388,7 @@ export default function Filters({ filterOptions }: Props) {
                 <UnstyledButton
                   key={p.value}
                   onClick={() =>
-                    setFilters({ type: p.value === "all" ? null : p.value })
+                    navigate({ type: p.value === "all" ? null : p.value })
                   }
                   style={(theme) => ({
                     padding: theme.spacing.xs,
@@ -415,7 +423,7 @@ export default function Filters({ filterOptions }: Props) {
                 <UnstyledButton
                   key={genderValue}
                   onClick={() =>
-                    setFilters({
+                    navigate({
                       gender: genderValue === "all" ? null : genderValue,
                     })
                   }
@@ -453,7 +461,7 @@ export default function Filters({ filterOptions }: Props) {
             <Chip.Group
               value={filters.dateRange || ""}
               onChange={(value) =>
-                setFilters({
+                navigate({
                   dateRange: typeof value === "string" ? value || null : null,
                 })
               }
@@ -478,7 +486,7 @@ export default function Filters({ filterOptions }: Props) {
             <Chip.Group
               value={filters.country || ""}
               onChange={(value) =>
-                setFilters({
+                navigate({
                   country: typeof value === "string" ? value || null : null,
                 })
               }
@@ -500,7 +508,7 @@ export default function Filters({ filterOptions }: Props) {
                 size="md"
                 placeholder={t("country.placeholder")}
                 value={filters.country}
-                onChange={(value) => setFilters({ country: value })}
+                onChange={(value) => navigate({ country: value })}
                 data={countrySelectData}
                 renderOption={renderCountryOption}
                 clearable
@@ -517,7 +525,7 @@ export default function Filters({ filterOptions }: Props) {
             <Chip.Group
               value={filters.language || ""}
               onChange={(value) =>
-                setFilters({
+                navigate({
                   language: typeof value === "string" ? value || null : null,
                 })
               }
@@ -541,7 +549,7 @@ export default function Filters({ filterOptions }: Props) {
                 size="md"
                 placeholder={t("language.placeholder")}
                 value={filters.language}
-                onChange={(value) => setFilters({ language: value })}
+                onChange={(value) => navigate({ language: value })}
                 data={languageSelectData}
                 renderOption={renderLanguageOption}
                 clearable
