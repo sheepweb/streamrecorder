@@ -40,7 +40,10 @@
     "removeFromWatchLater": "Sonraya İzlemeden Kaldır",
     "addedToWatchLater": "Sonraya İzlemeye Kaydedildi",
     "removedFromWatchLater": "Sonraya İzlemeden Kaldırıldı",
-    "videoLimitMessage": "Ücretsiz video hakkınız tükendi."
+    "videoLimitMessage": "Ücretsiz video hakkınız tükendi.",
+    "download": "Videoyu indir",
+    "downloadEmailSent": "İndirme bağlantısı e-postanıza gönderildi",
+    "downloadFeatureMessage": "Video indirme premium bir özelliktir."
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",

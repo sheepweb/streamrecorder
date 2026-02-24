@@ -40,7 +40,10 @@
     "removeFromWatchLater": "Remove from Watch Later",
     "addedToWatchLater": "Saved to Watch Later",
     "removedFromWatchLater": "Removed from Watch Later",
-    "videoLimitMessage": "You've reached your free video limit."
+    "videoLimitMessage": "You've reached your free video limit.",
+    "download": "Download video",
+    "downloadEmailSent": "Download link on its way to your email",
+    "downloadFeatureMessage": "Downloading videos is a premium feature."
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",

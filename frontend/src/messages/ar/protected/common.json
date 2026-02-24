@@ -38,7 +38,10 @@
     "removeFromWatchLater": "إزالة من شاهد لاحقاً",
     "addedToWatchLater": "تم الحفظ في شاهد لاحقاً",
     "removedFromWatchLater": "تمت الإزالة من شاهد لاحقاً",
-    "videoLimitMessage": "وصلت إلى الحد الأقصى لمشاهدات الفيديو المجانية."
+    "videoLimitMessage": "وصلت إلى الحد الأقصى لمشاهدات الفيديو المجانية.",
+    "download": "تحميل الفيديو",
+    "downloadEmailSent": "رابط التحميل في طريقه إلى بريدك الإلكتروني",
+    "downloadFeatureMessage": "تحميل الفيديوهات ميزة خاصة بالمشتركين المميزين."
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",

@@ -1,5 +1,6 @@
 "use client";
 
+import { downloadRecording } from "@/app/actions/download-recording";
 import { deleteRecording, toggleHidden } from "@/app/actions/recording";
 import { useWatchLater } from "@/app/hooks/use-watch-later";
 import { useUser } from "@/app/providers/user-provider";
@@ -11,14 +12,17 @@ import {
   IconBookmark,
   IconBookmarkFilled,
   IconDots,
+  IconDownload,
   IconEye,
   IconEyeOff,
   IconSparkles,
   IconTrash,
 } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
+import { useState } from "react";
+import { DownloadUpgradeModal } from "./download-upgrade-modal";
 
 interface RecordingMenuProps {
   recording: Recording;
@@ -35,11 +39,17 @@ export function RecordingMenu({
   const t = useTranslations("protected.common.recordings");
   const queryClient = useQueryClient();
   const { isInWatchLater, toggleWatchLater } = useWatchLater();
+  const locale = useLocale();
+  const [downloadUpgradeOpened, setDownloadUpgradeOpened] = useState(false);
 
   const isOwner = user?.id && recording.follower?.owner?.id === user.id;
   const isFollowing = user?.followers?.some(
     (f) => f.documentId === recording.follower?.documentId,
   );
+  const isPremium =
+    (user?.role as any)?.type === "admin" ||
+    (user?.role as any)?.type === "champion" ||
+    user?.subscriptionStatus === "active";
 
   const inWatchLater = recording.documentId
     ? isInWatchLater(recording.documentId)
@@ -87,65 +97,91 @@ export function RecordingMenu({
     });
   };
 
+  const handleDownload = async () => {
+    if (!recording.documentId || !user?.id) return;
+    if (!isPremium) {
+      setDownloadUpgradeOpened(true);
+      return;
+    }
+    await downloadRecording(recording.documentId, user.id, locale);
+    notifications.show({
+      title: t("downloadEmailSent"),
+      message: null,
+      color: "green",
+    });
+  };
+
   return (
-    <Menu shadow="md">
-      <Menu.Target>
-        <ActionIcon
-          variant="filled"
-          color="dark"
-          size="md"
-          onClick={(e) => e.preventDefault()}
-        >
-          <IconDots />
-        </ActionIcon>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Item
-          leftSection={
-            inWatchLater ? (
-              <IconBookmarkFilled size={14} />
-            ) : (
-              <IconBookmark size={14} />
-            )
-          }
-          onClick={handleToggleWatchLater}
-        >
-          {inWatchLater ? t("removeFromWatchLater") : t("addToWatchLater")}
-        </Menu.Item>
-        {isFollowing && (
-          <Menu.Item
-            component={Link}
-            href={`/ai-studio/create/${recording.documentId}`}
-            leftSection={<IconSparkles size={14} />}
+    <>
+      <Menu shadow="md">
+        <Menu.Target>
+          <ActionIcon
+            variant="filled"
+            color="dark"
+            size="md"
+            onClick={(e) => e.preventDefault()}
           >
-            {t("createWithAI")}
+            <IconDots />
+          </ActionIcon>
+        </Menu.Target>
+        <Menu.Dropdown>
+          <Menu.Item
+            leftSection={
+              inWatchLater ? (
+                <IconBookmarkFilled size={14} />
+              ) : (
+                <IconBookmark size={14} />
+              )
+            }
+            onClick={handleToggleWatchLater}
+          >
+            {inWatchLater ? t("removeFromWatchLater") : t("addToWatchLater")}
           </Menu.Item>
-        )}
-        {isOwner && (
-          <>
-            <Menu.Divider />
+          {isFollowing && (
             <Menu.Item
-              leftSection={
-                recording.hidden ? (
-                  <IconEye size={14} />
-                ) : (
-                  <IconEyeOff size={14} />
-                )
-              }
-              onClick={handleToggleHidden}
+              component={Link}
+              href={`/ai-studio/create/${recording.documentId}`}
+              leftSection={<IconSparkles size={14} />}
             >
-              {recording.hidden ? t("show") : t("hide")}
+              {t("createWithAI")}
             </Menu.Item>
-            <Menu.Item
-              color="red"
-              leftSection={<IconTrash size={14} />}
-              onClick={handleDelete}
-            >
-              {t("delete")}
-            </Menu.Item>
-          </>
-        )}
-      </Menu.Dropdown>
-    </Menu>
+          )}
+          <Menu.Item
+            leftSection={<IconDownload size={14} />}
+            onClick={handleDownload}
+          >
+            {t("download")}
+          </Menu.Item>
+          {isOwner && (
+            <>
+              <Menu.Divider />
+              <Menu.Item
+                leftSection={
+                  recording.hidden ? (
+                    <IconEye size={14} />
+                  ) : (
+                    <IconEyeOff size={14} />
+                  )
+                }
+                onClick={handleToggleHidden}
+              >
+                {recording.hidden ? t("show") : t("hide")}
+              </Menu.Item>
+              <Menu.Item
+                color="red"
+                leftSection={<IconTrash size={14} />}
+                onClick={handleDelete}
+              >
+                {t("delete")}
+              </Menu.Item>
+            </>
+          )}
+        </Menu.Dropdown>
+      </Menu>
+      <DownloadUpgradeModal
+        opened={downloadUpgradeOpened}
+        onClose={() => setDownloadUpgradeOpened(false)}
+      />
+    </>
   );
 }
