@@ -17,6 +17,7 @@ import {
 } from "@mantine/core";
 import {
   IconBrandSafari,
+  IconChartBar,
   IconClock,
   IconCrown,
   IconHome,
@@ -62,6 +63,12 @@ export const navigation = [
         url: "/premium",
         icon: IconCrown,
         color: "gold",
+      },
+      {
+        labelKey: "links.tiktokInsights",
+        url: "/tiktok-insights",
+        icon: IconChartBar,
+        color: "#22d3ee",
       },
     ],
   },

@@ -59,7 +59,7 @@ export function ProfileTabs({ type, username }: ProfileTabsProps) {
           {!isInsights && (
             <div
               style={{
-                marginLeft: "auto",
+                marginInlineStart: "auto",
                 display: "flex",
                 alignItems: "center",
                 marginBottom: 4,

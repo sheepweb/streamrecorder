@@ -21,13 +21,15 @@
 
   "premiumRecord100": "100개 채널 녹화",
   "premiumFullControl": "녹화 영상 완전 제어",
-  "premiumNotifications": "준비되면 알림",
+  "premiumNotifications": "준비되면 알림 받기",
   "premiumAiHighlights": "AI 하이라이트 & 클립",
   "premiumAiSubtitles": "AI 자막 & 번역",
   "premiumAiMemes": "AI 밈 & GIF",
   "premiumPublishSocial": "소셜 미디어에 게시",
   "premiumWatchLater": "나중에 보기 & 즐겨찾기",
   "premiumPrioritySupport": "우선 지원",
+  "premiumTiktokInsights": "TikTok 라이브 분석",
+  "premiumDownloadRecordings": "녹화 다운로드",
 
   "paymentMethod": "결제 방법",
   "freemiusDescription": "신용카드, PayPal 등",
@@ -49,7 +51,7 @@
   "oneTime": "일회성",
 
   "yourPremiumFeatures": "프리미엄 기능",
-  "unlockPremiumFeatures": "프리미엄 기능 잠금 해제",
+  "unlockPremiumFeatures": "프리미엄 기능 이용하기",
   "futureFeatures": "프리미엄에는 출시되는 모든 향후 기능이 포함됩니다.",
   "seeWhatsNew": "새로운 기능 보기",
 
@@ -64,7 +66,7 @@
   "securePayment": "안전한 결제",
 
   "cancelModalTitle": "구독 취소",
-  "cancelModalMessage": "떠나시다니 아쉽습니다! 취소하시면 {endDate}까지 프리미엄 기능을 계속 이용하실 수 있습니다.",
+  "cancelModalMessage": "떠나시다니 아쉽네요! 취소하시면 {endDate}까지 프리미엄 기능을 계속 이용하실 수 있습니다.",
   "cancelModalAfter": "이후 계정은 무료 플랜으로 전환됩니다.",
   "keepSubscription": "구독 유지",
   "yesCancel": "네, 취소합니다"

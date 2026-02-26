@@ -509,8 +509,8 @@ export default factories.createCoreController(
     },
     async cleanup(ctx) {
       // delete users who is 7 days old and still have no recordings
-      const days = parseInt(ctx.query.days as string) || 7;
-      const limit = parseInt(ctx.query.limit as string) || 50;
+      const days = Math.max(1, parseInt(ctx.query.days as string) || 7);
+      const limit = Math.min(100, Math.max(1, parseInt(ctx.query.limit as string) || 50));
       const destroy = ctx.query.destroy === "true";
 
       const knex = strapi.db.connection;
@@ -546,14 +546,17 @@ export default factories.createCoreController(
           .where("frm.related_type", "api::follower.follower")
           .where("frm.field", "avatar");
 
-        for (const file of avatarFiles) {
-          try {
-            await strapi.plugin("upload").service("upload").remove(file);
-            deletedAvatars++;
-          } catch (err) {
-            console.error(`Failed to delete avatar ${file.id}:`, err);
+        const results = await Promise.allSettled(
+          avatarFiles.map((file) =>
+            strapi.plugin("upload").service("upload").remove(file),
+          ),
+        );
+        deletedAvatars = results.filter((r) => r.status === "fulfilled").length;
+        results.forEach((r, i) => {
+          if (r.status === "rejected") {
+            console.error(`Failed to delete avatar ${avatarFiles[i].id}:`, r.reason);
           }
-        }
+        });
 
         await knex("files_related_mph")
           .whereIn("related_id", ids)

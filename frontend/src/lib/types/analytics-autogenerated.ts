@@ -10,6 +10,261 @@
  * ---------------------------------------------------------------
  */
 
+export interface GlobalStats {
+  /**
+   * Total unique users who sent gifts
+   * @example 12450
+   */
+  total_users?: number;
+  /**
+   * Total diamonds earned across all streamers
+   * @example 4500000
+   */
+  total_diamonds?: number;
+  /**
+   * Total gifts sent across all streamers
+   * @example 85000
+   */
+  total_gifts?: number;
+  /**
+   * Total battle events recorded
+   * @example 1200
+   */
+  total_battles?: number;
+}
+
+export interface CountryEntry {
+  /**
+   * ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  country?: string;
+  /**
+   * Total diamonds earned by streamers in this country
+   * @example 1250000
+   */
+  diamonds?: number;
+  /**
+   * Total gifts received by streamers in this country
+   * @example 42000
+   */
+  gifts?: number;
+  /**
+   * Number of unique streamers in this country
+   * @example 85
+   */
+  streamers?: number;
+  /**
+   * Number of unique gifters who gave to streamers in this country
+   * @example 3200
+   */
+  unique_gifters?: number;
+}
+
+export interface LanguageEntry {
+  /**
+   * BCP 47 language code
+   * @example "ar"
+   */
+  language?: string;
+  /**
+   * Total diamonds earned by streamers streaming in this language
+   * @example 980000
+   */
+  diamonds?: number;
+  /**
+   * Total gifts received
+   * @example 32000
+   */
+  gifts?: number;
+  /**
+   * Number of unique streamers in this language
+   * @example 62
+   */
+  streamers?: number;
+  /**
+   * Number of unique gifters
+   * @example 2800
+   */
+  unique_gifters?: number;
+}
+
+export interface DailyStats {
+  /**
+   * Date of the stats
+   * @format date
+   * @example "2026-02-25"
+   */
+  date?: string;
+  /**
+   * Total diamonds earned on this date
+   * @example 45000
+   */
+  diamonds?: number;
+  /**
+   * Total gifts sent on this date
+   * @example 1200
+   */
+  gifts?: number;
+  /**
+   * Number of active streamers on this date
+   * @example 15
+   */
+  streamers?: number;
+  /**
+   * Unique gifters on this date
+   * @example 320
+   */
+  unique_gifters?: number;
+}
+
+export interface TopEarner {
+  /**
+   * TikTok username of the streamer
+   * @example "majd.alban"
+   */
+  owner_username?: string;
+  /**
+   * ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  owner_country?: string;
+  /**
+   * BCP 47 language code
+   * @example "ar"
+   */
+  owner_language?: string;
+  /**
+   * Total diamonds earned
+   * @example 125000
+   */
+  diamonds?: number;
+  /**
+   * Total gifts received
+   * @example 3420
+   */
+  gift_count?: number;
+  /**
+   * Number of unique gifters
+   * @example 156
+   */
+  unique_gifters?: number;
+}
+
+export interface MostLiveStreamer {
+  /**
+   * TikTok username of the streamer
+   * @example "majd.alban"
+   */
+  owner_username?: string;
+  /**
+   * ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  owner_country?: string;
+  /**
+   * BCP 47 language code
+   * @example "ar"
+   */
+  owner_language?: string;
+  /**
+   * Number of stream sessions recorded
+   * @example 42
+   */
+  stream_count?: number;
+  /**
+   * Total hours streamed
+   * @format float
+   * @example 187.5
+   */
+  total_hours?: number;
+}
+
+export interface GlobalTopGifter {
+  /**
+   * TikTok username of the gifter
+   * @example "generous_user123"
+   */
+  sender_username?: string;
+  /**
+   * Display name of the gifter
+   * @example "Generous User"
+   */
+  sender_nickname?: string;
+  /**
+   * Total diamonds given across all streamers
+   * @example 85000
+   */
+  diamonds?: number;
+  /**
+   * Total number of gifts sent
+   * @example 2400
+   */
+  gift_count?: number;
+  /**
+   * Number of unique streamers gifted to
+   * @example 12
+   */
+  streamers_supported?: number;
+}
+
+export interface BattleStat {
+  /**
+   * TikTok username of the streamer
+   * @example "majd.alban"
+   */
+  owner_username?: string;
+  /**
+   * Total battles participated in
+   * @example 45
+   */
+  total_battles?: number;
+  /**
+   * Number of battles won
+   * @example 28
+   */
+  wins?: number;
+  /**
+   * Number of battles lost
+   * @example 12
+   */
+  losses?: number;
+  /**
+   * Number of battles drawn
+   * @example 5
+   */
+  draws?: number;
+  /**
+   * Win rate as a percentage
+   * @format float
+   * @example 62.2
+   */
+  win_rate?: number;
+}
+
+export interface GifterRelationship {
+  /**
+   * TikTok username of the gifter
+   * @example "generous_user123"
+   */
+  gifter?: string;
+  /**
+   * TikTok username of the streamer
+   * @example "majd.alban"
+   */
+  streamer?: string;
+  /**
+   * Total diamonds given by this gifter to this streamer
+   * @example 25000
+   */
+  diamonds?: number;
+  /**
+   * Number of gifts sent
+   * @example 680
+   */
+  gift_count?: number;
+}
+
 export interface StreamerStats {
   /**
    * Total diamonds received from gifts
@@ -397,6 +652,181 @@ export enum BattleBattleTypeEnum {
   Value1V2 = "1v2",
 }
 
+export type GetGlobalStatsData = GlobalStats;
+
+export interface GetDailyEarningsParams {
+  /**
+   * Filter by ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  country?: string;
+  /**
+   * Filter by BCP 47 language code
+   * @example "ar"
+   */
+  language?: string;
+}
+
+export type GetDailyEarningsData = DailyStats[];
+
+export type GetCountriesData = string[];
+
+export type GetLanguagesData = string[];
+
+export type GetCountryLeaderboardData = CountryEntry[];
+
+export interface GetCountryStatsParams {
+  /**
+   * ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  country: string;
+}
+
+export type GetCountryStatsData = DailyStats[];
+
+export type GetLanguageLeaderboardData = LanguageEntry[];
+
+export interface GetLanguageStatsParams {
+  /**
+   * BCP 47 language code
+   * @example "ar"
+   */
+  language: string;
+}
+
+export type GetLanguageStatsData = DailyStats[];
+
+export interface GetTopStreamersParams {
+  /**
+   * Number of items per page (max 50)
+   * @min 1
+   * @max 50
+   * @default 10
+   * @example 10
+   */
+  limit?: number;
+  /**
+   * Number of items to skip for pagination
+   * @min 0
+   * @default 0
+   * @example 0
+   */
+  offset?: number;
+  /**
+   * Filter by ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  country?: string;
+  /**
+   * Filter by BCP 47 language code
+   * @example "ar"
+   */
+  language?: string;
+}
+
+export type GetTopStreamersData = PaginationMeta & {
+  data?: TopEarner[];
+};
+
+export interface GetMostLiveParams {
+  /**
+   * Number of items per page (max 50)
+   * @min 1
+   * @max 50
+   * @default 10
+   * @example 10
+   */
+  limit?: number;
+  /**
+   * Number of items to skip for pagination
+   * @min 0
+   * @default 0
+   * @example 0
+   */
+  offset?: number;
+  /**
+   * Filter by ISO 3166-1 alpha-2 country code
+   * @example "SA"
+   */
+  country?: string;
+  /**
+   * Filter by BCP 47 language code
+   * @example "ar"
+   */
+  language?: string;
+}
+
+export type GetMostLiveData = PaginationMeta & {
+  data?: MostLiveStreamer[];
+};
+
+export interface GetTopGiftersParams {
+  /**
+   * Number of items per page (max 50)
+   * @min 1
+   * @max 50
+   * @default 10
+   * @example 10
+   */
+  limit?: number;
+  /**
+   * Number of items to skip for pagination
+   * @min 0
+   * @default 0
+   * @example 0
+   */
+  offset?: number;
+}
+
+export type GetTopGiftersData = PaginationMeta & {
+  data?: GlobalTopGifter[];
+};
+
+export interface GetBattleStatsParams {
+  /**
+   * Number of items per page (max 50)
+   * @min 1
+   * @max 50
+   * @default 10
+   * @example 10
+   */
+  limit?: number;
+  /**
+   * Number of items to skip for pagination
+   * @min 0
+   * @default 0
+   * @example 0
+   */
+  offset?: number;
+}
+
+export type GetBattleStatsData = PaginationMeta & {
+  data?: BattleStat[];
+};
+
+export interface GetGifterRelationshipsParams {
+  /**
+   * Number of items per page (max 50)
+   * @min 1
+   * @max 50
+   * @default 10
+   * @example 10
+   */
+  limit?: number;
+  /**
+   * Number of items to skip for pagination
+   * @min 0
+   * @default 0
+   * @example 0
+   */
+  offset?: number;
+}
+
+export type GetGifterRelationshipsData = PaginationMeta & {
+  data?: GifterRelationship[];
+};
+
 export interface GetStreamerStatsParams {
   /**
    * TikTok username of the streamer
@@ -516,6 +946,326 @@ export interface GetStreamerScheduleParams {
 }
 
 export type GetStreamerScheduleData = ScheduleDay[];
+
+export namespace Global {
+  /**
+   * @description Returns aggregated platform-wide totals
+   * @tags Global
+   * @name GetGlobalStats
+   * @summary Get global platform statistics
+   * @request GET:/api/stats
+   */
+  export namespace GetGlobalStats {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetGlobalStatsData;
+  }
+
+  /**
+   * @description Returns diamonds earned per day for the last 30 days across all streamers. Optionally filter by country or language.
+   * @tags Global
+   * @name GetDailyEarnings
+   * @summary Get daily diamond earnings
+   * @request GET:/api/daily-earnings
+   */
+  export namespace GetDailyEarnings {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * Filter by ISO 3166-1 alpha-2 country code
+       * @example "SA"
+       */
+      country?: string;
+      /**
+       * Filter by BCP 47 language code
+       * @example "ar"
+       */
+      language?: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetDailyEarningsData;
+  }
+
+  /**
+   * @description Returns country codes that have data in the database (ISO 3166-1 alpha-2, length=2 only)
+   * @tags Global
+   * @name GetCountries
+   * @summary Get available countries
+   * @request GET:/api/countries
+   */
+  export namespace GetCountries {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetCountriesData;
+  }
+
+  /**
+   * @description Returns language codes that have data in the database (BCP 47, length>=2 only)
+   * @tags Global
+   * @name GetLanguages
+   * @summary Get available languages
+   * @request GET:/api/languages
+   */
+  export namespace GetLanguages {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetLanguagesData;
+  }
+
+  /**
+   * @description Returns top 50 countries ranked by total diamonds earned
+   * @tags Global
+   * @name GetCountryLeaderboard
+   * @summary Get country leaderboard
+   * @request GET:/api/country-leaderboard
+   */
+  export namespace GetCountryLeaderboard {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetCountryLeaderboardData;
+  }
+
+  /**
+   * @description Returns daily diamond stats for the last 30 days for a specific country
+   * @tags Global
+   * @name GetCountryStats
+   * @summary Get country daily stats
+   * @request GET:/api/country-stats
+   */
+  export namespace GetCountryStats {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * ISO 3166-1 alpha-2 country code
+       * @example "SA"
+       */
+      country: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetCountryStatsData;
+  }
+
+  /**
+   * @description Returns top 50 languages ranked by total diamonds earned
+   * @tags Global
+   * @name GetLanguageLeaderboard
+   * @summary Get language leaderboard
+   * @request GET:/api/language-leaderboard
+   */
+  export namespace GetLanguageLeaderboard {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetLanguageLeaderboardData;
+  }
+
+  /**
+   * @description Returns daily diamond stats for the last 30 days for a specific language
+   * @tags Global
+   * @name GetLanguageStats
+   * @summary Get language daily stats
+   * @request GET:/api/language-stats
+   */
+  export namespace GetLanguageStats {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * BCP 47 language code
+       * @example "ar"
+       */
+      language: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetLanguageStatsData;
+  }
+
+  /**
+   * @description Returns streamers ranked by total diamonds earned, filterable by country and language
+   * @tags Global
+   * @name GetTopStreamers
+   * @summary Get top earners leaderboard
+   * @request GET:/api/top-streamers
+   */
+  export namespace GetTopStreamers {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * Number of items per page (max 50)
+       * @min 1
+       * @max 50
+       * @default 10
+       * @example 10
+       */
+      limit?: number;
+      /**
+       * Number of items to skip for pagination
+       * @min 0
+       * @default 0
+       * @example 0
+       */
+      offset?: number;
+      /**
+       * Filter by ISO 3166-1 alpha-2 country code
+       * @example "SA"
+       */
+      country?: string;
+      /**
+       * Filter by BCP 47 language code
+       * @example "ar"
+       */
+      language?: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetTopStreamersData;
+  }
+
+  /**
+   * @description Returns streamers ranked by total hours streamed, filterable by country and language
+   * @tags Global
+   * @name GetMostLive
+   * @summary Get most active streamers leaderboard
+   * @request GET:/api/most-live
+   */
+  export namespace GetMostLive {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * Number of items per page (max 50)
+       * @min 1
+       * @max 50
+       * @default 10
+       * @example 10
+       */
+      limit?: number;
+      /**
+       * Number of items to skip for pagination
+       * @min 0
+       * @default 0
+       * @example 0
+       */
+      offset?: number;
+      /**
+       * Filter by ISO 3166-1 alpha-2 country code
+       * @example "SA"
+       */
+      country?: string;
+      /**
+       * Filter by BCP 47 language code
+       * @example "ar"
+       */
+      language?: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetMostLiveData;
+  }
+
+  /**
+   * @description Returns users ranked by total diamonds given across all streamers
+   * @tags Global
+   * @name GetTopGifters
+   * @summary Get top gifters leaderboard
+   * @request GET:/api/top-gifters
+   */
+  export namespace GetTopGifters {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * Number of items per page (max 50)
+       * @min 1
+       * @max 50
+       * @default 10
+       * @example 10
+       */
+      limit?: number;
+      /**
+       * Number of items to skip for pagination
+       * @min 0
+       * @default 0
+       * @example 0
+       */
+      offset?: number;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetTopGiftersData;
+  }
+
+  /**
+   * @description Returns streamers ranked by total battles participated in
+   * @tags Global
+   * @name GetBattleStats
+   * @summary Get battle statistics leaderboard
+   * @request GET:/api/battle-stats
+   */
+  export namespace GetBattleStats {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * Number of items per page (max 50)
+       * @min 1
+       * @max 50
+       * @default 10
+       * @example 10
+       */
+      limit?: number;
+      /**
+       * Number of items to skip for pagination
+       * @min 0
+       * @default 0
+       * @example 0
+       */
+      offset?: number;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetBattleStatsData;
+  }
+
+  /**
+   * @description Returns top gifter-streamer pairs ranked by total diamonds given
+   * @tags Global
+   * @name GetGifterRelationships
+   * @summary Get gifter-streamer relationships
+   * @request GET:/api/gifter-relationships
+   */
+  export namespace GetGifterRelationships {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /**
+       * Number of items per page (max 50)
+       * @min 1
+       * @max 50
+       * @default 10
+       * @example 10
+       */
+      limit?: number;
+      /**
+       * Number of items to skip for pagination
+       * @min 0
+       * @default 0
+       * @example 0
+       */
+      offset?: number;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetGifterRelationshipsData;
+  }
+}
 
 export namespace Streamer {
   /**
@@ -898,6 +1648,238 @@ export class HttpClient<SecurityDataType = unknown> {
 export class Api<
   SecurityDataType extends unknown,
 > extends HttpClient<SecurityDataType> {
+  global = {
+    /**
+     * @description Returns aggregated platform-wide totals
+     *
+     * @tags Global
+     * @name GetGlobalStats
+     * @summary Get global platform statistics
+     * @request GET:/api/stats
+     */
+    getGlobalStats: (params: RequestParams = {}) =>
+      this.request<GetGlobalStatsData, Error>({
+        path: `/api/stats`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns diamonds earned per day for the last 30 days across all streamers. Optionally filter by country or language.
+     *
+     * @tags Global
+     * @name GetDailyEarnings
+     * @summary Get daily diamond earnings
+     * @request GET:/api/daily-earnings
+     */
+    getDailyEarnings: (
+      query: GetDailyEarningsParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetDailyEarningsData, Error>({
+        path: `/api/daily-earnings`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns country codes that have data in the database (ISO 3166-1 alpha-2, length=2 only)
+     *
+     * @tags Global
+     * @name GetCountries
+     * @summary Get available countries
+     * @request GET:/api/countries
+     */
+    getCountries: (params: RequestParams = {}) =>
+      this.request<GetCountriesData, Error>({
+        path: `/api/countries`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns language codes that have data in the database (BCP 47, length>=2 only)
+     *
+     * @tags Global
+     * @name GetLanguages
+     * @summary Get available languages
+     * @request GET:/api/languages
+     */
+    getLanguages: (params: RequestParams = {}) =>
+      this.request<GetLanguagesData, Error>({
+        path: `/api/languages`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns top 50 countries ranked by total diamonds earned
+     *
+     * @tags Global
+     * @name GetCountryLeaderboard
+     * @summary Get country leaderboard
+     * @request GET:/api/country-leaderboard
+     */
+    getCountryLeaderboard: (params: RequestParams = {}) =>
+      this.request<GetCountryLeaderboardData, Error>({
+        path: `/api/country-leaderboard`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns daily diamond stats for the last 30 days for a specific country
+     *
+     * @tags Global
+     * @name GetCountryStats
+     * @summary Get country daily stats
+     * @request GET:/api/country-stats
+     */
+    getCountryStats: (
+      query: GetCountryStatsParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetCountryStatsData, Error>({
+        path: `/api/country-stats`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns top 50 languages ranked by total diamonds earned
+     *
+     * @tags Global
+     * @name GetLanguageLeaderboard
+     * @summary Get language leaderboard
+     * @request GET:/api/language-leaderboard
+     */
+    getLanguageLeaderboard: (params: RequestParams = {}) =>
+      this.request<GetLanguageLeaderboardData, Error>({
+        path: `/api/language-leaderboard`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns daily diamond stats for the last 30 days for a specific language
+     *
+     * @tags Global
+     * @name GetLanguageStats
+     * @summary Get language daily stats
+     * @request GET:/api/language-stats
+     */
+    getLanguageStats: (
+      query: GetLanguageStatsParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetLanguageStatsData, Error>({
+        path: `/api/language-stats`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns streamers ranked by total diamonds earned, filterable by country and language
+     *
+     * @tags Global
+     * @name GetTopStreamers
+     * @summary Get top earners leaderboard
+     * @request GET:/api/top-streamers
+     */
+    getTopStreamers: (
+      query: GetTopStreamersParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetTopStreamersData, Error>({
+        path: `/api/top-streamers`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns streamers ranked by total hours streamed, filterable by country and language
+     *
+     * @tags Global
+     * @name GetMostLive
+     * @summary Get most active streamers leaderboard
+     * @request GET:/api/most-live
+     */
+    getMostLive: (query: GetMostLiveParams, params: RequestParams = {}) =>
+      this.request<GetMostLiveData, Error>({
+        path: `/api/most-live`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns users ranked by total diamonds given across all streamers
+     *
+     * @tags Global
+     * @name GetTopGifters
+     * @summary Get top gifters leaderboard
+     * @request GET:/api/top-gifters
+     */
+    getTopGifters: (query: GetTopGiftersParams, params: RequestParams = {}) =>
+      this.request<GetTopGiftersData, Error>({
+        path: `/api/top-gifters`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns streamers ranked by total battles participated in
+     *
+     * @tags Global
+     * @name GetBattleStats
+     * @summary Get battle statistics leaderboard
+     * @request GET:/api/battle-stats
+     */
+    getBattleStats: (query: GetBattleStatsParams, params: RequestParams = {}) =>
+      this.request<GetBattleStatsData, Error>({
+        path: `/api/battle-stats`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns top gifter-streamer pairs ranked by total diamonds given
+     *
+     * @tags Global
+     * @name GetGifterRelationships
+     * @summary Get gifter-streamer relationships
+     * @request GET:/api/gifter-relationships
+     */
+    getGifterRelationships: (
+      query: GetGifterRelationshipsParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetGifterRelationshipsData, Error>({
+        path: `/api/gifter-relationships`,
+        method: "GET",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+  };
   streamer = {
     /**
      * @description Returns aggregated statistics for a specific streamer including diamonds, gifts, messages, and battle performance

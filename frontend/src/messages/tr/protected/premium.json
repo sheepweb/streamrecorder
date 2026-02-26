@@ -21,13 +21,15 @@
 
   "premiumRecord100": "100 kanalı kaydedin",
   "premiumFullControl": "Kayıtlarınız üzerinde tam kontrol",
-  "premiumNotifications": "Hazır olduğunda bildirim",
+  "premiumNotifications": "Hazır olunca bildirim al",
   "premiumAiHighlights": "AI öne çıkanlar ve klipler",
   "premiumAiSubtitles": "AI altyazı ve çeviri",
   "premiumAiMemes": "AI memler ve GIF'ler",
   "premiumPublishSocial": "Sosyal medyada yayınla",
   "premiumWatchLater": "Daha sonra izle ve favoriler",
   "premiumPrioritySupport": "Öncelikli destek",
+  "premiumTiktokInsights": "TikTok Canlı İstatistikleri",
+  "premiumDownloadRecordings": "Kayıtları indir",
 
   "paymentMethod": "Ödeme Yöntemi",
   "freemiusDescription": "Kredi Kartı, PayPal ve daha fazlası",
@@ -49,7 +51,7 @@
   "oneTime": "tek seferlik",
 
   "yourPremiumFeatures": "Premium Özellikleriniz",
-  "unlockPremiumFeatures": "Premium Özelliklerin Kilidini Açın",
+  "unlockPremiumFeatures": "Premium özelliklerin kilidini aç",
   "futureFeatures": "Premium, yayınlandıkça tüm gelecek özellikleri içerir.",
   "seeWhatsNew": "Yeniliklere bakın",
 
@@ -64,7 +66,7 @@
   "securePayment": "Güvenli ödeme",
 
   "cancelModalTitle": "Aboneliği İptal Et",
-  "cancelModalMessage": "Gittiğinizi görmek bizi üzüyor! İptal ederseniz, {endDate} tarihine kadar premium özelliklere erişiminiz devam edecek.",
+  "cancelModalMessage": "Ayrıldığını görmek bizi üzüyor! İptal ederseniz, {endDate} tarihine kadar premium özelliklere erişiminiz devam edecek.",
   "cancelModalAfter": "Bundan sonra hesabınız ücretsiz plana dönecek.",
   "keepSubscription": "Aboneliği koru",
   "yesCancel": "Evet, iptal et"

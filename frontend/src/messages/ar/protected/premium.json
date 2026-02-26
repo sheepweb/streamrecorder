@@ -21,13 +21,15 @@
 
   "premiumRecord100": "سجّل 100 من قنواتك",
   "premiumFullControl": "تحكم كامل في تسجيلاتك",
-  "premiumNotifications": "إشعارات عند الجاهزية",
+  "premiumNotifications": "إشعار عند الاكتمال",
   "premiumAiHighlights": "مقاطع وأبرز اللحظات بالذكاء الاصطناعي",
   "premiumAiSubtitles": "ترجمة نصية بالذكاء الاصطناعي",
   "premiumAiMemes": "ميمز وصور متحركة بالذكاء الاصطناعي",
   "premiumPublishSocial": "انشر على وسائل التواصل الاجتماعي",
   "premiumWatchLater": "شاهد لاحقاً والمفضلة",
   "premiumPrioritySupport": "دعم ذو أولوية",
+  "premiumTiktokInsights": "إحصائيات TikTok المباشر",
+  "premiumDownloadRecordings": "تنزيل أي تسجيل",
 
   "paymentMethod": "طريقة الدفع",
   "freemiusDescription": "بطاقة ائتمان، باي بال، والمزيد",
@@ -49,7 +51,7 @@
   "oneTime": "دفعة واحدة",
 
   "yourPremiumFeatures": "ميزاتك البريميوم",
-  "unlockPremiumFeatures": "افتح ميزات البريميوم",
+  "unlockPremiumFeatures": "استمتع بجميع المميزات",
   "futureFeatures": "البريميوم يشمل جميع الميزات المستقبلية عند إصدارها.",
   "seeWhatsNew": "شاهد الجديد",
 
@@ -64,7 +66,7 @@
   "securePayment": "دفع آمن",
 
   "cancelModalTitle": "إلغاء الاشتراك",
-  "cancelModalMessage": "نأسف لرؤيتك تذهب! إذا ألغيت، ستظل لديك صلاحية ميزات البريميوم حتى {endDate}.",
+  "cancelModalMessage": "يحزننا أن تغادر! إذا ألغيت، ستظل لديك صلاحية ميزات البريميوم حتى {endDate}.",
   "cancelModalAfter": "بعد ذلك، سيعود حسابك إلى الاشتراك المجاني.",
   "keepSubscription": "احتفظ بالاشتراك",
   "yesCancel": "نعم، إلغاء"

@@ -31,6 +31,7 @@ import {
   IconBrandMastercard,
   IconBrandPaypal,
   IconBrandVisa,
+  IconChartBar,
   IconCheck,
   IconCrown,
   IconDownload,
@@ -112,6 +113,8 @@ export default function PremiumClient() {
     { icon: IconScissors, label: t("premiumPublishSocial"), color: "#38bdf8" },
     { icon: IconVideo, label: t("premiumWatchLater"), color: "#c084fc" },
     { icon: IconHeadset, label: t("premiumPrioritySupport"), color: "#a78bfa" },
+    { icon: IconChartBar, label: t("premiumTiktokInsights"), color: "#22d3ee" },
+    { icon: IconDownload, label: t("premiumDownloadRecordings"), color: "#4ade80" },
   ];
 
   const selectedPlan = BILLING_OPTIONS.find((o) => o.id === selectedBilling);
