@@ -15,6 +15,7 @@ import {
   IconDownload,
   IconEye,
   IconEyeOff,
+  IconScissors,
   IconSparkles,
   IconTrash,
 } from "@tabler/icons-react";
@@ -47,13 +48,17 @@ export function RecordingMenu({
     (f) => f.documentId === recording.follower?.documentId,
   );
   const isPremium =
-    (user?.role as any)?.type === "admin" ||
-    (user?.role as any)?.type === "champion" ||
+    user?.role?.type === "admin" ||
+    user?.role?.type === "champion" ||
     user?.subscriptionStatus === "active";
 
   const inWatchLater = recording.documentId
     ? isInWatchLater(recording.documentId)
     : false;
+
+  const recType = type || recording.follower?.type;
+  const recUsername = username || recording.follower?.username;
+  const editHref = `/${recType}/${recUsername}/video/${recording.documentId}/edit`;
 
   const handleDelete = () => {
     if (!recording.documentId) return;
@@ -91,7 +96,9 @@ export function RecordingMenu({
     const wasInWatchLater = inWatchLater;
     toggleWatchLater(recording.documentId);
     notifications.show({
-      title: wasInWatchLater ? t("removedFromWatchLater") : t("addedToWatchLater"),
+      title: wasInWatchLater
+        ? t("removedFromWatchLater")
+        : t("addedToWatchLater"),
       message: null,
       color: wasInWatchLater ? "gray" : "green",
     });
@@ -146,6 +153,14 @@ export function RecordingMenu({
               {t("createWithAI")}
             </Menu.Item>
           )}
+          <Menu.Divider />
+          <Menu.Item
+            component={Link}
+            href={editHref}
+            leftSection={<IconScissors size={14} />}
+          >
+            Edit clip
+          </Menu.Item>
           <Menu.Item
             leftSection={<IconDownload size={14} />}
             onClick={handleDownload}
@@ -154,7 +169,6 @@ export function RecordingMenu({
           </Menu.Item>
           {isOwner && (
             <>
-              <Menu.Divider />
               <Menu.Item
                 leftSection={
                   recording.hidden ? (
