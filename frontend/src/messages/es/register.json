@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Crear Cuenta",
+    "description": "Crea una cuenta gratuita en LiveStreamRecorder para grabar automáticamente las transmisiones en vivo de tus creadores favoritos."
+  },
+  "title": "Crear una cuenta",
+  "subtitle": "Únete a nosotros y empieza a explorar",
+  "username": {
+    "label": "Usuario",
+    "placeholder": "Elige un usuario"
+  },
+  "email": {
+    "label": "Correo electrónico",
+    "placeholder": "tu@ejemplo.com"
+  },
+  "password": {
+    "label": "Contraseña",
+    "placeholder": "Crea una contraseña",
+    "hint": "La contraseña debe tener al menos 6 caracteres"
+  },
+  "terms": {
+    "agree": "Acepto los",
+    "link": "Términos y Condiciones"
+  },
+  "submit": {
+    "default": "Crear cuenta",
+    "loading": "Creando cuenta..."
+  },
+  "login": {
+    "text": "¿Ya tienes una cuenta?",
+    "link": "Inicia sesión"
+  }
+}

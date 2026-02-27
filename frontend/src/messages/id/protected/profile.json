@@ -1,0 +1,13 @@
+{
+  "addedAgo": "ditambahkan {time}",
+  "lastCheckedAgo": "status live diperiksa {time}",
+  "discoverStreamers": "Temukan Teman",
+  "emptyNewlyAdded": {
+    "title": "{username} telah ditambahkan!",
+    "description": "Kami akan mulai merekam stream mereka secara otomatis."
+  },
+  "emptyDefault": {
+    "title": "Belum ada rekaman",
+    "description": "Belum ada rekaman dari {username}. Cek lagi nanti!"
+  }
+}

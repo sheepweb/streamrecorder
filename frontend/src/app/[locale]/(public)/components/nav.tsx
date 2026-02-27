@@ -15,15 +15,15 @@ export const navConfig = {
       icon: IconVideo,
     },
   ],
-  navLinks: [
-    { key: "blogs", label: "Blogs", href: "/blogs" },
-    { key: "premium", label: "Premium", href: "/premium" },
-  ],
   languages: [
-    { code: "en", label: "English" },
-    { code: "ar", label: "العربية" },
-    { code: "tr", label: "Türkçe" },
-    { code: "ko", label: "한국어" },
+    { code: "en", label: "English", flag: "us" },
+    { code: "ar", label: "العربية", flag: "sa" },
+    { code: "es", label: "Español", flag: "mx" },
+    { code: "id", label: "Bahasa Indonesia", flag: "id" },
+    { code: "ja", label: "日本語", flag: "jp" },
+    { code: "ko", label: "한국어", flag: "kr" },
+    { code: "pt", label: "Português", flag: "br" },
+    { code: "tr", label: "Türkçe", flag: "tr" },
   ],
   featuredCreators: [
     { key: "browse", label: "Browse All", href: "/creators/all" },

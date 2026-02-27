@@ -15,6 +15,7 @@ import {
   IconWorldSearch,
 } from "@tabler/icons-react";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { usePWAInstall } from "react-use-pwa-install";
@@ -184,6 +185,15 @@ export function MobileBar() {
                         <Menu.Item
                           key={lang.code}
                           onClick={() => switchLocale(lang.code)}
+                          leftSection={
+                            <Image
+                              src={`https://flagcdn.com/w40/${lang.flag}.png`}
+                              width={20}
+                              height={15}
+                              alt={lang.label}
+                              style={{ borderRadius: 2, objectFit: "cover" }}
+                            />
+                          }
                         >
                           {lang.label}
                         </Menu.Item>

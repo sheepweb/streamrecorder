@@ -1,18 +1,16 @@
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
-  locales: ["en", "ar", "tr", "ko"],
+  locales: ["en", "ar", "tr", "ko", "ja", "es", "pt", "id"],
   defaultLocale: "en",
   localePrefix: "as-needed",
 });
 
 // OpenGraph locale mapping for SEO metadata
 export const OG_LOCALES: Record<string, string> = {
-  // Active
   en: "en_US", // English
   ar: "ar_SA", // Arabic
   tr: "tr_TR", // Turkish
-  // Future
   es: "es_LA", // Spanish (Latin American)
   pt: "pt_BR", // Portuguese (Brazilian)
   id: "id_ID", // Indonesian

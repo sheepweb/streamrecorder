@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "ログイン",
+    "description": "LiveStreamRecorder アカウントにサインインして、録画とフォロー中のストリーマーにアクセスしてください。"
+  },
+  "title": "おかえりなさい",
+  "subtitle": "アカウントにサインインして続ける",
+  "email": {
+    "label": "メールアドレス",
+    "placeholder": "you@example.com"
+  },
+  "password": {
+    "label": "パスワード",
+    "placeholder": "パスワードを入力してください"
+  },
+  "forgotPassword": "パスワードをお忘れですか？",
+  "submit": {
+    "default": "サインイン",
+    "loading": "サインイン中..."
+  },
+  "register": {
+    "text": "アカウントをお持ちでないですか？",
+    "link": "作成する"
+  }
+}

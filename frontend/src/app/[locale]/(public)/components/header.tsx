@@ -16,6 +16,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { IconChevronDown, IconWorld } from "@tabler/icons-react";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { redirectLoginUri } from "../login/components/login-form";
 import { navConfig } from "./nav";
@@ -135,6 +136,15 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
                       <Menu.Item
                         key={lang.code}
                         onClick={() => switchLocale(lang.code)}
+                        leftSection={
+                          <Image
+                            src={`https://flagcdn.com/w40/${lang.flag}.png`}
+                            width={20}
+                            height={15}
+                            alt={lang.label}
+                            style={{ borderRadius: 2, objectFit: "cover" }}
+                          />
+                        }
                       >
                         {lang.label}
                       </Menu.Item>
@@ -269,6 +279,15 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
               <NavLink
                 key={lang.code}
                 label={lang.label}
+                leftSection={
+                  <Image
+                    src={`https://flagcdn.com/w40/${lang.flag}.png`}
+                    width={20}
+                    height={15}
+                    alt={lang.label}
+                    style={{ borderRadius: 2, objectFit: "cover" }}
+                  />
+                }
                 onClick={() => {
                   switchLocale(lang.code);
                   closeDrawer();

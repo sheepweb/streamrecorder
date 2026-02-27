@@ -15,6 +15,12 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "flagcdn.com",
+      },
+    ],
   },
   async redirects() {
     return [

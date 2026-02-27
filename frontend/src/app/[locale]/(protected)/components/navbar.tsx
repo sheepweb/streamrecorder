@@ -35,6 +35,7 @@ import {
   IconWorldSearch,
 } from "@tabler/icons-react";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -370,6 +371,15 @@ export function Navbar({
                       <Menu.Item
                         key={lang.code}
                         onClick={() => switchLocale(lang.code)}
+                        leftSection={
+                          <Image
+                            src={`https://flagcdn.com/w40/${lang.flag}.png`}
+                            width={20}
+                            height={15}
+                            alt={lang.label}
+                            style={{ borderRadius: 2, objectFit: "cover" }}
+                          />
+                        }
                       >
                         {lang.label}
                       </Menu.Item>

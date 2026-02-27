@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "アカウント作成",
+    "description": "LiveStreamRecorder の無料アカウントを作成して、お気に入りのクリエイターのライブ配信を自動録画しましょう。"
+  },
+  "title": "アカウントを作成する",
+  "subtitle": "登録してコンテンツを探索しましょう",
+  "username": {
+    "label": "ユーザー名",
+    "placeholder": "ユーザー名を選択してください"
+  },
+  "email": {
+    "label": "メールアドレス",
+    "placeholder": "you@example.com"
+  },
+  "password": {
+    "label": "パスワード",
+    "placeholder": "パスワードを作成してください",
+    "hint": "パスワードは 6 文字以上で設定してください"
+  },
+  "terms": {
+    "agree": "以下に同意します：",
+    "link": "利用規約"
+  },
+  "submit": {
+    "default": "アカウントを作成",
+    "loading": "作成中..."
+  },
+  "login": {
+    "text": "すでにアカウントをお持ちですか？",
+    "link": "サインイン"
+  }
+}

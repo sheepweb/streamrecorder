@@ -1,0 +1,13 @@
+{
+  "addedAgo": "adicionado {time}",
+  "lastCheckedAgo": "status ao vivo verificado {time}",
+  "discoverStreamers": "Encontrar Amigos",
+  "emptyNewlyAdded": {
+    "title": "{username} foi adicionado!",
+    "description": "Vamos começar a gravar as lives automaticamente."
+  },
+  "emptyDefault": {
+    "title": "Nenhuma gravação ainda",
+    "description": "Nenhuma gravação de {username} ainda. Volte mais tarde!"
+  }
+}

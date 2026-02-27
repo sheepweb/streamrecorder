@@ -1,0 +1,25 @@
+{
+  "meta": {
+    "title": "Masuk",
+    "description": "Masuk ke akun LiveStreamRecorder Anda untuk mengakses rekaman dan streamer yang Anda ikuti."
+  },
+  "title": "Selamat datang kembali",
+  "subtitle": "Masuk untuk melanjutkan ke akun Anda",
+  "email": {
+    "label": "Alamat email",
+    "placeholder": "anda@contoh.com"
+  },
+  "password": {
+    "label": "Kata sandi",
+    "placeholder": "Masukkan kata sandi Anda"
+  },
+  "forgotPassword": "Lupa kata sandi?",
+  "submit": {
+    "default": "Masuk",
+    "loading": "Sedang masuk..."
+  },
+  "register": {
+    "text": "Belum punya akun?",
+    "link": "Buat akun"
+  }
+}

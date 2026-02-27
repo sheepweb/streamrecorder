@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "Buat Akun",
+    "description": "Buat akun LiveStreamRecorder gratis untuk merekam live stream dari kreator favorit Anda secara otomatis."
+  },
+  "title": "Buat akun",
+  "subtitle": "Bergabunglah dan mulai jelajahi",
+  "username": {
+    "label": "Username",
+    "placeholder": "Pilih username"
+  },
+  "email": {
+    "label": "Alamat email",
+    "placeholder": "anda@contoh.com"
+  },
+  "password": {
+    "label": "Kata sandi",
+    "placeholder": "Buat kata sandi",
+    "hint": "Kata sandi minimal 6 karakter"
+  },
+  "terms": {
+    "agree": "Saya setuju dengan",
+    "link": "Syarat dan Ketentuan"
+  },
+  "submit": {
+    "default": "Buat akun",
+    "loading": "Membuat akun..."
+  },
+  "login": {
+    "text": "Sudah punya akun?",
+    "link": "Masuk"
+  }
+}
