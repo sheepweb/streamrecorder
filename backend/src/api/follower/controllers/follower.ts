@@ -12,7 +12,16 @@ export default factories.createCoreController(
       const sort = ctx.query.sort as string | undefined;
       const includeRecordings = scope === "discover";
 
-      const sortField = sort?.split(":")[0] || "createdAt";
+      const ALLOWED_SORT_FIELDS = new Set([
+        "createdAt",
+        "username",
+        "totalRecordings",
+        "latestRecording",
+      ]);
+      const rawSortField = sort?.split(":")[0] || "createdAt";
+      const sortField = ALLOWED_SORT_FIELDS.has(rawSortField)
+        ? rawSortField
+        : "createdAt";
       const sortDirection = sort?.includes(":desc") ? "DESC" : "ASC";
 
       const knex = strapi.db.connection;
@@ -236,7 +245,7 @@ export default factories.createCoreController(
         if (idRows.length === 0) {
           return {
             data: [],
-            meta: { pagination: { page, pageSize, pageCount: 0, total: 0 } },
+            meta: { pagination: { page, pageSize, pageCount: Math.ceil(total / pageSize), total } },
           };
         }
 
@@ -261,7 +270,7 @@ export default factories.createCoreController(
       if (rows.length === 0) {
         return {
           data: [],
-          meta: { pagination: { page, pageSize, pageCount: 0, total: 0 } },
+          meta: { pagination: { page, pageSize, pageCount: Math.ceil(total / pageSize), total } },
         };
       }
 
