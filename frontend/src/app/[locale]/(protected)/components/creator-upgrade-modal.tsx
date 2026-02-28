@@ -20,11 +20,13 @@ import {
 } from "@mantine/core";
 import {
   IconBell,
+  IconChartBar,
   IconCrown,
   IconDownload,
   IconLanguage,
   IconMovie,
   IconScissors,
+  IconShare,
   IconSparkles,
   IconUsers,
   IconVideo,
@@ -58,9 +60,15 @@ export function CreatorUpgradeModal({
     { icon: IconBell, label: tp("premiumNotifications"), color: "#fbbf24" },
     { icon: IconMovie, label: tp("premiumAiHighlights"), color: "#34d399" },
     { icon: IconLanguage, label: tp("premiumAiSubtitles"), color: "#f472b6" },
-    { icon: IconScissors, label: tp("premiumPublishSocial"), color: "#38bdf8" },
+    { icon: IconShare, label: tp("premiumPublishSocial"), color: "#38bdf8" },
     { icon: IconVideo, label: tp("premiumWatchLater"), color: "#c084fc" },
     { icon: IconSparkles, label: tp("premiumAiMemes"), color: "#fb923c" },
+    { icon: IconScissors, label: tp("premiumClipEditor"), color: "#ef4444" },
+    {
+      icon: IconChartBar,
+      label: tp("premiumTiktokInsights"),
+      color: "#22d3ee",
+    },
   ];
 
   return (
@@ -100,16 +108,9 @@ export function CreatorUpgradeModal({
 
         <Stack align="center" gap="xs">
           <IconCrown size={44} color="#fbbf24" />
-          <Title order={2} c="white" ta="center" size={isMobile ? "h4" : "h2"}>
-            {t("followers.upgradeModalHeadline")}
-          </Title>
-          <Text
-            c="rgba(255,255,255,0.85)"
-            ta="center"
-            size={isMobile ? "sm" : "lg"}
-          >
+          <Title order={2} c="white" ta="center" size={isMobile ? "h4" : "h3"}>
             {t("followers.max3Message")}
-          </Text>
+          </Title>
         </Stack>
       </Box>
 

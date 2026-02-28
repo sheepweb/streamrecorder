@@ -183,12 +183,12 @@ export function CustomSlider({
             display: "flex",
           }}
         >
-          {thumbnailCues.length > 0 &&
-            duration > 0 &&
-            (() => {
-              // Calculate how many thumbnails fit in extended width
+          {thumbnailCues.length > 0 && (() => {
+              // Calculate exact number of thumbnails and their width to fill container perfectly
               const totalWidth = containerWidth + 40;
-              const numThumbs = Math.ceil(totalWidth / thumbDisplayWidth);
+              const numThumbs = Math.round(totalWidth / thumbDisplayWidth);
+              const exactThumbWidth = totalWidth / numThumbs;
+
               // Sample cues evenly from the array
               const sampledCues: ThumbnailCue[] = [];
               const step = thumbnailCues.length / numThumbs;
@@ -199,19 +199,20 @@ export function CustomSlider({
 
               return sampledCues.map((cue, i) => {
                 const scale = thumbDisplayHeight / cue.h;
+                const widthScale = exactThumbWidth / cue.w;
                 const cols = spriteCols.get(cue.url) || 10;
 
                 return (
                   <Box
                     key={`thumb-${i}`}
                     style={{
-                      width: thumbDisplayWidth,
+                      width: exactThumbWidth,
                       height: thumbDisplayHeight,
                       flexShrink: 0,
                       overflow: "hidden",
                       backgroundImage: `url(${cue.url})`,
-                      backgroundSize: `${cols * thumbDisplayWidth}px ${cols * thumbDisplayHeight}px`,
-                      backgroundPosition: `${-cue.x * scale}px ${-cue.y * scale}px`,
+                      backgroundSize: `${cols * exactThumbWidth}px ${cols * thumbDisplayHeight}px`,
+                      backgroundPosition: `${-cue.x * widthScale}px ${-cue.y * scale}px`,
                       backgroundRepeat: "no-repeat",
                     }}
                   />
