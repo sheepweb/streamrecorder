@@ -83,8 +83,8 @@
   },
   "quota": {
     "badge": "{used} / {total} bulan ini",
-    "limitReachedNote": "Batas tercapai · reset {date}",
+    "limitReachedNote": "Batas tercapai · diperbarui {date}",
     "alertTitle": "Batas bulanan tercapai",
-    "alertBody": "Kamu sudah memakai semua {total} sesi AI bulan ini. Batas diperbarui pada {date}."
+    "alertBody": "Kamu sudah menggunakan semua {total} generasi AI bulan ini. Batasmu diperbarui pada {date}."
   }
 }

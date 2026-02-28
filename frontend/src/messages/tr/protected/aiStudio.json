@@ -85,6 +85,6 @@
     "badge": "Bu ay {used} / {total}",
     "limitReachedNote": "Limit doldu · {date} yenileniyor",
     "alertTitle": "Aylık limit doldu",
-    "alertBody": "Bu ayki {total} AI oluşturma hakkınızı kullandınız. {date} tarihinde yenileniyor."
+    "alertBody": "Bu ayki {total} AI üretimini kullandınız. Limitiniz {date} tarihinde yenileniyor."
   }
 }
