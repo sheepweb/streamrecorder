@@ -4,6 +4,7 @@ import {
   ActionIcon,
   Alert,
   Avatar,
+  Box,
   Card,
   Group,
   Stack,
@@ -15,6 +16,7 @@ import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { MiniPlayer } from "../../../components/video/mini-player";
 import { AiCreateForm } from "../../components/ai-create-form";
 import { AiStudioGuard } from "../../components/ai-studio-guard";
 
@@ -31,8 +33,16 @@ export default async function Page({ params }: PageProps) {
   const t = await getTranslations("protected.aiStudio");
 
   const now = new Date();
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
-  const resetDate = new Date(now.getFullYear(), now.getMonth() + 1, 1).toLocaleDateString("en", { month: "long", day: "numeric" });
+  const startOfMonth = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    1,
+  ).toISOString();
+  const resetDate = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    1,
+  ).toLocaleDateString("en", { month: "long", day: "numeric" });
 
   const [{ data: recordingResponse }, usageResponse] = await Promise.all([
     api.recording
@@ -105,10 +115,21 @@ export default async function Page({ params }: PageProps) {
         )}
 
         {limitReached ? (
-          <Alert icon={<IconAlertCircle />} color="orange" variant="light" title="Monthly limit reached">
-            You've used all {MONTHLY_QUOTA} AI generations for this month. Your limit resets on {resetDate}.
-            If you need more, reach out to us and we'll add additional generations to your account.
-          </Alert>
+          <Stack gap="lg">
+            <Box maw={600} pos="relative" style={{ aspectRatio: "16/9" }}>
+              <MiniPlayer documentId={recording.documentId!} />
+            </Box>
+            <Alert
+              icon={<IconAlertCircle />}
+              color="orange"
+              variant="light"
+              title="Monthly limit reached"
+            >
+              You've used all {MONTHLY_QUOTA} AI generations for this month. Your
+              limit resets on {resetDate}. If you need more, reach out to us and
+              we'll add additional generations to your account.
+            </Alert>
+          </Stack>
         ) : (
           <AiCreateForm recording={recording} />
         )}
