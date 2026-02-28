@@ -126,8 +126,7 @@ export default async function Page({ params }: PageProps) {
               title="Monthly limit reached"
             >
               You've used all {MONTHLY_QUOTA} AI generations for this month. Your
-              limit resets on {resetDate}. If you need more, reach out to us and
-              we'll add additional generations to your account.
+              limit resets on {resetDate}.
             </Alert>
           </Stack>
         ) : (
