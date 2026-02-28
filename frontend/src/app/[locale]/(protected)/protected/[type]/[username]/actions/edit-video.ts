@@ -1,6 +1,20 @@
 "use server";
 
-export async function exportClip(
+import api from "@/lib/api";
+
+async function checkNotBasic(): Promise<boolean> {
+  try {
+    const user = await api.usersPermissionsUsersRoles.getUsersPermissionsUsersRoles({
+      populate: { role: true },
+    });
+    const roleType = (user?.data?.role as any)?.type;
+    return roleType !== "authenticated";
+  } catch {
+    return false;
+  }
+}
+
+export async function cropExportVideo(
   videoDocumentId: string,
   userId: number,
   startTime: number,
@@ -22,14 +36,19 @@ export async function exportClip(
   });
 }
 
-export async function downloadClip(
+export async function cropDownloadVideo(
   videoDocumentId: string,
   userId: number,
   locale: string,
   startTime: number,
   endTime: number,
 ): Promise<void> {
-  await fetch(process.env.N8N_URL + "/webhook/clip", {
+  const canDownload = await checkNotBasic();
+  if (!canDownload) {
+    throw new Error("Premium subscription required");
+  }
+
+  await fetch(process.env.N8N_URL + "/webhook/crop-download-video", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,8 +59,7 @@ export async function downloadClip(
       userId,
       locale,
       startTime,
-      endTime,
-      action: "download",
+      duration: endTime - startTime,
     }),
   });
 }

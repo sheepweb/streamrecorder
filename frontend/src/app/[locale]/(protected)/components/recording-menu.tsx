@@ -24,6 +24,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 import { DownloadUpgradeModal } from "./download-upgrade-modal";
+import { VideoEditorModal } from "./video-editor-modal";
 
 interface RecordingMenuProps {
   recording: Recording;
@@ -42,6 +43,7 @@ export function RecordingMenu({
   const { isInWatchLater, toggleWatchLater } = useWatchLater();
   const locale = useLocale();
   const [downloadUpgradeOpened, setDownloadUpgradeOpened] = useState(false);
+  const [editorOpened, setEditorOpened] = useState(false);
 
   const isOwner = user?.id && recording.follower?.owner?.id === user.id;
   const isFollowing = user?.followers?.some(
@@ -56,9 +58,6 @@ export function RecordingMenu({
     ? isInWatchLater(recording.documentId)
     : false;
 
-  const recType = type || recording.follower?.type;
-  const recUsername = username || recording.follower?.username;
-  const editHref = `/${recType}/${recUsername}/video/${recording.documentId}/edit`;
 
   const handleDelete = () => {
     if (!recording.documentId) return;
@@ -134,11 +133,7 @@ export function RecordingMenu({
         <Menu.Dropdown>
           <Menu.Item
             leftSection={
-              inWatchLater ? (
-                <IconBookmarkFilled size={14} />
-              ) : (
-                <IconBookmark size={14} />
-              )
+              inWatchLater ? <IconBookmarkFilled /> : <IconBookmark />
             }
             onClick={handleToggleWatchLater}
           >
@@ -148,42 +143,32 @@ export function RecordingMenu({
             <Menu.Item
               component={Link}
               href={`/ai-studio/create/${recording.documentId}`}
-              leftSection={<IconSparkles size={14} />}
+              leftSection={<IconSparkles />}
             >
               {t("createWithAI")}
             </Menu.Item>
           )}
           <Menu.Divider />
           <Menu.Item
-            component={Link}
-            href={editHref}
-            leftSection={<IconScissors size={14} />}
+            leftSection={<IconScissors />}
+            onClick={() => setEditorOpened(true)}
           >
             Edit clip
           </Menu.Item>
-          <Menu.Item
-            leftSection={<IconDownload size={14} />}
-            onClick={handleDownload}
-          >
+          <Menu.Item leftSection={<IconDownload />} onClick={handleDownload}>
             {t("download")}
           </Menu.Item>
           {isOwner && (
             <>
               <Menu.Item
-                leftSection={
-                  recording.hidden ? (
-                    <IconEye size={14} />
-                  ) : (
-                    <IconEyeOff size={14} />
-                  )
-                }
+                leftSection={recording.hidden ? <IconEye /> : <IconEyeOff />}
                 onClick={handleToggleHidden}
               >
                 {recording.hidden ? t("show") : t("hide")}
               </Menu.Item>
               <Menu.Item
                 color="red"
-                leftSection={<IconTrash size={14} />}
+                leftSection={<IconTrash />}
                 onClick={handleDelete}
               >
                 {t("delete")}
@@ -195,6 +180,11 @@ export function RecordingMenu({
       <DownloadUpgradeModal
         opened={downloadUpgradeOpened}
         onClose={() => setDownloadUpgradeOpened(false)}
+      />
+      <VideoEditorModal
+        recording={recording}
+        opened={editorOpened}
+        onClose={() => setEditorOpened(false)}
       />
     </>
   );
