@@ -1,7 +1,10 @@
 async function up(knex) {
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_sources_state ON sources(state)`,
-  );
+  const hasTable = await knex.schema.hasTable("sources");
+  if (hasTable) {
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_sources_state ON sources(state)`,
+    );
+  }
 }
 
 async function down(knex) {

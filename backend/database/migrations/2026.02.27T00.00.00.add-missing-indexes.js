@@ -1,27 +1,38 @@
 async function up(knex) {
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_sources_path ON sources(path)`,
-  );
+  const hasSources = await knex.schema.hasTable("sources");
+  const hasVisitorViews = await knex.schema.hasTable("visitor_views");
+  const hasFollowers = await knex.schema.hasTable("followers");
+  const hasRecordings = await knex.schema.hasTable("recordings");
 
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_sources_state_duration ON sources(state, duration)`,
-  );
+  if (hasSources) {
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_sources_path ON sources(path)`,
+    );
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_sources_state_duration ON sources(state, duration)`,
+    );
+  }
 
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_visitor_views_fingerprint ON visitor_views(fingerprint)`,
-  );
+  if (hasVisitorViews) {
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_visitor_views_fingerprint ON visitor_views(fingerprint)`,
+    );
+  }
 
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_followers_last_checked_at ON followers(last_checked_at)`,
-  );
+  if (hasFollowers) {
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_followers_last_checked_at ON followers(last_checked_at)`,
+    );
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_followers_pause ON followers(pause)`,
+    );
+  }
 
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_followers_pause ON followers(pause)`,
-  );
-
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_recordings_locale ON recordings(locale)`,
-  );
+  if (hasRecordings) {
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_recordings_locale ON recordings(locale)`,
+    );
+  }
 }
 
 async function down(knex) {
