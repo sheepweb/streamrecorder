@@ -111,6 +111,7 @@ export const fetchProfileRecordings = cache(async function (
       sort: "createdAt:desc",
       "pagination[page]": 1,
       "pagination[pageSize]": 5,
+      "pagination[withCount]": false,
     }),
   );
 

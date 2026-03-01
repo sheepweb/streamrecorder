@@ -33,8 +33,8 @@ export default function RecordingModalClient() {
     queryFn: ({ pageParam }) => fetchRecordings(filters, pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const { page = 1, pageCount = 0 } = lastPage.meta?.pagination ?? {};
-      return page < pageCount ? page + 1 : undefined;
+      const { page = 1, pageSize } = lastPage.meta?.pagination ?? {};
+      return lastPage.data.length === pageSize ? page + 1 : undefined;
     },
   });
 

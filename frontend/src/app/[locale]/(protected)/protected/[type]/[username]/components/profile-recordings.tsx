@@ -36,8 +36,9 @@ export default function ProfileRecordings() {
           pageParam,
         ),
       initialPageParam: 1,
-      getNextPageParam: (lastPage, allPages) => {
-        return lastPage.data.length === 15 ? allPages.length + 1 : undefined;
+      getNextPageParam: (lastPage) => {
+        const { page = 1, pageSize } = lastPage.meta?.pagination ?? {};
+        return lastPage.data.length === pageSize ? page + 1 : undefined;
       },
     });
 
