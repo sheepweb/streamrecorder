@@ -36,19 +36,21 @@ import { useTranslations } from "next-intl";
 
 const DISCOUNT_CODE = "FIRST25";
 
-interface VideoUpgradeModalProps {
+interface UnfollowUpgradeModalProps {
   opened: boolean;
   onClose: () => void;
 }
 
-export function VideoUpgradeModal({ opened, onClose }: VideoUpgradeModalProps) {
+export function UnfollowUpgradeModal({
+  opened,
+  onClose,
+}: UnfollowUpgradeModalProps) {
   const t = useTranslations("protected.common");
   const tp = useTranslations("protected.premium");
 
   const isMobile = useMatches({ base: true, sm: false });
-
   const handleClose = () => {
-    trackEvent("video_upgrade_modal_close");
+    trackEvent("unfollow_upgrade_modal_close");
     onClose();
   };
 
@@ -84,7 +86,6 @@ export function VideoUpgradeModal({ opened, onClose }: VideoUpgradeModalProps) {
         },
       }}
     >
-      {/* Gradient header */}
       <Box
         p={isMobile ? "md" : "xl"}
         style={{
@@ -107,14 +108,12 @@ export function VideoUpgradeModal({ opened, onClose }: VideoUpgradeModalProps) {
         <Stack align="center" gap="xs">
           <IconCrown size={44} color="#fbbf24" />
           <Title order={2} c="white" ta="center" size={isMobile ? "h4" : "h3"}>
-            {t("recordings.videoLimitMessage")}
+            {t("followers.unfollowUpgradeTitle")}
           </Title>
         </Stack>
       </Box>
 
-      {/* Body */}
       <Stack gap="md" p="lg">
-        {/* Features grid */}
         <Stack gap="xs">
           <Text fw={600} size="sm" c="dimmed">
             {tp("unlockPremiumFeatures")}
@@ -131,7 +130,6 @@ export function VideoUpgradeModal({ opened, onClose }: VideoUpgradeModalProps) {
           </Grid>
         </Stack>
 
-        {/* Discount section */}
         <Paper
           p="sm"
           radius="md"
@@ -178,12 +176,11 @@ export function VideoUpgradeModal({ opened, onClose }: VideoUpgradeModalProps) {
           </Flex>
         </Paper>
 
-        {/* CTA */}
         <Button
           component={Link}
           href="/premium"
           onClick={() => {
-            trackEvent("video_upgrade_modal_click");
+            trackEvent("unfollow_upgrade_modal_click");
             onClose();
           }}
           fullWidth

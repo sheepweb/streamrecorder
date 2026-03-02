@@ -56,7 +56,8 @@
     "max100Message": "Bu planda 100 içerik üreticisi limitine ulaştınız.",
     "upgradeButton": "Premium'a Yükselt",
     "upgradeModalDiscount": "İlk ayınızda %25 indirim",
-    "upgradeModalCodeNote": "Ödeme sırasında kodu girin"
+    "upgradeModalCodeNote": "Ödeme sırasında kodu girin",
+    "unfollowUpgradeTitle": "Premium ile içerik üreticilerinizi istediğiniz gibi yönetin"
   },
   "newest": "En Yeni",
   "oldest": "En Eski"

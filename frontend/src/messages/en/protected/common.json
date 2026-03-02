@@ -56,7 +56,8 @@
     "max100Message": "You've reached your limit of 100 creators on this plan.",
     "upgradeButton": "Upgrade to Premium",
     "upgradeModalDiscount": "25% off your first month",
-    "upgradeModalCodeNote": "Apply at checkout"
+    "upgradeModalCodeNote": "Apply at checkout",
+    "unfollowUpgradeTitle": "Manage your creators freely with premium"
   },
   "newest": "Newest",
   "oldest": "Oldest"

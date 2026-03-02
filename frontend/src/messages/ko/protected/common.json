@@ -56,7 +56,8 @@
     "max100Message": "이 플랜에서 크리에이터 100명 한도에 도달했습니다.",
     "upgradeButton": "Premium으로 업그레이드",
     "upgradeModalDiscount": "첫 달 25% 할인",
-    "upgradeModalCodeNote": "결제 시 코드를 입력하세요"
+    "upgradeModalCodeNote": "결제 시 코드를 입력하세요",
+    "unfollowUpgradeTitle": "프리미엄으로 크리에이터를 자유롭게 관리하세요"
   },
   "newest": "최신순",
   "oldest": "오래된순"

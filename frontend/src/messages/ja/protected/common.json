@@ -56,7 +56,8 @@
     "max100Message": "このプランの 100 クリエイター上限に達しました。",
     "upgradeButton": "プレミアムにアップグレード",
     "upgradeModalDiscount": "初月 25% オフ",
-    "upgradeModalCodeNote": "チェックアウト時に適用"
+    "upgradeModalCodeNote": "チェックアウト時に適用",
+    "unfollowUpgradeTitle": "プレミアムでクリエイターを自由に管理"
   },
   "newest": "新着順",
   "oldest": "古い順"

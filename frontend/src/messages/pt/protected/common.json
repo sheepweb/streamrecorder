@@ -56,7 +56,8 @@
     "max100Message": "Você atingiu o limite de 100 criadores deste plano.",
     "upgradeButton": "Fazer upgrade para Premium",
     "upgradeModalDiscount": "25% de desconto no primeiro mês",
-    "upgradeModalCodeNote": "Aplique no checkout"
+    "upgradeModalCodeNote": "Aplique no checkout",
+    "unfollowUpgradeTitle": "Gerencie seus criadores livremente com o premium"
   },
   "newest": "Mais recentes",
   "oldest": "Mais antigos"

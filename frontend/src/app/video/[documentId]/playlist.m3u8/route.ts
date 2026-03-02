@@ -232,7 +232,7 @@ export async function GET(
   return new Response(playlist, {
     headers: {
       "Content-Type": "application/vnd.apple.mpegurl",
-      "Cache-Control": "public, max-age=31536000",
+      "Cache-Control": "no-store",
     },
   });
 }

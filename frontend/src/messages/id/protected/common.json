@@ -56,7 +56,8 @@
     "max100Message": "Anda telah mencapai batas 100 kreator pada paket ini.",
     "upgradeButton": "Upgrade ke Premium",
     "upgradeModalDiscount": "Diskon 25% untuk bulan pertama",
-    "upgradeModalCodeNote": "Terapkan saat checkout"
+    "upgradeModalCodeNote": "Terapkan saat checkout",
+    "unfollowUpgradeTitle": "Kelola kreator sesukamu dengan premium"
   },
   "newest": "Terbaru",
   "oldest": "Terlama"
