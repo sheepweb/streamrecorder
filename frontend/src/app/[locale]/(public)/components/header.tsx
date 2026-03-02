@@ -18,6 +18,8 @@ import { IconChevronDown, IconWorld } from "@tabler/icons-react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { redirectLoginUri } from "../login/components/login-form";
 import { navConfig } from "./nav";
 
@@ -30,8 +32,16 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
   const locale = useLocale();
   const { switchLocale } = useChangeLanguage();
 
+  const router = useRouter();
+  const [dashboardLoading, setDashboardLoading] = useState(false);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure();
+
+  const handleDashboardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setDashboardLoading(true);
+    router.push(redirectLoginUri);
+  };
 
   return (
     <>
@@ -156,6 +166,8 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
                 <Button
                   component={Link}
                   href={redirectLoginUri}
+                  onClick={handleDashboardClick}
+                  loading={dashboardLoading}
                   variant="gradient"
                   gradient={{ from: "#6366f1", to: "#a855f7", deg: 135 }}
                   radius="md"
@@ -303,6 +315,8 @@ export function Header({ isLoggedIn = false }: HeaderProps) {
                 fullWidth
                 component={Link}
                 href={redirectLoginUri}
+                onClick={handleDashboardClick}
+                loading={dashboardLoading}
                 variant="gradient"
                 gradient={{ from: "#6366f1", to: "#a855f7", deg: 135 }}
                 radius="md"

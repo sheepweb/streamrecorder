@@ -43,7 +43,8 @@
     "videoLimitMessage": "You've reached your free video limit.",
     "download": "Download video",
     "downloadEmailSent": "Download link on its way to your email",
-    "downloadFeatureMessage": "Downloading videos is a premium feature."
+    "downloadFeatureMessage": "Downloading videos is a premium feature.",
+    "editClip": "Edit Clip"
   },
   "followers": {
     "addedAgo_context": "For when a creator was added to user's list. Shows 'Added 3 days ago'",

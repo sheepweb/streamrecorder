@@ -43,7 +43,8 @@
     "videoLimitMessage": "Alcanzaste tu límite gratuito de videos.",
     "download": "Descargar video",
     "downloadEmailSent": "El enlace de descarga está en camino a tu correo",
-    "downloadFeatureMessage": "Descargar videos es una función premium."
+    "downloadFeatureMessage": "Descargar videos es una función premium.",
+    "editClip": "Editar clip"
   },
   "followers": {
     "addedAgo_context": "Para cuando se agregó un creador a la lista del usuario. Muestra 'Agregado hace 3 días'",

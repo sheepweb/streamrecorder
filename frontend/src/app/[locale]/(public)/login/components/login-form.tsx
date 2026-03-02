@@ -1,7 +1,6 @@
 "use client";
 
 import { login } from "@/app/actions/auth";
-import { trackEvent } from "@/app/lib/analytics";
 import {
   Anchor,
   Button,
@@ -14,31 +13,16 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import * as Sentry from "@sentry/nextjs";
 import { IconLock, IconMail } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 
 export const redirectLoginUri = "/dashboard";
 
 export function LoginForm() {
   const t = useTranslations("login");
   const [state, formAction, pending] = useActionState(login, null);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (state && state?.success) {
-      Sentry.setUser({
-        id: state?.user?.id,
-        email: state?.user?.email,
-        username: state?.user?.username,
-      });
-      trackEvent("login");
-      router.push(redirectLoginUri);
-    }
-  }, [state, router]);
 
   return (
     <Container size="xs">

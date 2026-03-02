@@ -43,7 +43,8 @@
     "videoLimitMessage": "Você atingiu o limite de vídeos gratuitos.",
     "download": "Baixar vídeo",
     "downloadEmailSent": "O link de download está sendo enviado para o seu e-mail",
-    "downloadFeatureMessage": "Baixar vídeos é um recurso premium."
+    "downloadFeatureMessage": "Baixar vídeos é um recurso premium.",
+    "editClip": "Editar clipe"
   },
   "followers": {
     "addedAgo_context": "Para quando o criador foi adicionado à lista do usuário. Exibe 'Adicionado há 3 dias'",

@@ -153,7 +153,7 @@ export function RecordingMenu({
             leftSection={<IconScissors />}
             onClick={() => setEditorOpened(true)}
           >
-            Edit clip
+            {t("editClip")}
           </Menu.Item>
           <Menu.Item leftSection={<IconDownload />} onClick={handleDownload}>
             {t("download")}
