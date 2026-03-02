@@ -13,6 +13,7 @@
     "label": "Kata sandi",
     "placeholder": "Masukkan kata sandi Anda"
   },
+  "emailConfirmed": "Email Anda telah diverifikasi. Silakan masuk ke akun Anda.",
   "forgotPassword": "Lupa kata sandi?",
   "submit": {
     "default": "Masuk",

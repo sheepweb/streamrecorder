@@ -14,17 +14,13 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import { IconLock, IconMail, IconUser } from "@tabler/icons-react";
+import { IconLock, IconMail, IconMailCheck, IconUser } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-
 import { useActionState, useEffect, useState } from "react";
-import { redirectLoginUri } from "../../login/components/login-form";
 
 export function RegisterForm() {
   const t = useTranslations("register");
-  const router = useRouter();
   const [state, formAction, pending] = useActionState(register, null);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
 
@@ -34,9 +30,8 @@ export function RegisterForm() {
         language: navigator.language,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       });
-      router.push(redirectLoginUri);
     }
-  }, [state, router]);
+  }, [state]);
 
   return (
     <Container size="sm">
@@ -69,6 +64,38 @@ export function RegisterForm() {
         </Text>
       </Stack>
 
+      {state?.success ? (
+        <Paper
+          p="xl"
+          radius="lg"
+          style={{
+            background: "rgba(255, 255, 255, 0.02)",
+            border: "1px solid rgba(255, 255, 255, 0.06)",
+          }}
+        >
+          <Stack align="center" gap="md" py="lg">
+            <IconMailCheck size={48} style={{ color: "#6ee7b7" }} />
+            <Title order={3} ta="center" style={{ color: "#f1f5f9" }}>
+              {t("checkEmail.title")}
+            </Title>
+            <Text
+              size="md"
+              ta="center"
+              maw={400}
+              style={{ color: "#94a3b8", lineHeight: 1.7 }}
+            >
+              {t("checkEmail.description")}
+            </Text>
+            <Anchor
+              component={Link}
+              href="/login"
+              style={{ color: "#a5b4fc", fontWeight: 500 }}
+            >
+              {t("checkEmail.loginLink")}
+            </Anchor>
+          </Stack>
+        </Paper>
+      ) : (
       <Paper
         p="xl"
         radius="lg"
@@ -195,6 +222,7 @@ export function RegisterForm() {
           </Stack>
         </form>
       </Paper>
+      )}
 
       <Text ta="center" mt="xl" style={{ color: "#64748b" }}>
         {t("login.text")}{" "}

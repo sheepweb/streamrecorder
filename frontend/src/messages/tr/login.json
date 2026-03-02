@@ -13,6 +13,7 @@
     "label": "Şifre",
     "placeholder": "Şifrenizi girin"
   },
+  "emailConfirmed": "E-posta adresiniz doğrulandı. Artık giriş yapabilirsiniz.",
   "forgotPassword": "Şifremi unuttum",
   "submit": {
     "default": "Giriş yap",

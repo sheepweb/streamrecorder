@@ -26,6 +26,11 @@
     "default": "Criar conta",
     "loading": "Criando conta..."
   },
+  "checkEmail": {
+    "title": "Verifique seu e-mail",
+    "description": "Enviamos um link de confirmação para o seu e-mail. Clique no link para ativar sua conta.",
+    "loginLink": "Ir para o login"
+  },
   "login": {
     "text": "Já tem uma conta?",
     "link": "Entrar"

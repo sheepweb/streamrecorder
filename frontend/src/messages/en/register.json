@@ -26,6 +26,11 @@
     "default": "Create account",
     "loading": "Creating account..."
   },
+  "checkEmail": {
+    "title": "Check your inbox",
+    "description": "We've sent a confirmation link to your email. Click the link to verify your account.",
+    "loginLink": "Go to sign in"
+  },
   "login": {
     "text": "Already have an account?",
     "link": "Sign in"

@@ -16,12 +16,15 @@ import {
 import { IconLock, IconMail } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 
 export const redirectLoginUri = "/dashboard";
 
 export function LoginForm() {
   const t = useTranslations("login");
+  const searchParams = useSearchParams();
+  const emailConfirmed = searchParams.get("email-confirmed") === "true";
   const [state, formAction, pending] = useActionState(login, null);
 
   return (
@@ -63,6 +66,22 @@ export function LoginForm() {
           border: "1px solid rgba(255, 255, 255, 0.06)",
         }}
       >
+        {emailConfirmed && (
+          <Paper
+            p="md"
+            radius="md"
+            mb="lg"
+            style={{
+              background: "rgba(16, 185, 129, 0.1)",
+              border: "1px solid rgba(16, 185, 129, 0.2)",
+            }}
+          >
+            <Text size="sm" style={{ color: "#6ee7b7" }}>
+              {t("emailConfirmed")}
+            </Text>
+          </Paper>
+        )}
+
         {state?.error && (
           <Paper
             p="md"

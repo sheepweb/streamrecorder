@@ -13,6 +13,7 @@
     "label": "Password",
     "placeholder": "Enter your password"
   },
+  "emailConfirmed": "Your email has been confirmed. You can now sign in.",
   "forgotPassword": "Forgot password?",
   "submit": {
     "default": "Sign in",

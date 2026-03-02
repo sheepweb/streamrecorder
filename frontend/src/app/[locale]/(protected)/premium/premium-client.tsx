@@ -29,6 +29,7 @@ import {
   IconBrandApple,
   IconBrandGoogle,
   IconBrandMastercard,
+  IconBrandPaypal,
   IconBrandVisa,
   IconChartBar,
   IconCheck,
@@ -520,70 +521,72 @@ export default function PremiumClient() {
                     </Paper>
 
                     {/* Freemius Option */}
-                    {/*<Paper
-                      p="md"
-                      radius="md"
-                      withBorder
-                      style={{
-                        cursor: "pointer",
-                        borderColor:
-                          selectedPayment === "freemius"
-                            ? "var(--mantine-color-green-6)"
-                            : "rgba(255,255,255,0.1)",
-                        background:
-                          selectedPayment === "freemius"
-                            ? "rgba(34, 197, 94, 0.1)"
-                            : "rgba(0,0,0,0.2)",
-                      }}
-                      onClick={() => setSelectedPayment("freemius")}
-                    >
-                      <Stack gap="sm">
-                        <Group justify="space-between" wrap="nowrap">
-                          <Group gap="md" wrap="nowrap">
-                            <Radio value="freemius" color="green" />
-                            <div>
-                              <Text fw={500}>Freemius</Text>
-                              <Text size="xs" c="dimmed">
-                                {t("freemiusDescription")}
-                              </Text>
-                            </div>
+                    {
+                      <Paper
+                        p="md"
+                        radius="md"
+                        withBorder
+                        style={{
+                          cursor: "pointer",
+                          borderColor:
+                            selectedPayment === "freemius"
+                              ? "var(--mantine-color-green-6)"
+                              : "rgba(255,255,255,0.1)",
+                          background:
+                            selectedPayment === "freemius"
+                              ? "rgba(34, 197, 94, 0.1)"
+                              : "rgba(0,0,0,0.2)",
+                        }}
+                        onClick={() => setSelectedPayment("freemius")}
+                      >
+                        <Stack gap="sm">
+                          <Group justify="space-between" wrap="nowrap">
+                            <Group gap="md" wrap="nowrap">
+                              <Radio value="freemius" color="green" />
+                              <div>
+                                <Text fw={500}>Freemius</Text>
+                                <Text size="xs" c="dimmed">
+                                  {t("freemiusDescription")}
+                                </Text>
+                              </div>
+                            </Group>
                           </Group>
-                        </Group>
 
-                        <Group gap="xs" mt="xs" wrap="wrap">
-                          <Card
-                            withBorder
-                            radius="sm"
-                            bg="transparent"
-                            c="green"
-                            py={2}
-                            px="xs"
-                          >
-                            <IconBrandVisa stroke={1.5} />
-                          </Card>
-                          <Card
-                            withBorder
-                            radius="sm"
-                            bg="transparent"
-                            c="green"
-                            py={2}
-                            px="xs"
-                          >
-                            <IconBrandMastercard stroke={1.5} />
-                          </Card>
-                          <Card
-                            withBorder
-                            radius="sm"
-                            bg="transparent"
-                            c="green"
-                            py={2}
-                            px="xs"
-                          >
-                            <IconBrandPaypal stroke={1.5} />
-                          </Card>
-                        </Group>
-                      </Stack>
-                    </Paper>*/}
+                          <Group gap="xs" mt="xs" wrap="wrap">
+                            <Card
+                              withBorder
+                              radius="sm"
+                              bg="transparent"
+                              c="green"
+                              py={2}
+                              px="xs"
+                            >
+                              <IconBrandVisa stroke={1.5} />
+                            </Card>
+                            <Card
+                              withBorder
+                              radius="sm"
+                              bg="transparent"
+                              c="green"
+                              py={2}
+                              px="xs"
+                            >
+                              <IconBrandMastercard stroke={1.5} />
+                            </Card>
+                            <Card
+                              withBorder
+                              radius="sm"
+                              bg="transparent"
+                              c="green"
+                              py={2}
+                              px="xs"
+                            >
+                              <IconBrandPaypal stroke={1.5} />
+                            </Card>
+                          </Group>
+                        </Stack>
+                      </Paper>
+                    }
                   </Stack>
                 </Radio.Group>
 

@@ -52,7 +52,8 @@
     "recharts": "^3.7.0",
     "serwist": "^9.5.0",
     "stripe": "^20.3.1",
-    "swagger-typescript-api": "^13.2.16"
+    "swagger-typescript-api": "^13.2.16",
+    "validator": "^13.15.26"
   },
   "devDependencies": {
     "@types/node": "22",

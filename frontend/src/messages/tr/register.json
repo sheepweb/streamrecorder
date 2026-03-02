@@ -26,6 +26,11 @@
     "default": "Hesap oluştur",
     "loading": "Hesap oluşturuluyor..."
   },
+  "checkEmail": {
+    "title": "E-postanızı kontrol edin",
+    "description": "Size bir doğrulama bağlantısı gönderdik. Hesabınızı aktifleştirmek için e-postanızdaki bağlantıya tıklayın.",
+    "loginLink": "Giriş sayfasına git"
+  },
   "login": {
     "text": "Zaten hesabınız var mı?",
     "link": "Giriş yapın"

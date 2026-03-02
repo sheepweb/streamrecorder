@@ -13,6 +13,7 @@
     "label": "パスワード",
     "placeholder": "パスワードを入力してください"
   },
+  "emailConfirmed": "メールアドレスの認証が完了しました。ログインしてご利用ください。",
   "forgotPassword": "パスワードをお忘れですか？",
   "submit": {
     "default": "サインイン",

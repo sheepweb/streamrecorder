@@ -13,6 +13,7 @@
     "label": "Contraseña",
     "placeholder": "Ingresa tu contraseña"
   },
+  "emailConfirmed": "Tu correo electrónico ha sido verificado. Ya puedes iniciar sesión.",
   "forgotPassword": "¿Olvidaste tu contraseña?",
   "submit": {
     "default": "Iniciar sesión",
