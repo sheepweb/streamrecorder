@@ -71,12 +71,6 @@
       "relation": "manyToMany",
       "target": "api::follower.follower"
     },
-    "tiktok": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::tiktok.tiktok",
-      "mappedBy": "user"
-    },
     "socialAccounts": {
       "type": "relation",
       "relation": "oneToMany",

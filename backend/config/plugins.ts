@@ -233,22 +233,34 @@ export default ({ env }) => ({
             },
           };
 
-          // Endpoint: GET /tiktoks/me
-          draft.paths["/tiktoks/me"] = {
+          // Endpoint: GET/POST /social-accounts/me
+          draft.paths["/social-accounts/me"] = {
             get: {
-              tags: ["Tiktok"],
-              operationId: "meGetTiktoks",
-              summary: "Get current user's TikTok account",
+              tags: ["SocialAccount"],
+              operationId: "meGetSocialAccounts",
+              summary: "Get current user's social accounts",
               security: [{ bearerAuth: [] }],
+              parameters: [
+                {
+                  name: "provider",
+                  in: "query",
+                  required: false,
+                  schema: { type: "string", enum: ["google", "apple", "facebook", "tiktok"] },
+                  description: "Filter by provider",
+                },
+              ],
               responses: {
                 "200": {
-                  description: "TikTok account or null",
+                  description: "Social accounts list",
                   content: {
                     "application/json": {
                       schema: {
                         type: "object",
                         properties: {
-                          data: { $ref: "#/components/schemas/Tiktok" },
+                          data: {
+                            type: "array",
+                            items: { $ref: "#/components/schemas/SocialAccount" },
+                          },
                         },
                       },
                     },
@@ -258,41 +270,41 @@ export default ({ env }) => ({
               },
             },
             post: {
-              ...draft.paths["/tiktoks"]?.post,
-              operationId: "mePostTiktoks",
-              summary: "Create TikTok account for current user (max 1)",
+              ...draft.paths["/social-accounts"]?.post,
+              operationId: "mePostSocialAccounts",
+              summary: "Create social account for current user",
               security: [{ bearerAuth: [] }],
               responses: {
-                ...draft.paths["/tiktoks"]?.post?.responses,
+                ...draft.paths["/social-accounts"]?.post?.responses,
                 "400": {
-                  description: "You already have a TikTok account linked",
+                  description: "You already have this provider linked",
                 },
                 "401": { description: "Unauthorized" },
               },
             },
           };
 
-          draft.paths["/tiktoks/me/{id}"] = {
+          draft.paths["/social-accounts/me/{id}"] = {
             put: {
-              ...draft.paths["/tiktoks/{id}"]?.put,
-              operationId: "mePutTiktoksId",
-              summary: "Update current user's TikTok account",
+              ...draft.paths["/social-accounts/{id}"]?.put,
+              operationId: "mePutSocialAccountsId",
+              summary: "Update current user's social account",
               security: [{ bearerAuth: [] }],
               responses: {
-                ...draft.paths["/tiktoks/{id}"]?.put?.responses,
+                ...draft.paths["/social-accounts/{id}"]?.put?.responses,
                 "401": { description: "Unauthorized" },
-                "403": { description: "Forbidden - not your TikTok account" },
+                "403": { description: "Forbidden - not your social account" },
               },
             },
             delete: {
-              ...draft.paths["/tiktoks/{id}"]?.delete,
-              operationId: "meDeleteTiktoksId",
-              summary: "Delete current user's TikTok account",
+              ...draft.paths["/social-accounts/{id}"]?.delete,
+              operationId: "meDeleteSocialAccountsId",
+              summary: "Delete current user's social account",
               security: [{ bearerAuth: [] }],
               responses: {
-                ...draft.paths["/tiktoks/{id}"]?.delete?.responses,
+                ...draft.paths["/social-accounts/{id}"]?.delete?.responses,
                 "401": { description: "Unauthorized" },
-                "403": { description: "Forbidden - not your TikTok account" },
+                "403": { description: "Forbidden - not your social account" },
               },
             },
           };
@@ -814,11 +826,9 @@ export default ({ env }) => ({
                       type: "array",
                       items: { $ref: "#/components/schemas/Follower" },
                     },
-                    tiktok: {
-                      oneOf: [
-                        { $ref: "#/components/schemas/Tiktok" },
-                        { type: "null" },
-                      ],
+                    socialAccounts: {
+                      type: "array",
+                      items: { $ref: "#/components/schemas/SocialAccount" },
                     },
                     subscriptionStatus: {
                       type: "string",

@@ -30,6 +30,9 @@
     "and": "kabul etmiş ve",
     "privacyLink": "Gizlilik Politikası'nı"
   },
+  "errors": {
+    "emailTaken": "Bu e-posta ile zaten bir hesap mevcut. Lütfen orijinal yönteminizle giriş yapın."
+  },
   "register": {
     "text": "Hesabınız yok mu?",
     "link": "Hesap oluşturun"

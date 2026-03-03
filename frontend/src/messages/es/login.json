@@ -30,6 +30,9 @@
     "and": "y confirmas que has leído la",
     "privacyLink": "Política de Privacidad"
   },
+  "errors": {
+    "emailTaken": "Ya existe una cuenta con este correo electrónico. Por favor, inicia sesión con tu método original."
+  },
   "register": {
     "text": "¿No tienes una cuenta?",
     "link": "Crea una"

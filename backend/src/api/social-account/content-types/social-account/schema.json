@@ -12,7 +12,7 @@
   "attributes": {
     "provider": {
       "type": "enumeration",
-      "enum": ["google", "apple", "facebook"],
+      "enum": ["google", "apple", "facebook", "tiktok"],
       "required": true
     },
     "providerId": {

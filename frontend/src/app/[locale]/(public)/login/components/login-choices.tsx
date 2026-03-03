@@ -19,12 +19,15 @@ import {
 } from "@tabler/icons-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export function LoginChoices() {
   const t = useTranslations("login");
+  const searchParams = useSearchParams();
   const [tiktokLoading, setTiktokLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const error = searchParams.get("error");
 
   const handleTikTokLogin = async () => {
     trackEvent("login_method", { method: "tiktok" });
@@ -82,6 +85,21 @@ export function LoginChoices() {
           }}
         >
           <Stack gap="md">
+            {error === "email_taken" && (
+              <Text
+                size="sm"
+                ta="center"
+                p="sm"
+                style={{
+                  color: "#f87171",
+                  background: "rgba(248, 113, 113, 0.1)",
+                  border: "1px solid rgba(248, 113, 113, 0.2)",
+                  borderRadius: 8,
+                }}
+              >
+                {t("errors.emailTaken")}
+              </Text>
+            )}
             <Button
               component={Link}
               href="/login/email-password"

@@ -104,14 +104,15 @@ export async function GET(request: NextRequest) {
 
     // --- Settings: save tokens to existing user's tiktok record ---
     if (action === "settings") {
-      const existingConnection = await api.tiktok.meGetTiktoks();
-      if (existingConnection.data?.data) {
+      const existingConnection = await api.socialAccount.meGetSocialAccounts({ provider: "tiktok" });
+      if (existingConnection.data?.data?.length) {
         return redirect("/settings?tiktok=connected");
       }
 
-      await api.tiktok.mePostTiktoks({
+      await api.socialAccount.mePostSocialAccounts({
         data: {
-          openId: data.open_id,
+          provider: "tiktok",
+          providerId: data.open_id,
           accessToken: data.access_token,
           refreshToken: data.refresh_token,
           expiresAt,
@@ -132,21 +133,25 @@ export async function GET(request: NextRequest) {
 
     // Call Strapi to find or create user
     const strapiUrl = process.env.STRAPI_URL || "http://localhost:1337";
-    const loginResponse = await fetch(`${strapiUrl}/api/tiktok-auth/login`, {
+    const loginResponse = await fetch(`${strapiUrl}/api/social-auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        openId: data.open_id,
+        provider: "tiktok",
+        providerId: data.open_id,
         accessToken: data.access_token,
         refreshToken: data.refresh_token,
         expiresAt,
-        username: tiktokUsername,
+        displayName: tiktokUsername,
       }),
     });
 
     if (!loginResponse.ok) {
       const err = await loginResponse.json();
       console.error("TikTok auth login failed:", err);
+      if (err?.error?.details?.code === "EMAIL_TAKEN") {
+        return redirect("/login?error=email_taken");
+      }
       return errorRedirect(action);
     }
 

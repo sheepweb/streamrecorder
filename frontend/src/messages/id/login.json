@@ -30,6 +30,9 @@
     "and": "dan mengonfirmasi bahwa Anda telah membaca",
     "privacyLink": "Kebijakan Privasi"
   },
+  "errors": {
+    "emailTaken": "Akun dengan email ini sudah ada. Silakan masuk dengan metode awal Anda."
+  },
   "register": {
     "text": "Belum punya akun?",
     "link": "Buat akun"

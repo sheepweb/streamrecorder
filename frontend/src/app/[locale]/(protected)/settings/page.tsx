@@ -33,7 +33,7 @@ export default function SettingsPage() {
       <SimpleGrid cols={{ sm: 1, md: 2 }}>
         <ProfileCard />
         <SubscriptionCard />
-        <Can I="meCreate" a="Tiktok">
+        <Can I="meCreate" a="SocialAccount">
           <TikTokCard />
         </Can>
         <Role is="admin" not>

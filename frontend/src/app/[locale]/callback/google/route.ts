@@ -122,6 +122,9 @@ export async function GET(request: NextRequest) {
     if (!loginResponse.ok) {
       const err = await loginResponse.json();
       console.error("Google auth login failed:", err);
+      if (err?.error?.details?.code === "EMAIL_TAKEN") {
+        return redirect("/login?error=email_taken");
+      }
       return errorRedirect(action);
     }
 

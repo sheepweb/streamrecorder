@@ -1162,7 +1162,9 @@ export interface ApiSocialAccountSocialAccount
       'api::social-account.social-account'
     > &
       Schema.Attribute.Private;
-    provider: Schema.Attribute.Enumeration<['google', 'apple', 'facebook']> &
+    provider: Schema.Attribute.Enumeration<
+      ['google', 'apple', 'facebook', 'tiktok']
+    > &
       Schema.Attribute.Required;
     providerId: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
@@ -1215,41 +1217,6 @@ export interface ApiSourceSource extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     videoOriginal: Schema.Attribute.Component<'videos.video', false>;
     videoSmall: Schema.Attribute.Component<'videos.video', false>;
-  };
-}
-
-export interface ApiTiktokTiktok extends Struct.CollectionTypeSchema {
-  collectionName: 'tiktoks';
-  info: {
-    displayName: 'Tiktok';
-    pluralName: 'tiktoks';
-    singularName: 'tiktok';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    accessToken: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    expiresAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::tiktok.tiktok'
-    > &
-      Schema.Attribute.Private;
-    openId: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    refreshToken: Schema.Attribute.String & Schema.Attribute.Required;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
   };
 }
 
@@ -1787,7 +1754,6 @@ export interface PluginUsersPermissionsUser
     subscriptionStatus: Schema.Attribute.Enumeration<
       ['active', 'cancelled', 'trialing', 'expired']
     >;
-    tiktok: Schema.Attribute.Relation<'oneToOne', 'api::tiktok.tiktok'>;
     trialClaimed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1826,7 +1792,6 @@ declare module '@strapi/strapi' {
       'api::report.report': ApiReportReport;
       'api::social-account.social-account': ApiSocialAccountSocialAccount;
       'api::source.source': ApiSourceSource;
-      'api::tiktok.tiktok': ApiTiktokTiktok;
       'api::visitor-view.visitor-view': ApiVisitorViewVisitorView;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

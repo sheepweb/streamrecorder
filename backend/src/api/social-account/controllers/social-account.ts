@@ -4,7 +4,20 @@
 
 import { factories } from "@strapi/strapi";
 
-const ALLOWED_PROVIDERS = ["google", "apple", "facebook"];
+const ALLOWED_PROVIDERS = ["google", "apple", "facebook", "tiktok"];
+
+async function findUniqueUsername(strapi: any, base: string): Promise<string> {
+  let username = base;
+  let attempt = 0;
+  while (true) {
+    const exists = await strapi
+      .documents("plugin::users-permissions.user")
+      .findFirst({ filters: { username } });
+    if (!exists) return username;
+    attempt++;
+    username = `${base}_${Math.random().toString(36).slice(2, 6)}`;
+  }
+}
 
 export default factories.createCoreController(
   "api::social-account.social-account",
@@ -92,25 +105,45 @@ export default factories.createCoreController(
             });
         }
       } else {
-        isNewUser = true;
         const userEmail = email || `${provider}_${providerId}@noreply.social`;
 
-        // Check if user already exists
+        // Try to find existing user by email
         user = await strapi
           .documents("plugin::users-permissions.user")
           .findFirst({ filters: { email: userEmail } });
 
-        if (!user) {
+        // Also check old TikTok email format for migrated users
+        if (!user && provider === "tiktok") {
+          user = await strapi
+            .documents("plugin::users-permissions.user")
+            .findFirst({
+              filters: { email: `tiktok_${providerId}@noreply.tiktok` },
+            });
+        }
+
+        if (user) {
+          // Existing user — just link them
+          if (user.blocked) {
+            return ctx.badRequest("Your account has been blocked");
+          }
+        } else {
+          // Truly new user
+          isNewUser = true;
+
           const defaultRole = await strapi
             .documents("plugin::users-permissions.role")
             .findFirst({ filters: { type: "authenticated" } });
+
+          const username = await findUniqueUsername(
+            strapi,
+            displayName || `${provider}_${providerId.slice(0, 8)}`,
+          );
 
           user = await strapi
             .documents("plugin::users-permissions.user")
             .create({
               data: {
-                username:
-                  displayName || `${provider}_${providerId.slice(0, 8)}`,
+                username,
                 email: userEmail,
                 provider,
                 confirmed: true,
@@ -119,6 +152,7 @@ export default factories.createCoreController(
             });
         }
 
+        // Create social-account record linked to user
         await strapi.documents("api::social-account.social-account").create({
           data: {
             provider,
@@ -142,6 +176,109 @@ export default factories.createCoreController(
         user: { id: user.id, username: user.username },
         isNewUser,
       };
+    },
+
+    async meFind(ctx) {
+      const user = ctx.state.user;
+      if (!user) {
+        return ctx.unauthorized();
+      }
+
+      const filters: any = { user: { id: user.id } };
+      if (ctx.query.provider) {
+        filters.provider = ctx.query.provider;
+      }
+
+      const socialAccounts = await strapi
+        .documents("api::social-account.social-account")
+        .findMany({ filters });
+
+      return { data: socialAccounts };
+    },
+
+    async meCreate(ctx) {
+      const user = ctx.state.user;
+      if (!user) {
+        return ctx.unauthorized();
+      }
+
+      const data = ctx.request.body.data || {};
+
+      // Check if user already has this provider linked
+      const existing = await strapi
+        .documents("api::social-account.social-account")
+        .findFirst({
+          filters: { user: { id: user.id }, provider: data.provider },
+        });
+
+      if (existing) {
+        return ctx.badRequest(
+          `You already have a ${data.provider} account linked`,
+        );
+      }
+
+      const socialAccount = await strapi
+        .documents("api::social-account.social-account")
+        .create({
+          data: {
+            ...data,
+            user: { connect: [user.documentId] },
+          },
+        });
+
+      return { data: socialAccount };
+    },
+
+    async meUpdate(ctx) {
+      const user = ctx.state.user;
+      if (!user) {
+        return ctx.unauthorized();
+      }
+
+      const { id } = ctx.params;
+
+      const socialAccount = await strapi
+        .documents("api::social-account.social-account")
+        .findOne({
+          documentId: id,
+          populate: { user: { fields: ["id"] } },
+        });
+
+      if (!socialAccount) {
+        return ctx.notFound();
+      }
+
+      if (socialAccount.user?.id !== user.id) {
+        return ctx.forbidden("You can only update your own social account");
+      }
+
+      return super.update(ctx);
+    },
+
+    async meDelete(ctx) {
+      const user = ctx.state.user;
+      if (!user) {
+        return ctx.unauthorized();
+      }
+
+      const { id } = ctx.params;
+
+      const socialAccount = await strapi
+        .documents("api::social-account.social-account")
+        .findOne({
+          documentId: id,
+          populate: { user: { fields: ["id"] } },
+        });
+
+      if (!socialAccount) {
+        return ctx.notFound();
+      }
+
+      if (socialAccount.user?.id !== user.id) {
+        return ctx.forbidden("You can only delete your own social account");
+      }
+
+      return super.delete(ctx);
     },
   }),
 );

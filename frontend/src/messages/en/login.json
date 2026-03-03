@@ -30,6 +30,9 @@
     "and": "and confirm that you have read Live Stream Recorder's",
     "privacyLink": "Privacy Policy"
   },
+  "errors": {
+    "emailTaken": "An account with this email already exists. Please sign in with your original method."
+  },
   "register": {
     "text": "Don't have an account?",
     "link": "Sign up"

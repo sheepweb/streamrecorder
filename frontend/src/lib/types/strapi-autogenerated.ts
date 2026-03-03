@@ -373,14 +373,16 @@ export interface Activity {
         id?: string | number;
         documentId?: string;
       }[];
-      tiktok?: {
+      socialAccounts?: {
         id?: string | number;
         documentId?: string;
-        openId?: string;
+        provider?: ActivityProviderEnum;
+        providerId?: string;
         accessToken?: string;
         refreshToken?: string;
         /** @format date-time */
         expiresAt?: string;
+        email?: string;
         user?: {
           id?: string | number;
           documentId?: string;
@@ -404,7 +406,7 @@ export interface Activity {
           id?: string | number;
           documentId?: string;
         }[];
-      };
+      }[];
       subscriptionStatus?: ActivitySubscriptionStatusEnum;
       billingPeriod?: string;
       /** @format date-time */
@@ -848,14 +850,16 @@ export interface AiRequest {
         id?: string | number;
         documentId?: string;
       }[];
-      tiktok?: {
+      socialAccounts?: {
         id?: string | number;
         documentId?: string;
-        openId?: string;
+        provider?: AiRequestProviderEnum;
+        providerId?: string;
         accessToken?: string;
         refreshToken?: string;
         /** @format date-time */
         expiresAt?: string;
+        email?: string;
         user?: {
           id?: string | number;
           documentId?: string;
@@ -879,7 +883,7 @@ export interface AiRequest {
           id?: string | number;
           documentId?: string;
         }[];
-      };
+      }[];
       subscriptionStatus?: AiRequestSubscriptionStatusEnum;
       billingPeriod?: string;
       /** @format date-time */
@@ -1109,6 +1113,11 @@ export interface VideosVideoComponent {
    * @example "123456789"
    */
   sizeBytes?: string;
+  /**
+   * @pattern ^\d*$
+   * @example "123456789"
+   */
+  startedAt?: string;
 }
 
 export interface AiTaskRequest {
@@ -1455,14 +1464,16 @@ export interface AiTask {
           id?: string | number;
           documentId?: string;
         }[];
-        tiktok?: {
+        socialAccounts?: {
           id?: string | number;
           documentId?: string;
-          openId?: string;
+          provider?: AiTaskProviderEnum;
+          providerId?: string;
           accessToken?: string;
           refreshToken?: string;
           /** @format date-time */
           expiresAt?: string;
+          email?: string;
           user?: {
             id?: string | number;
             documentId?: string;
@@ -1486,7 +1497,7 @@ export interface AiTask {
             id?: string | number;
             documentId?: string;
           }[];
-        };
+        }[];
         subscriptionStatus?: AiTaskSubscriptionStatusEnum;
         billingPeriod?: string;
         /** @format date-time */
@@ -2385,14 +2396,16 @@ export interface Clip {
         id?: string | number;
         documentId?: string;
       }[];
-      tiktok?: {
+      socialAccounts?: {
         id?: string | number;
         documentId?: string;
-        openId?: string;
+        provider?: ClipProviderEnum;
+        providerId?: string;
         accessToken?: string;
         refreshToken?: string;
         /** @format date-time */
         expiresAt?: string;
+        email?: string;
         user?: {
           id?: string | number;
           documentId?: string;
@@ -2416,7 +2429,7 @@ export interface Clip {
           id?: string | number;
           documentId?: string;
         }[];
-      };
+      }[];
       subscriptionStatus?: ClipSubscriptionStatusEnum;
       billingPeriod?: string;
       /** @format date-time */
@@ -2953,14 +2966,16 @@ export interface ClipShare {
           id?: string | number;
           documentId?: string;
         }[];
-        tiktok?: {
+        socialAccounts?: {
           id?: string | number;
           documentId?: string;
-          openId?: string;
+          provider?: ClipShareProviderEnum;
+          providerId?: string;
           accessToken?: string;
           refreshToken?: string;
           /** @format date-time */
           expiresAt?: string;
+          email?: string;
           user?: {
             id?: string | number;
             documentId?: string;
@@ -2984,7 +2999,7 @@ export interface ClipShare {
             id?: string | number;
             documentId?: string;
           }[];
-        };
+        }[];
         subscriptionStatus?: ClipShareSubscriptionStatusEnum;
         billingPeriod?: string;
         /** @format date-time */
@@ -3805,14 +3820,16 @@ export interface Follower {
         documentId?: string;
       }[];
     }[];
-    tiktok?: {
+    socialAccounts?: {
       id?: string | number;
       documentId?: string;
-      openId?: string;
+      provider?: FollowerProviderEnum;
+      providerId?: string;
       accessToken?: string;
       refreshToken?: string;
       /** @format date-time */
       expiresAt?: string;
+      email?: string;
       user?: {
         id?: string | number;
         documentId?: string;
@@ -3836,7 +3853,7 @@ export interface Follower {
         id?: string | number;
         documentId?: string;
       }[];
-    };
+    }[];
     subscriptionStatus?: FollowerSubscriptionStatusEnum;
     billingPeriod?: string;
     /** @format date-time */
@@ -4252,14 +4269,16 @@ export interface Meme {
           id?: string | number;
           documentId?: string;
         }[];
-        tiktok?: {
+        socialAccounts?: {
           id?: string | number;
           documentId?: string;
-          openId?: string;
+          provider?: MemeProviderEnum;
+          providerId?: string;
           accessToken?: string;
           refreshToken?: string;
           /** @format date-time */
           expiresAt?: string;
+          email?: string;
           user?: {
             id?: string | number;
             documentId?: string;
@@ -4283,7 +4302,7 @@ export interface Meme {
             id?: string | number;
             documentId?: string;
           }[];
-        };
+        }[];
         subscriptionStatus?: MemeSubscriptionStatusEnum;
         billingPeriod?: string;
         /** @format date-time */
@@ -4801,14 +4820,16 @@ export interface Recording {
         id?: string | number;
         documentId?: string;
       }[];
-      tiktok?: {
+      socialAccounts?: {
         id?: string | number;
         documentId?: string;
-        openId?: string;
+        provider?: RecordingProviderEnum;
+        providerId?: string;
         accessToken?: string;
         refreshToken?: string;
         /** @format date-time */
         expiresAt?: string;
+        email?: string;
         user?: {
           id?: string | number;
           documentId?: string;
@@ -4832,7 +4853,7 @@ export interface Recording {
           id?: string | number;
           documentId?: string;
         }[];
-      };
+      }[];
       subscriptionStatus?: RecordingSubscriptionStatusEnum;
       billingPeriod?: string;
       /** @format date-time */
@@ -5084,6 +5105,465 @@ export interface Report {
 
 export interface ReportResponse {
   data?: Report;
+  meta?: object;
+}
+
+export interface SocialAccountRequest {
+  data: {
+    provider: SocialAccountRequestProviderEnum;
+    providerId: string;
+    accessToken: string;
+    refreshToken?: string;
+    /** @format date-time */
+    expiresAt: string;
+    email?: string;
+    /** @example "string or id" */
+    user?: number | string;
+    locale?: string;
+    localizations?: (number | string)[];
+  };
+}
+
+export interface SocialAccountListResponse {
+  data?: SocialAccount[];
+  meta?: {
+    pagination?: {
+      page?: number;
+      /** @min 25 */
+      pageSize?: number;
+      /** @max 1 */
+      pageCount?: number;
+      total?: number;
+    };
+  };
+}
+
+export interface SocialAccount {
+  id?: string | number;
+  documentId?: string;
+  provider: SocialAccountProviderEnum;
+  providerId: string;
+  accessToken: string;
+  refreshToken?: string;
+  /** @format date-time */
+  expiresAt: string;
+  email?: string;
+  user?: {
+    id?: string | number;
+    documentId?: string;
+    username?: string;
+    /** @format email */
+    email?: string;
+    provider?: string;
+    resetPasswordToken?: string;
+    confirmationToken?: string;
+    confirmed?: boolean;
+    blocked?: boolean;
+    role?: {
+      id?: string | number;
+      documentId?: string;
+      name?: string;
+      description?: string;
+      type?: string;
+      permissions?: {
+        id?: string | number;
+        documentId?: string;
+        action?: string;
+        role?: {
+          id?: string | number;
+          documentId?: string;
+        };
+        /** @format date-time */
+        createdAt?: string;
+        /** @format date-time */
+        updatedAt?: string;
+        /** @format date-time */
+        publishedAt?: string;
+        createdBy?: {
+          id?: string | number;
+          documentId?: string;
+          firstname?: string;
+          lastname?: string;
+          username?: string;
+          /** @format email */
+          email?: string;
+          resetPasswordToken?: string;
+          registrationToken?: string;
+          isActive?: boolean;
+          roles?: {
+            id?: string | number;
+            documentId?: string;
+            name?: string;
+            code?: string;
+            description?: string;
+            users?: {
+              id?: string | number;
+              documentId?: string;
+            }[];
+            permissions?: {
+              id?: string | number;
+              documentId?: string;
+              action?: string;
+              actionParameters?: any;
+              subject?: string;
+              properties?: any;
+              conditions?: any;
+              role?: {
+                id?: string | number;
+                documentId?: string;
+              };
+              /** @format date-time */
+              createdAt?: string;
+              /** @format date-time */
+              updatedAt?: string;
+              /** @format date-time */
+              publishedAt?: string;
+              createdBy?: {
+                id?: string | number;
+                documentId?: string;
+              };
+              updatedBy?: {
+                id?: string | number;
+                documentId?: string;
+              };
+              locale?: string;
+              localizations?: {
+                id?: string | number;
+                documentId?: string;
+              }[];
+            }[];
+            /** @format date-time */
+            createdAt?: string;
+            /** @format date-time */
+            updatedAt?: string;
+            /** @format date-time */
+            publishedAt?: string;
+            createdBy?: {
+              id?: string | number;
+              documentId?: string;
+            };
+            updatedBy?: {
+              id?: string | number;
+              documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+              id?: string | number;
+              documentId?: string;
+            }[];
+          }[];
+          blocked?: boolean;
+          preferedLanguage?: string;
+          /** @format date-time */
+          createdAt?: string;
+          /** @format date-time */
+          updatedAt?: string;
+          /** @format date-time */
+          publishedAt?: string;
+          createdBy?: {
+            id?: string | number;
+            documentId?: string;
+          };
+          updatedBy?: {
+            id?: string | number;
+            documentId?: string;
+          };
+          locale?: string;
+          localizations?: {
+            id?: string | number;
+            documentId?: string;
+          }[];
+        };
+        updatedBy?: {
+          id?: string | number;
+          documentId?: string;
+        };
+        locale?: string;
+        localizations?: {
+          id?: string | number;
+          documentId?: string;
+        }[];
+      }[];
+      users?: {
+        id?: string | number;
+        documentId?: string;
+      }[];
+      /** @format date-time */
+      createdAt?: string;
+      /** @format date-time */
+      updatedAt?: string;
+      /** @format date-time */
+      publishedAt?: string;
+      createdBy?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      updatedBy?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      locale?: string;
+      localizations?: {
+        id?: string | number;
+        documentId?: string;
+      }[];
+    };
+    followers?: {
+      id?: string | number;
+      documentId?: string;
+      /**
+       * @pattern ^\d*$
+       * @example "123456789"
+       */
+      uniqueId?: string;
+      nickname?: string;
+      username?: string;
+      type?: SocialAccountTypeEnum;
+      gender?: SocialAccountGenderEnum;
+      countryCode?: string;
+      languageCode?: string;
+      avatar?: {
+        id?: string | number;
+        documentId?: string;
+        name?: string;
+        alternativeText?: string;
+        caption?: string;
+        width?: number;
+        height?: number;
+        formats?: any;
+        hash?: string;
+        ext?: string;
+        mime?: string;
+        /** @format float */
+        size?: number;
+        url?: string;
+        previewUrl?: string;
+        provider?: string;
+        provider_metadata?: any;
+        related?: {
+          id?: string | number;
+          documentId?: string;
+        }[];
+        folder?: {
+          id?: string | number;
+          documentId?: string;
+          name?: string;
+          pathId?: number;
+          parent?: {
+            id?: string | number;
+            documentId?: string;
+          };
+          children?: {
+            id?: string | number;
+            documentId?: string;
+          }[];
+          files?: {
+            id?: string | number;
+            documentId?: string;
+            name?: string;
+            alternativeText?: string;
+            caption?: string;
+            width?: number;
+            height?: number;
+            formats?: any;
+            hash?: string;
+            ext?: string;
+            mime?: string;
+            /** @format float */
+            size?: number;
+            url?: string;
+            previewUrl?: string;
+            provider?: string;
+            provider_metadata?: any;
+            related?: {
+              id?: string | number;
+              documentId?: string;
+            }[];
+            folder?: {
+              id?: string | number;
+              documentId?: string;
+            };
+            folderPath?: string;
+            /** @format date-time */
+            createdAt?: string;
+            /** @format date-time */
+            updatedAt?: string;
+            /** @format date-time */
+            publishedAt?: string;
+            createdBy?: {
+              id?: string | number;
+              documentId?: string;
+            };
+            updatedBy?: {
+              id?: string | number;
+              documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+              id?: string | number;
+              documentId?: string;
+            }[];
+          }[];
+          path?: string;
+          /** @format date-time */
+          createdAt?: string;
+          /** @format date-time */
+          updatedAt?: string;
+          /** @format date-time */
+          publishedAt?: string;
+          createdBy?: {
+            id?: string | number;
+            documentId?: string;
+          };
+          updatedBy?: {
+            id?: string | number;
+            documentId?: string;
+          };
+          locale?: string;
+          localizations?: {
+            id?: string | number;
+            documentId?: string;
+          }[];
+        };
+        folderPath?: string;
+        /** @format date-time */
+        createdAt?: string;
+        /** @format date-time */
+        updatedAt?: string;
+        /** @format date-time */
+        publishedAt?: string;
+        createdBy?: {
+          id?: string | number;
+          documentId?: string;
+        };
+        updatedBy?: {
+          id?: string | number;
+          documentId?: string;
+        };
+        locale?: string;
+        localizations?: {
+          id?: string | number;
+          documentId?: string;
+        }[];
+      };
+      /** @format date-time */
+      lastCheckedAt?: string;
+      protected?: boolean;
+      pause?: boolean;
+      description?: string;
+      tagline?: string;
+      faq?: any;
+      category?: string;
+      migration?: number;
+      owner?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      /** @format date-time */
+      createdAt?: string;
+      /** @format date-time */
+      updatedAt?: string;
+      /** @format date-time */
+      publishedAt?: string;
+      createdBy?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      updatedBy?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      locale?: string;
+      localizations?: {
+        id?: string | number;
+        documentId?: string;
+      }[];
+    }[];
+    socialAccounts?: {
+      id?: string | number;
+      documentId?: string;
+      provider?: SocialAccountProviderEnum1;
+      providerId?: string;
+      accessToken?: string;
+      refreshToken?: string;
+      /** @format date-time */
+      expiresAt?: string;
+      email?: string;
+      user?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      /** @format date-time */
+      createdAt?: string;
+      /** @format date-time */
+      updatedAt?: string;
+      /** @format date-time */
+      publishedAt?: string;
+      createdBy?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      updatedBy?: {
+        id?: string | number;
+        documentId?: string;
+      };
+      locale?: string;
+      localizations?: {
+        id?: string | number;
+        documentId?: string;
+      }[];
+    }[];
+    subscriptionStatus?: SocialAccountSubscriptionStatusEnum;
+    billingPeriod?: string;
+    /** @format date-time */
+    subscriptionEndDate?: string;
+    freemius?: string;
+    stripe?: string;
+    paymentProvider?: SocialAccountPaymentProviderEnum;
+    trialClaimed?: boolean;
+    /** @format date-time */
+    createdAt?: string;
+    /** @format date-time */
+    updatedAt?: string;
+    /** @format date-time */
+    publishedAt?: string;
+    createdBy?: {
+      id?: string | number;
+      documentId?: string;
+    };
+    updatedBy?: {
+      id?: string | number;
+      documentId?: string;
+    };
+    locale?: string;
+    localizations?: {
+      id?: string | number;
+      documentId?: string;
+    }[];
+  };
+  /** @format date-time */
+  createdAt?: string;
+  /** @format date-time */
+  updatedAt?: string;
+  /** @format date-time */
+  publishedAt?: string;
+  createdBy?: {
+    id?: string | number;
+    documentId?: string;
+  };
+  updatedBy?: {
+    id?: string | number;
+    documentId?: string;
+  };
+  locale?: string;
+  localizations?: {
+    id?: string | number;
+    documentId?: string;
+  }[];
+}
+
+export interface SocialAccountResponse {
+  data?: SocialAccount;
   meta?: object;
 }
 
@@ -5451,14 +5931,16 @@ export interface Source {
           id?: string | number;
           documentId?: string;
         }[];
-        tiktok?: {
+        socialAccounts?: {
           id?: string | number;
           documentId?: string;
-          openId?: string;
+          provider?: SourceProviderEnum;
+          providerId?: string;
           accessToken?: string;
           refreshToken?: string;
           /** @format date-time */
           expiresAt?: string;
+          email?: string;
           user?: {
             id?: string | number;
             documentId?: string;
@@ -5482,7 +5964,7 @@ export interface Source {
             id?: string | number;
             documentId?: string;
           }[];
-        };
+        }[];
         subscriptionStatus?: SourceSubscriptionStatusEnum;
         billingPeriod?: string;
         /** @format date-time */
@@ -5613,459 +6095,6 @@ export interface Source {
 
 export interface SourceResponse {
   data?: Source;
-  meta?: object;
-}
-
-export interface TiktokRequest {
-  data: {
-    openId?: string;
-    accessToken: string;
-    refreshToken: string;
-    /** @format date-time */
-    expiresAt: string;
-    /** @example "string or id" */
-    user?: number | string;
-    locale?: string;
-    localizations?: (number | string)[];
-  };
-}
-
-export interface TiktokListResponse {
-  data?: Tiktok[];
-  meta?: {
-    pagination?: {
-      page?: number;
-      /** @min 25 */
-      pageSize?: number;
-      /** @max 1 */
-      pageCount?: number;
-      total?: number;
-    };
-  };
-}
-
-export interface Tiktok {
-  id?: string | number;
-  documentId?: string;
-  openId?: string;
-  accessToken: string;
-  refreshToken: string;
-  /** @format date-time */
-  expiresAt: string;
-  user?: {
-    id?: string | number;
-    documentId?: string;
-    username?: string;
-    /** @format email */
-    email?: string;
-    provider?: string;
-    resetPasswordToken?: string;
-    confirmationToken?: string;
-    confirmed?: boolean;
-    blocked?: boolean;
-    role?: {
-      id?: string | number;
-      documentId?: string;
-      name?: string;
-      description?: string;
-      type?: string;
-      permissions?: {
-        id?: string | number;
-        documentId?: string;
-        action?: string;
-        role?: {
-          id?: string | number;
-          documentId?: string;
-        };
-        /** @format date-time */
-        createdAt?: string;
-        /** @format date-time */
-        updatedAt?: string;
-        /** @format date-time */
-        publishedAt?: string;
-        createdBy?: {
-          id?: string | number;
-          documentId?: string;
-          firstname?: string;
-          lastname?: string;
-          username?: string;
-          /** @format email */
-          email?: string;
-          resetPasswordToken?: string;
-          registrationToken?: string;
-          isActive?: boolean;
-          roles?: {
-            id?: string | number;
-            documentId?: string;
-            name?: string;
-            code?: string;
-            description?: string;
-            users?: {
-              id?: string | number;
-              documentId?: string;
-            }[];
-            permissions?: {
-              id?: string | number;
-              documentId?: string;
-              action?: string;
-              actionParameters?: any;
-              subject?: string;
-              properties?: any;
-              conditions?: any;
-              role?: {
-                id?: string | number;
-                documentId?: string;
-              };
-              /** @format date-time */
-              createdAt?: string;
-              /** @format date-time */
-              updatedAt?: string;
-              /** @format date-time */
-              publishedAt?: string;
-              createdBy?: {
-                id?: string | number;
-                documentId?: string;
-              };
-              updatedBy?: {
-                id?: string | number;
-                documentId?: string;
-              };
-              locale?: string;
-              localizations?: {
-                id?: string | number;
-                documentId?: string;
-              }[];
-            }[];
-            /** @format date-time */
-            createdAt?: string;
-            /** @format date-time */
-            updatedAt?: string;
-            /** @format date-time */
-            publishedAt?: string;
-            createdBy?: {
-              id?: string | number;
-              documentId?: string;
-            };
-            updatedBy?: {
-              id?: string | number;
-              documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-              id?: string | number;
-              documentId?: string;
-            }[];
-          }[];
-          blocked?: boolean;
-          preferedLanguage?: string;
-          /** @format date-time */
-          createdAt?: string;
-          /** @format date-time */
-          updatedAt?: string;
-          /** @format date-time */
-          publishedAt?: string;
-          createdBy?: {
-            id?: string | number;
-            documentId?: string;
-          };
-          updatedBy?: {
-            id?: string | number;
-            documentId?: string;
-          };
-          locale?: string;
-          localizations?: {
-            id?: string | number;
-            documentId?: string;
-          }[];
-        };
-        updatedBy?: {
-          id?: string | number;
-          documentId?: string;
-        };
-        locale?: string;
-        localizations?: {
-          id?: string | number;
-          documentId?: string;
-        }[];
-      }[];
-      users?: {
-        id?: string | number;
-        documentId?: string;
-      }[];
-      /** @format date-time */
-      createdAt?: string;
-      /** @format date-time */
-      updatedAt?: string;
-      /** @format date-time */
-      publishedAt?: string;
-      createdBy?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      updatedBy?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      locale?: string;
-      localizations?: {
-        id?: string | number;
-        documentId?: string;
-      }[];
-    };
-    followers?: {
-      id?: string | number;
-      documentId?: string;
-      /**
-       * @pattern ^\d*$
-       * @example "123456789"
-       */
-      uniqueId?: string;
-      nickname?: string;
-      username?: string;
-      type?: TiktokTypeEnum;
-      gender?: TiktokGenderEnum;
-      countryCode?: string;
-      languageCode?: string;
-      avatar?: {
-        id?: string | number;
-        documentId?: string;
-        name?: string;
-        alternativeText?: string;
-        caption?: string;
-        width?: number;
-        height?: number;
-        formats?: any;
-        hash?: string;
-        ext?: string;
-        mime?: string;
-        /** @format float */
-        size?: number;
-        url?: string;
-        previewUrl?: string;
-        provider?: string;
-        provider_metadata?: any;
-        related?: {
-          id?: string | number;
-          documentId?: string;
-        }[];
-        folder?: {
-          id?: string | number;
-          documentId?: string;
-          name?: string;
-          pathId?: number;
-          parent?: {
-            id?: string | number;
-            documentId?: string;
-          };
-          children?: {
-            id?: string | number;
-            documentId?: string;
-          }[];
-          files?: {
-            id?: string | number;
-            documentId?: string;
-            name?: string;
-            alternativeText?: string;
-            caption?: string;
-            width?: number;
-            height?: number;
-            formats?: any;
-            hash?: string;
-            ext?: string;
-            mime?: string;
-            /** @format float */
-            size?: number;
-            url?: string;
-            previewUrl?: string;
-            provider?: string;
-            provider_metadata?: any;
-            related?: {
-              id?: string | number;
-              documentId?: string;
-            }[];
-            folder?: {
-              id?: string | number;
-              documentId?: string;
-            };
-            folderPath?: string;
-            /** @format date-time */
-            createdAt?: string;
-            /** @format date-time */
-            updatedAt?: string;
-            /** @format date-time */
-            publishedAt?: string;
-            createdBy?: {
-              id?: string | number;
-              documentId?: string;
-            };
-            updatedBy?: {
-              id?: string | number;
-              documentId?: string;
-            };
-            locale?: string;
-            localizations?: {
-              id?: string | number;
-              documentId?: string;
-            }[];
-          }[];
-          path?: string;
-          /** @format date-time */
-          createdAt?: string;
-          /** @format date-time */
-          updatedAt?: string;
-          /** @format date-time */
-          publishedAt?: string;
-          createdBy?: {
-            id?: string | number;
-            documentId?: string;
-          };
-          updatedBy?: {
-            id?: string | number;
-            documentId?: string;
-          };
-          locale?: string;
-          localizations?: {
-            id?: string | number;
-            documentId?: string;
-          }[];
-        };
-        folderPath?: string;
-        /** @format date-time */
-        createdAt?: string;
-        /** @format date-time */
-        updatedAt?: string;
-        /** @format date-time */
-        publishedAt?: string;
-        createdBy?: {
-          id?: string | number;
-          documentId?: string;
-        };
-        updatedBy?: {
-          id?: string | number;
-          documentId?: string;
-        };
-        locale?: string;
-        localizations?: {
-          id?: string | number;
-          documentId?: string;
-        }[];
-      };
-      /** @format date-time */
-      lastCheckedAt?: string;
-      protected?: boolean;
-      pause?: boolean;
-      description?: string;
-      tagline?: string;
-      faq?: any;
-      category?: string;
-      migration?: number;
-      owner?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      /** @format date-time */
-      createdAt?: string;
-      /** @format date-time */
-      updatedAt?: string;
-      /** @format date-time */
-      publishedAt?: string;
-      createdBy?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      updatedBy?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      locale?: string;
-      localizations?: {
-        id?: string | number;
-        documentId?: string;
-      }[];
-    }[];
-    tiktok?: {
-      id?: string | number;
-      documentId?: string;
-      openId?: string;
-      accessToken?: string;
-      refreshToken?: string;
-      /** @format date-time */
-      expiresAt?: string;
-      user?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      /** @format date-time */
-      createdAt?: string;
-      /** @format date-time */
-      updatedAt?: string;
-      /** @format date-time */
-      publishedAt?: string;
-      createdBy?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      updatedBy?: {
-        id?: string | number;
-        documentId?: string;
-      };
-      locale?: string;
-      localizations?: {
-        id?: string | number;
-        documentId?: string;
-      }[];
-    };
-    subscriptionStatus?: TiktokSubscriptionStatusEnum;
-    billingPeriod?: string;
-    /** @format date-time */
-    subscriptionEndDate?: string;
-    freemius?: string;
-    stripe?: string;
-    paymentProvider?: TiktokPaymentProviderEnum;
-    trialClaimed?: boolean;
-    /** @format date-time */
-    createdAt?: string;
-    /** @format date-time */
-    updatedAt?: string;
-    /** @format date-time */
-    publishedAt?: string;
-    createdBy?: {
-      id?: string | number;
-      documentId?: string;
-    };
-    updatedBy?: {
-      id?: string | number;
-      documentId?: string;
-    };
-    locale?: string;
-    localizations?: {
-      id?: string | number;
-      documentId?: string;
-    }[];
-  };
-  /** @format date-time */
-  createdAt?: string;
-  /** @format date-time */
-  updatedAt?: string;
-  /** @format date-time */
-  publishedAt?: string;
-  createdBy?: {
-    id?: string | number;
-    documentId?: string;
-  };
-  updatedBy?: {
-    id?: string | number;
-    documentId?: string;
-  };
-  locale?: string;
-  localizations?: {
-    id?: string | number;
-    documentId?: string;
-  }[];
-}
-
-export interface TiktokResponse {
-  data?: Tiktok;
   meta?: object;
 }
 
@@ -6413,14 +6442,16 @@ export interface VisitorView {
           id?: string | number;
           documentId?: string;
         }[];
-        tiktok?: {
+        socialAccounts?: {
           id?: string | number;
           documentId?: string;
-          openId?: string;
+          provider?: VisitorViewProviderEnum;
+          providerId?: string;
           accessToken?: string;
           refreshToken?: string;
           /** @format date-time */
           expiresAt?: string;
+          email?: string;
           user?: {
             id?: string | number;
             documentId?: string;
@@ -6444,7 +6475,7 @@ export interface VisitorView {
             id?: string | number;
             documentId?: string;
           }[];
-        };
+        }[];
         subscriptionStatus?: VisitorViewSubscriptionStatusEnum;
         billingPeriod?: string;
         /** @format date-time */
@@ -6746,6 +6777,13 @@ export enum ActivityGenderEnum {
   Unknown = "unknown",
 }
 
+export enum ActivityProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum ActivitySubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -6779,6 +6817,13 @@ export enum AiRequestGenderEnum {
   Male = "male",
   Female = "female",
   Unknown = "unknown",
+}
+
+export enum AiRequestProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
 }
 
 export enum AiRequestSubscriptionStatusEnum {
@@ -6843,6 +6888,13 @@ export enum AiTaskGenderEnum {
   Unknown = "unknown",
 }
 
+export enum AiTaskProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum AiTaskSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -6898,6 +6950,13 @@ export enum ClipGenderEnum {
   Unknown = "unknown",
 }
 
+export enum ClipProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum ClipSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -6936,6 +6995,13 @@ export enum ClipShareGenderEnum {
   Male = "male",
   Female = "female",
   Unknown = "unknown",
+}
+
+export enum ClipShareProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
 }
 
 export enum ClipShareSubscriptionStatusEnum {
@@ -6996,6 +7062,13 @@ export enum FollowerGenderEnum1 {
   Unknown = "unknown",
 }
 
+export enum FollowerProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum FollowerSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -7034,6 +7107,13 @@ export enum MemeGenderEnum {
   Unknown = "unknown",
 }
 
+export enum MemeProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum MemeSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -7063,6 +7143,13 @@ export enum RecordingGenderEnum {
   Unknown = "unknown",
 }
 
+export enum RecordingProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum RecordingSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -7071,6 +7158,55 @@ export enum RecordingSubscriptionStatusEnum {
 }
 
 export enum RecordingPaymentProviderEnum {
+  Freemius = "freemius",
+  Stripe = "stripe",
+}
+
+export enum SocialAccountRequestProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
+export enum SocialAccountProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
+export enum SocialAccountTypeEnum {
+  Tiktok = "tiktok",
+  Twitch = "twitch",
+  Kick = "kick",
+  Youtube = "youtube",
+  Afreecatv = "afreecatv",
+  Pandalive = "pandalive",
+  Bigo = "bigo",
+}
+
+export enum SocialAccountGenderEnum {
+  Male = "male",
+  Female = "female",
+  Unknown = "unknown",
+}
+
+export enum SocialAccountProviderEnum1 {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
+export enum SocialAccountSubscriptionStatusEnum {
+  Active = "active",
+  Cancelled = "cancelled",
+  Trialing = "trialing",
+  Expired = "expired",
+}
+
+export enum SocialAccountPaymentProviderEnum {
   Freemius = "freemius",
   Stripe = "stripe",
 }
@@ -7103,6 +7239,13 @@ export enum SourceGenderEnum {
   Unknown = "unknown",
 }
 
+export enum SourceProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
 export enum SourceSubscriptionStatusEnum {
   Active = "active",
   Cancelled = "cancelled",
@@ -7121,34 +7264,6 @@ export enum SourceStateEnum1 {
   Failed = "failed",
 }
 
-export enum TiktokTypeEnum {
-  Tiktok = "tiktok",
-  Twitch = "twitch",
-  Kick = "kick",
-  Youtube = "youtube",
-  Afreecatv = "afreecatv",
-  Pandalive = "pandalive",
-  Bigo = "bigo",
-}
-
-export enum TiktokGenderEnum {
-  Male = "male",
-  Female = "female",
-  Unknown = "unknown",
-}
-
-export enum TiktokSubscriptionStatusEnum {
-  Active = "active",
-  Cancelled = "cancelled",
-  Trialing = "trialing",
-  Expired = "expired",
-}
-
-export enum TiktokPaymentProviderEnum {
-  Freemius = "freemius",
-  Stripe = "stripe",
-}
-
 export enum VisitorViewTypeEnum {
   Tiktok = "tiktok",
   Twitch = "twitch",
@@ -7163,6 +7278,13 @@ export enum VisitorViewGenderEnum {
   Male = "male",
   Female = "female",
   Unknown = "unknown",
+}
+
+export enum VisitorViewProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
 }
 
 export enum VisitorViewSubscriptionStatusEnum {
@@ -7737,6 +7859,52 @@ export interface DeleteReportsIdParams {
 /** @format int64 */
 export type DeleteReportsIdData = number;
 
+export interface GetSocialAccountsParams {
+  /** Sort by attributes ascending (asc) or descending (desc) */
+  sort?: string;
+  /** Return page/pageSize (default: true) */
+  "pagination[withCount]"?: boolean;
+  /** Page number (default: 0) */
+  "pagination[page]"?: number;
+  /** Page size (default: 25) */
+  "pagination[pageSize]"?: number;
+  /** Offset value (default: 0) */
+  "pagination[start]"?: number;
+  /** Number of entities to return (default: 25) */
+  "pagination[limit]"?: number;
+  /** Fields to return (ex: title,author) */
+  fields?: string;
+  /** Relations to return */
+  populate?: string | string[] | object;
+  /** Filters to apply */
+  filters?: Record<string, any>;
+  /** Locale to apply */
+  locale?: string;
+}
+
+export type GetSocialAccountsData = SocialAccountListResponse;
+
+export type PostSocialAccountsData = SocialAccountResponse;
+
+export interface GetSocialAccountsIdParams {
+  id: string;
+}
+
+export type GetSocialAccountsIdData = SocialAccountResponse;
+
+export interface PutSocialAccountsIdParams {
+  id: string;
+}
+
+export type PutSocialAccountsIdData = SocialAccountResponse;
+
+export interface DeleteSocialAccountsIdParams {
+  id: string;
+}
+
+/** @format int64 */
+export type DeleteSocialAccountsIdData = number;
+
 export interface GetSourcesParams {
   /** Sort by attributes ascending (asc) or descending (desc) */
   sort?: string;
@@ -7782,52 +7950,6 @@ export interface DeleteSourcesIdParams {
 
 /** @format int64 */
 export type DeleteSourcesIdData = number;
-
-export interface GetTiktoksParams {
-  /** Sort by attributes ascending (asc) or descending (desc) */
-  sort?: string;
-  /** Return page/pageSize (default: true) */
-  "pagination[withCount]"?: boolean;
-  /** Page number (default: 0) */
-  "pagination[page]"?: number;
-  /** Page size (default: 25) */
-  "pagination[pageSize]"?: number;
-  /** Offset value (default: 0) */
-  "pagination[start]"?: number;
-  /** Number of entities to return (default: 25) */
-  "pagination[limit]"?: number;
-  /** Fields to return (ex: title,author) */
-  fields?: string;
-  /** Relations to return */
-  populate?: string | string[] | object;
-  /** Filters to apply */
-  filters?: Record<string, any>;
-  /** Locale to apply */
-  locale?: string;
-}
-
-export type GetTiktoksData = TiktokListResponse;
-
-export type PostTiktoksData = TiktokResponse;
-
-export interface GetTiktoksIdParams {
-  id: string;
-}
-
-export type GetTiktoksIdData = TiktokResponse;
-
-export interface PutTiktoksIdParams {
-  id: string;
-}
-
-export type PutTiktoksIdData = TiktokResponse;
-
-export interface DeleteTiktoksIdParams {
-  id: string;
-}
-
-/** @format int64 */
-export type DeleteTiktoksIdData = number;
 
 export interface GetVisitorViewsParams {
   /** Sort by attributes ascending (asc) or descending (desc) */
@@ -8116,7 +8238,7 @@ export type GetUsersPermissionsUsersRolesData = UsersPermissionsUser & {
     type?: string;
   };
   followers?: Follower[];
-  tiktok?: Tiktok | null;
+  socialAccounts?: SocialAccount[];
   subscriptionStatus?: SubscriptionStatusEnum;
   billingPeriod?: string | null;
   /** @format date-time */
@@ -8181,24 +8303,45 @@ export interface DestroyUserData {
   success?: boolean;
 }
 
-export interface MeGetTiktoksData {
-  data?: Tiktok;
+export interface MeGetSocialAccountsParams {
+  /** Filter by provider */
+  provider?: ProviderEnum;
 }
 
-export type MePostTiktoksData = TiktokResponse;
+/** Filter by provider */
+export enum ProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
 
-export interface MePutTiktoksIdParams {
+export interface MeGetSocialAccountsData {
+  data?: SocialAccount[];
+}
+
+/** Filter by provider */
+export enum MeGetSocialAccountsParams1ProviderEnum {
+  Google = "google",
+  Apple = "apple",
+  Facebook = "facebook",
+  Tiktok = "tiktok",
+}
+
+export type MePostSocialAccountsData = SocialAccountResponse;
+
+export interface MePutSocialAccountsIdParams {
   id: string;
 }
 
-export type MePutTiktoksIdData = TiktokResponse;
+export type MePutSocialAccountsIdData = SocialAccountResponse;
 
-export interface MeDeleteTiktoksIdParams {
+export interface MeDeleteSocialAccountsIdParams {
   id: string;
 }
 
 /** @format int64 */
-export type MeDeleteTiktoksIdData = number;
+export type MeDeleteSocialAccountsIdData = number;
 
 export interface MeGetClipsParams {
   /** Sort by attributes ascending (asc) or descending (desc) */
@@ -9977,6 +10120,181 @@ export namespace Report {
   }
 }
 
+export namespace SocialAccount {
+  /**
+   * No description
+   * @tags Social-account
+   * @name GetSocialAccounts
+   * @request GET:/social-accounts
+   * @secure
+   */
+  export namespace GetSocialAccounts {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /** Sort by attributes ascending (asc) or descending (desc) */
+      sort?: string;
+      /** Return page/pageSize (default: true) */
+      "pagination[withCount]"?: boolean;
+      /** Page number (default: 0) */
+      "pagination[page]"?: number;
+      /** Page size (default: 25) */
+      "pagination[pageSize]"?: number;
+      /** Offset value (default: 0) */
+      "pagination[start]"?: number;
+      /** Number of entities to return (default: 25) */
+      "pagination[limit]"?: number;
+      /** Fields to return (ex: title,author) */
+      fields?: string;
+      /** Relations to return */
+      populate?: string | string[] | object;
+      /** Filters to apply */
+      filters?: Record<string, any>;
+      /** Locale to apply */
+      locale?: string;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetSocialAccountsData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name PostSocialAccounts
+   * @request POST:/social-accounts
+   * @secure
+   */
+  export namespace PostSocialAccounts {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = SocialAccountRequest;
+    export type RequestHeaders = {};
+    export type ResponseBody = PostSocialAccountsData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name GetSocialAccountsId
+   * @request GET:/social-accounts/{id}
+   * @secure
+   */
+  export namespace GetSocialAccountsId {
+    export type RequestParams = {
+      id: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = GetSocialAccountsIdData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name PutSocialAccountsId
+   * @request PUT:/social-accounts/{id}
+   * @secure
+   */
+  export namespace PutSocialAccountsId {
+    export type RequestParams = {
+      id: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = SocialAccountRequest;
+    export type RequestHeaders = {};
+    export type ResponseBody = PutSocialAccountsIdData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name DeleteSocialAccountsId
+   * @request DELETE:/social-accounts/{id}
+   * @secure
+   */
+  export namespace DeleteSocialAccountsId {
+    export type RequestParams = {
+      id: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = DeleteSocialAccountsIdData;
+  }
+
+  /**
+   * No description
+   * @tags SocialAccount
+   * @name MeGetSocialAccounts
+   * @summary Get current user's social accounts
+   * @request GET:/social-accounts/me
+   * @secure
+   */
+  export namespace MeGetSocialAccounts {
+    export type RequestParams = {};
+    export type RequestQuery = {
+      /** Filter by provider */
+      provider?: MeGetSocialAccountsParams1ProviderEnum;
+    };
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = MeGetSocialAccountsData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name MePostSocialAccounts
+   * @summary Create social account for current user
+   * @request POST:/social-accounts/me
+   * @secure
+   */
+  export namespace MePostSocialAccounts {
+    export type RequestParams = {};
+    export type RequestQuery = {};
+    export type RequestBody = SocialAccountRequest;
+    export type RequestHeaders = {};
+    export type ResponseBody = MePostSocialAccountsData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name MePutSocialAccountsId
+   * @summary Update current user's social account
+   * @request PUT:/social-accounts/me/{id}
+   * @secure
+   */
+  export namespace MePutSocialAccountsId {
+    export type RequestParams = {
+      id: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = SocialAccountRequest;
+    export type RequestHeaders = {};
+    export type ResponseBody = MePutSocialAccountsIdData;
+  }
+
+  /**
+   * No description
+   * @tags Social-account
+   * @name MeDeleteSocialAccountsId
+   * @summary Delete current user's social account
+   * @request DELETE:/social-accounts/me/{id}
+   * @secure
+   */
+  export namespace MeDeleteSocialAccountsId {
+    export type RequestParams = {
+      id: string;
+    };
+    export type RequestQuery = {};
+    export type RequestBody = never;
+    export type RequestHeaders = {};
+    export type ResponseBody = MeDeleteSocialAccountsIdData;
+  }
+}
+
 export namespace Source {
   /**
    * No description
@@ -10078,178 +10396,6 @@ export namespace Source {
     export type RequestBody = never;
     export type RequestHeaders = {};
     export type ResponseBody = DeleteSourcesIdData;
-  }
-}
-
-export namespace Tiktok {
-  /**
-   * No description
-   * @tags Tiktok
-   * @name GetTiktoks
-   * @request GET:/tiktoks
-   * @secure
-   */
-  export namespace GetTiktoks {
-    export type RequestParams = {};
-    export type RequestQuery = {
-      /** Sort by attributes ascending (asc) or descending (desc) */
-      sort?: string;
-      /** Return page/pageSize (default: true) */
-      "pagination[withCount]"?: boolean;
-      /** Page number (default: 0) */
-      "pagination[page]"?: number;
-      /** Page size (default: 25) */
-      "pagination[pageSize]"?: number;
-      /** Offset value (default: 0) */
-      "pagination[start]"?: number;
-      /** Number of entities to return (default: 25) */
-      "pagination[limit]"?: number;
-      /** Fields to return (ex: title,author) */
-      fields?: string;
-      /** Relations to return */
-      populate?: string | string[] | object;
-      /** Filters to apply */
-      filters?: Record<string, any>;
-      /** Locale to apply */
-      locale?: string;
-    };
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = GetTiktoksData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name PostTiktoks
-   * @request POST:/tiktoks
-   * @secure
-   */
-  export namespace PostTiktoks {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = TiktokRequest;
-    export type RequestHeaders = {};
-    export type ResponseBody = PostTiktoksData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name GetTiktoksId
-   * @request GET:/tiktoks/{id}
-   * @secure
-   */
-  export namespace GetTiktoksId {
-    export type RequestParams = {
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = GetTiktoksIdData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name PutTiktoksId
-   * @request PUT:/tiktoks/{id}
-   * @secure
-   */
-  export namespace PutTiktoksId {
-    export type RequestParams = {
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = TiktokRequest;
-    export type RequestHeaders = {};
-    export type ResponseBody = PutTiktoksIdData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name DeleteTiktoksId
-   * @request DELETE:/tiktoks/{id}
-   * @secure
-   */
-  export namespace DeleteTiktoksId {
-    export type RequestParams = {
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = DeleteTiktoksIdData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name MeGetTiktoks
-   * @summary Get current user's TikTok account
-   * @request GET:/tiktoks/me
-   * @secure
-   */
-  export namespace MeGetTiktoks {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = MeGetTiktoksData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name MePostTiktoks
-   * @summary Create TikTok account for current user (max 1)
-   * @request POST:/tiktoks/me
-   * @secure
-   */
-  export namespace MePostTiktoks {
-    export type RequestParams = {};
-    export type RequestQuery = {};
-    export type RequestBody = TiktokRequest;
-    export type RequestHeaders = {};
-    export type ResponseBody = MePostTiktoksData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name MePutTiktoksId
-   * @summary Update current user's TikTok account
-   * @request PUT:/tiktoks/me/{id}
-   * @secure
-   */
-  export namespace MePutTiktoksId {
-    export type RequestParams = {
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = TiktokRequest;
-    export type RequestHeaders = {};
-    export type ResponseBody = MePutTiktoksIdData;
-  }
-
-  /**
-   * No description
-   * @tags Tiktok
-   * @name MeDeleteTiktoksId
-   * @summary Delete current user's TikTok account
-   * @request DELETE:/tiktoks/me/{id}
-   * @secure
-   */
-  export namespace MeDeleteTiktoksId {
-    export type RequestParams = {
-      id: string;
-    };
-    export type RequestQuery = {};
-    export type RequestBody = never;
-    export type RequestHeaders = {};
-    export type ResponseBody = MeDeleteTiktoksIdData;
   }
 }
 
@@ -12617,6 +12763,203 @@ export class Api<
         ...params,
       }),
   };
+  socialAccount = {
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name GetSocialAccounts
+     * @request GET:/social-accounts
+     * @secure
+     */
+    getSocialAccounts: (
+      query: GetSocialAccountsParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetSocialAccountsData, Error>({
+        path: `/social-accounts`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name PostSocialAccounts
+     * @request POST:/social-accounts
+     * @secure
+     */
+    postSocialAccounts: (
+      data: SocialAccountRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<PostSocialAccountsData, Error>({
+        path: `/social-accounts`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name GetSocialAccountsId
+     * @request GET:/social-accounts/{id}
+     * @secure
+     */
+    getSocialAccountsId: (
+      { id, ...query }: GetSocialAccountsIdParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<GetSocialAccountsIdData, Error>({
+        path: `/social-accounts/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name PutSocialAccountsId
+     * @request PUT:/social-accounts/{id}
+     * @secure
+     */
+    putSocialAccountsId: (
+      { id, ...query }: PutSocialAccountsIdParams,
+      data: SocialAccountRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<PutSocialAccountsIdData, Error>({
+        path: `/social-accounts/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name DeleteSocialAccountsId
+     * @request DELETE:/social-accounts/{id}
+     * @secure
+     */
+    deleteSocialAccountsId: (
+      { id, ...query }: DeleteSocialAccountsIdParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<DeleteSocialAccountsIdData, Error>({
+        path: `/social-accounts/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags SocialAccount
+     * @name MeGetSocialAccounts
+     * @summary Get current user's social accounts
+     * @request GET:/social-accounts/me
+     * @secure
+     */
+    meGetSocialAccounts: (
+      query: MeGetSocialAccountsParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<MeGetSocialAccountsData, void>({
+        path: `/social-accounts/me`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name MePostSocialAccounts
+     * @summary Create social account for current user
+     * @request POST:/social-accounts/me
+     * @secure
+     */
+    mePostSocialAccounts: (
+      data: SocialAccountRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<MePostSocialAccountsData, void | Error>({
+        path: `/social-accounts/me`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name MePutSocialAccountsId
+     * @summary Update current user's social account
+     * @request PUT:/social-accounts/me/{id}
+     * @secure
+     */
+    mePutSocialAccountsId: (
+      { id, ...query }: MePutSocialAccountsIdParams,
+      data: SocialAccountRequest,
+      params: RequestParams = {},
+    ) =>
+      this.request<MePutSocialAccountsIdData, Error | void>({
+        path: `/social-accounts/me/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Social-account
+     * @name MeDeleteSocialAccountsId
+     * @summary Delete current user's social account
+     * @request DELETE:/social-accounts/me/{id}
+     * @secure
+     */
+    meDeleteSocialAccountsId: (
+      { id, ...query }: MeDeleteSocialAccountsIdParams,
+      params: RequestParams = {},
+    ) =>
+      this.request<MeDeleteSocialAccountsIdData, Error | void>({
+        path: `/social-accounts/me/${id}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
   source = {
     /**
      * No description
@@ -12712,190 +13055,6 @@ export class Api<
     ) =>
       this.request<DeleteSourcesIdData, Error>({
         path: `/sources/${id}`,
-        method: "DELETE",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-  };
-  tiktok = {
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name GetTiktoks
-     * @request GET:/tiktoks
-     * @secure
-     */
-    getTiktoks: (query: GetTiktoksParams, params: RequestParams = {}) =>
-      this.request<GetTiktoksData, Error>({
-        path: `/tiktoks`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name PostTiktoks
-     * @request POST:/tiktoks
-     * @secure
-     */
-    postTiktoks: (data: TiktokRequest, params: RequestParams = {}) =>
-      this.request<PostTiktoksData, Error>({
-        path: `/tiktoks`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name GetTiktoksId
-     * @request GET:/tiktoks/{id}
-     * @secure
-     */
-    getTiktoksId: (
-      { id, ...query }: GetTiktoksIdParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<GetTiktoksIdData, Error>({
-        path: `/tiktoks/${id}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name PutTiktoksId
-     * @request PUT:/tiktoks/{id}
-     * @secure
-     */
-    putTiktoksId: (
-      { id, ...query }: PutTiktoksIdParams,
-      data: TiktokRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<PutTiktoksIdData, Error>({
-        path: `/tiktoks/${id}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name DeleteTiktoksId
-     * @request DELETE:/tiktoks/{id}
-     * @secure
-     */
-    deleteTiktoksId: (
-      { id, ...query }: DeleteTiktoksIdParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<DeleteTiktoksIdData, Error>({
-        path: `/tiktoks/${id}`,
-        method: "DELETE",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name MeGetTiktoks
-     * @summary Get current user's TikTok account
-     * @request GET:/tiktoks/me
-     * @secure
-     */
-    meGetTiktoks: (params: RequestParams = {}) =>
-      this.request<MeGetTiktoksData, void>({
-        path: `/tiktoks/me`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name MePostTiktoks
-     * @summary Create TikTok account for current user (max 1)
-     * @request POST:/tiktoks/me
-     * @secure
-     */
-    mePostTiktoks: (data: TiktokRequest, params: RequestParams = {}) =>
-      this.request<MePostTiktoksData, void | Error>({
-        path: `/tiktoks/me`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name MePutTiktoksId
-     * @summary Update current user's TikTok account
-     * @request PUT:/tiktoks/me/{id}
-     * @secure
-     */
-    mePutTiktoksId: (
-      { id, ...query }: MePutTiktoksIdParams,
-      data: TiktokRequest,
-      params: RequestParams = {},
-    ) =>
-      this.request<MePutTiktoksIdData, Error | void>({
-        path: `/tiktoks/me/${id}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * No description
-     *
-     * @tags Tiktok
-     * @name MeDeleteTiktoksId
-     * @summary Delete current user's TikTok account
-     * @request DELETE:/tiktoks/me/{id}
-     * @secure
-     */
-    meDeleteTiktoksId: (
-      { id, ...query }: MeDeleteTiktoksIdParams,
-      params: RequestParams = {},
-    ) =>
-      this.request<MeDeleteTiktoksIdData, Error | void>({
-        path: `/tiktoks/me/${id}`,
         method: "DELETE",
         secure: true,
         format: "json",
