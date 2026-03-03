@@ -43,9 +43,7 @@ function redirect(path: string): NextResponse {
 
 function errorRedirect(action: string): NextResponse {
   const target =
-    action === "settings"
-      ? "/settings?tiktok=error"
-      : "/login?tiktok=error";
+    action === "settings" ? "/settings?tiktok=error" : "/login?tiktok=error";
   return redirect(target);
 }
 
@@ -54,7 +52,7 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get("code");
   const error = searchParams.get("error");
   const state = searchParams.get("state");
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+
   const action = parseAction(state);
 
   if (error || !code) {
@@ -64,6 +62,7 @@ export async function GET(request: NextRequest) {
   try {
     const clientKey = process.env.TIKTOK_CLIENT_KEY!;
     const clientSecret = process.env.TIKTOK_CLIENT_SECRET!;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
     const redirectUri = `${baseUrl}/callback/tiktok`;
 
     // Get PKCE verifier from cookie
@@ -154,7 +153,6 @@ export async function GET(request: NextRequest) {
     const loginData = await loginResponse.json();
 
     // Set JWT cookie and redirect to dashboard
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
     const response = NextResponse.redirect(`${baseUrl}/dashboard`);
     response.cookies.set(TOKEN_KEY, loginData.jwt, {
       httpOnly: true,
