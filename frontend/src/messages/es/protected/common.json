@@ -46,12 +46,6 @@
     "downloadFeatureMessage": "Descargar videos es una función premium.",
     "editClip": "Editar clip",
     "deleteSources": "Eliminar fuentes",
-    "deleteSourcesConfirm": {
-      "title": "Eliminar fuentes",
-      "message": "¿Estás seguro de que quieres eliminar todos los archivos fuente? La grabación se mantendrá pero los videos serán eliminados.",
-      "confirm": "Eliminar fuentes",
-      "cancel": "Cancelar"
-    },
     "deleteSourcesSuccess": "{count} fuentes eliminadas"
   },
   "followers": {

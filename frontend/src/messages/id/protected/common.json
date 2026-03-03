@@ -46,12 +46,6 @@
     "downloadFeatureMessage": "Mengunduh video adalah fitur premium.",
     "editClip": "Edit Klip",
     "deleteSources": "Hapus sumber",
-    "deleteSourcesConfirm": {
-      "title": "Hapus sumber",
-      "message": "Apakah Anda yakin ingin menghapus semua file sumber? Rekaman akan tetap ada tetapi video akan dihapus.",
-      "confirm": "Hapus sumber",
-      "cancel": "Batal"
-    },
     "deleteSourcesSuccess": "{count} sumber dihapus"
   },
   "followers": {

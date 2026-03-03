@@ -46,12 +46,6 @@
     "downloadFeatureMessage": "Baixar vídeos é um recurso premium.",
     "editClip": "Editar clipe",
     "deleteSources": "Excluir fontes",
-    "deleteSourcesConfirm": {
-      "title": "Excluir fontes",
-      "message": "Tem certeza que deseja excluir todos os arquivos fonte? A gravação será mantida mas os vídeos serão removidos.",
-      "confirm": "Excluir fontes",
-      "cancel": "Cancelar"
-    },
     "deleteSourcesSuccess": "{count} fontes excluídas"
   },
   "followers": {

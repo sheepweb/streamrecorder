@@ -46,12 +46,6 @@
     "downloadFeatureMessage": "Video indirme premium bir özelliktir.",
     "editClip": "Klibi Düzenle",
     "deleteSources": "Kaynakları sil",
-    "deleteSourcesConfirm": {
-      "title": "Kaynakları sil",
-      "message": "Tüm kaynak dosyalarını silmek istediğinizden emin misiniz? Kayıt kalacak ancak videolar kaldırılacak.",
-      "confirm": "Kaynakları sil",
-      "cancel": "İptal"
-    },
     "deleteSourcesSuccess": "{count} kaynak silindi"
   },
   "followers": {

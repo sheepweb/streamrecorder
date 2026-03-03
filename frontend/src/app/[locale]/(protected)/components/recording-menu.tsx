@@ -84,34 +84,21 @@ export function RecordingMenu({
     });
   };
 
-  const handleDeleteSources = () => {
+  const handleDeleteSources = async () => {
     if (!recording.documentId) return;
-    modals.openConfirmModal({
-      title: t("deleteSourcesConfirm.title"),
-      children: <Text size="sm">{t("deleteSourcesConfirm.message")}</Text>,
-      labels: {
-        confirm: t("deleteSourcesConfirm.confirm"),
-        cancel: t("deleteSourcesConfirm.cancel"),
-      },
-      confirmProps: { color: "red" },
-      onConfirm: async () => {
-        const result = await deleteRecordingSources(recording.documentId!);
-        if (result.success) {
-          notifications.show({
-            title: t("deleteSourcesSuccess", {
-              count: result.deletedCount || 0,
-            }),
-            message: null,
-            color: "green",
-          });
-          if (username && type) {
-            queryClient.invalidateQueries({
-              queryKey: ["recordings", username, type],
-            });
-          }
-        }
-      },
-    });
+    const result = await deleteRecordingSources(recording.documentId);
+    if (result.success) {
+      notifications.show({
+        title: t("deleteSourcesSuccess", { count: result.deletedCount || 0 }),
+        message: null,
+        color: "green",
+      });
+      if (username && type) {
+        queryClient.invalidateQueries({
+          queryKey: ["recordings", username, type],
+        });
+      }
+    }
   };
 
   const handleToggleHidden = async () => {

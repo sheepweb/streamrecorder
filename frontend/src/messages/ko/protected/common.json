@@ -46,12 +46,6 @@
     "downloadFeatureMessage": "영상 다운로드는 프리미엄 기능입니다.",
     "editClip": "클립 편집",
     "deleteSources": "소스 삭제",
-    "deleteSourcesConfirm": {
-      "title": "소스 삭제",
-      "message": "모든 소스 파일을 삭제하시겠습니까? 녹화는 유지되지만 영상은 제거됩니다.",
-      "confirm": "소스 삭제",
-      "cancel": "취소"
-    },
     "deleteSourcesSuccess": "{count}개 소스 삭제됨"
   },
   "followers": {

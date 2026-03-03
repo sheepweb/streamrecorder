@@ -44,12 +44,6 @@
     "downloadFeatureMessage": "تحميل الفيديوهات ميزة خاصة بالمشتركين المميزين.",
     "editClip": "تعديل المقطع",
     "deleteSources": "حذف المصادر",
-    "deleteSourcesConfirm": {
-      "title": "حذف المصادر",
-      "message": "هل أنت متأكد من حذف جميع ملفات المصدر؟ سيبقى التسجيل ولكن ستتم إزالة الفيديوهات.",
-      "confirm": "حذف المصادر",
-      "cancel": "إلغاء"
-    },
     "deleteSourcesSuccess": "تم حذف {count} مصدر"
   },
   "followers": {

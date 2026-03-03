@@ -46,12 +46,6 @@
     "downloadFeatureMessage": "動画のダウンロードはプレミアム機能です。",
     "editClip": "クリップを編集",
     "deleteSources": "ソースを削除",
-    "deleteSourcesConfirm": {
-      "title": "ソースを削除",
-      "message": "すべてのソースファイルを削除してもよいですか？録画は残りますが、動画は削除されます。",
-      "confirm": "ソースを削除",
-      "cancel": "キャンセル"
-    },
     "deleteSourcesSuccess": "{count} 件のソースを削除しました"
   },
   "followers": {
