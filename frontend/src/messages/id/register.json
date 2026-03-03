@@ -18,9 +18,17 @@
     "placeholder": "Buat kata sandi",
     "hint": "Kata sandi minimal 6 karakter"
   },
+  "choices": {
+    "emailPassword": "Gunakan Email / Kata Sandi",
+    "tiktok": "Lanjutkan dengan TikTok"
+  },
   "terms": {
     "agree": "Saya setuju dengan",
-    "link": "Syarat dan Ketentuan"
+    "link": "Syarat dan Ketentuan",
+    "text": "Dengan melanjutkan, Anda menyetujui",
+    "tosLink": "Ketentuan Layanan",
+    "and": "dan mengonfirmasi bahwa Anda telah membaca",
+    "privacyLink": "Kebijakan Privasi"
   },
   "submit": {
     "default": "Buat akun",

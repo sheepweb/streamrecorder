@@ -19,6 +19,16 @@
     "default": "로그인",
     "loading": "로그인 중..."
   },
+  "choices": {
+    "emailPassword": "이메일 / 비밀번호 사용",
+    "tiktok": "TikTok으로 계속하기"
+  },
+  "terms": {
+    "text": "계속하면 Live Stream Recorder의",
+    "tosLink": "서비스 약관",
+    "and": "에 동의하고",
+    "privacyLink": "개인정보 처리방침"
+  },
   "register": {
     "text": "계정이 없으신가요?",
     "link": "회원가입"

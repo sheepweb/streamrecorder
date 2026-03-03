@@ -19,6 +19,16 @@
     "default": "サインイン",
     "loading": "サインイン中..."
   },
+  "choices": {
+    "emailPassword": "メール / パスワードを使用",
+    "tiktok": "TikTokで続ける"
+  },
+  "terms": {
+    "text": "続行することで、Live Stream Recorderの",
+    "tosLink": "利用規約",
+    "and": "に同意し、",
+    "privacyLink": "プライバシーポリシー"
+  },
   "register": {
     "text": "アカウントをお持ちでないですか？",
     "link": "作成する"

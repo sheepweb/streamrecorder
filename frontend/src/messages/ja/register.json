@@ -18,9 +18,17 @@
     "placeholder": "パスワードを作成してください",
     "hint": "パスワードは 6 文字以上で設定してください"
   },
+  "choices": {
+    "emailPassword": "メール / パスワードを使用",
+    "tiktok": "TikTokで続ける"
+  },
   "terms": {
     "agree": "以下に同意します：",
-    "link": "利用規約"
+    "link": "利用規約",
+    "text": "続行することで、Live Stream Recorderの",
+    "tosLink": "利用規約",
+    "and": "に同意し、",
+    "privacyLink": "プライバシーポリシー"
   },
   "submit": {
     "default": "アカウントを作成",

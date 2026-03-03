@@ -1,17 +1,17 @@
 import { generateAlternates } from "@/app/lib/seo";
 import { getLocale, getTranslations } from "next-intl/server";
-import { RegisterChoices } from "./components/register-choices";
+import { LoginForm } from "../components/login-form";
 
 export async function generateMetadata() {
-  const t = await getTranslations("register");
+  const t = await getTranslations("login");
   const locale = await getLocale();
   return {
     title: t("meta.title"),
     description: t("meta.description"),
-    alternates: generateAlternates("/register", locale),
+    alternates: generateAlternates("/login/email-password", locale),
   };
 }
 
-export default function RegisterPage() {
-  return <RegisterChoices />;
+export default function EmailPasswordLoginPage() {
+  return <LoginForm />;
 }

@@ -18,9 +18,17 @@
     "placeholder": "Bir şifre oluşturun",
     "hint": "Şifre en az 6 karakter olmalıdır"
   },
+  "choices": {
+    "emailPassword": "E-posta / Şifre Kullan",
+    "tiktok": "TikTok ile Devam Et"
+  },
   "terms": {
     "agree": "Kabul ediyorum:",
-    "link": "Şartlar ve Koşullar"
+    "link": "Şartlar ve Koşullar",
+    "text": "Devam ederek, Live Stream Recorder'ın",
+    "tosLink": "Hizmet Şartları'nı",
+    "and": "kabul etmiş ve",
+    "privacyLink": "Gizlilik Politikası'nı"
   },
   "submit": {
     "default": "Hesap oluştur",

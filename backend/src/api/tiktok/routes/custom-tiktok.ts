@@ -1,6 +1,12 @@
 export default {
   routes: [
     {
+      method: "POST",
+      path: "/tiktok-auth/login",
+      handler: "tiktok.login",
+      config: { auth: false },
+    },
+    {
       method: "GET",
       path: "/tiktoks/me",
       handler: "tiktok.meFind",

@@ -19,6 +19,16 @@
     "default": "Giriş yap",
     "loading": "Giriş yapılıyor..."
   },
+  "choices": {
+    "emailPassword": "E-posta / Şifre Kullan",
+    "tiktok": "TikTok ile Devam Et"
+  },
+  "terms": {
+    "text": "Devam ederek, Live Stream Recorder'ın",
+    "tosLink": "Hizmet Şartları'nı",
+    "and": "kabul etmiş ve",
+    "privacyLink": "Gizlilik Politikası'nı"
+  },
   "register": {
     "text": "Hesabınız yok mu?",
     "link": "Hesap oluşturun"

@@ -19,6 +19,16 @@
     "default": "Iniciar sesión",
     "loading": "Iniciando sesión..."
   },
+  "choices": {
+    "emailPassword": "Usar Correo / Contraseña",
+    "tiktok": "Continuar con TikTok"
+  },
+  "terms": {
+    "text": "Al continuar, aceptas los",
+    "tosLink": "Términos de Servicio",
+    "and": "y confirmas que has leído la",
+    "privacyLink": "Política de Privacidad"
+  },
   "register": {
     "text": "¿No tienes una cuenta?",
     "link": "Crea una"

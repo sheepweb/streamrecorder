@@ -18,9 +18,17 @@
     "placeholder": "Crea una contraseña",
     "hint": "La contraseña debe tener al menos 6 caracteres"
   },
+  "choices": {
+    "emailPassword": "Usar Correo / Contraseña",
+    "tiktok": "Continuar con TikTok"
+  },
   "terms": {
     "agree": "Acepto los",
-    "link": "Términos y Condiciones"
+    "link": "Términos y Condiciones",
+    "text": "Al continuar, aceptas los",
+    "tosLink": "Términos de Servicio",
+    "and": "y confirmas que has leído la",
+    "privacyLink": "Política de Privacidad"
   },
   "submit": {
     "default": "Crear cuenta",

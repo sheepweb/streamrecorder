@@ -19,6 +19,16 @@
     "default": "Masuk",
     "loading": "Sedang masuk..."
   },
+  "choices": {
+    "emailPassword": "Gunakan Email / Kata Sandi",
+    "tiktok": "Lanjutkan dengan TikTok"
+  },
+  "terms": {
+    "text": "Dengan melanjutkan, Anda menyetujui",
+    "tosLink": "Ketentuan Layanan",
+    "and": "dan mengonfirmasi bahwa Anda telah membaca",
+    "privacyLink": "Kebijakan Privasi"
+  },
   "register": {
     "text": "Belum punya akun?",
     "link": "Buat akun"

@@ -1,0 +1,173 @@
+import api from "@/lib/api";
+import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
+
+interface TikTokTokenResponse {
+  access_token: string;
+  refresh_token: string;
+  open_id: string;
+  expires_in: number;
+  token_type: string;
+  error?: string;
+  error_description?: string;
+}
+
+interface TikTokUserResponse {
+  data: {
+    user: {
+      open_id: string;
+      display_name: string;
+      avatar_url: string;
+      username: string;
+    };
+  };
+  error: { code: string; message: string };
+}
+
+const PKCE_COOKIE = "tiktok_pkce_verifier";
+const TOKEN_KEY = "strapi_jwt";
+
+function parseAction(state: string | null): string {
+  if (!state) return "settings";
+  const action = state.split(":")[0];
+  if (["settings", "login", "signup"].includes(action)) return action;
+  return "settings";
+}
+
+function errorRedirect(requestUrl: string, action: string): NextResponse {
+  const target =
+    action === "settings"
+      ? "/settings?tiktok=error"
+      : "/login?tiktok=error";
+  const response = NextResponse.redirect(new URL(target, requestUrl));
+  response.cookies.delete(PKCE_COOKIE);
+  return response;
+}
+
+function successRedirect(requestUrl: string, path: string): NextResponse {
+  const response = NextResponse.redirect(new URL(path, requestUrl));
+  response.cookies.delete(PKCE_COOKIE);
+  return response;
+}
+
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const code = searchParams.get("code");
+  const error = searchParams.get("error");
+  const state = searchParams.get("state");
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+  const action = parseAction(state);
+
+  if (error || !code) {
+    return errorRedirect(request.url, action);
+  }
+
+  try {
+    const clientKey = process.env.TIKTOK_CLIENT_KEY!;
+    const clientSecret = process.env.TIKTOK_CLIENT_SECRET!;
+    const redirectUri = `${baseUrl}/callback/tiktok`;
+
+    // Get PKCE verifier from cookie
+    const cookieStore = await cookies();
+    const codeVerifier = cookieStore.get(PKCE_COOKIE)?.value;
+
+    if (!codeVerifier) {
+      console.error("TikTok callback: PKCE cookie not found");
+      return errorRedirect(request.url, action);
+    }
+
+    // Exchange code for tokens
+    const tokenResponse = await fetch(
+      "https://open.tiktokapis.com/v2/oauth/token/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          client_key: clientKey,
+          client_secret: clientSecret,
+          code,
+          grant_type: "authorization_code",
+          redirect_uri: redirectUri,
+          code_verifier: codeVerifier,
+        }),
+      },
+    );
+
+    const data: TikTokTokenResponse = await tokenResponse.json();
+
+    if (data.error) {
+      console.error("TikTok token exchange failed:", data.error_description);
+      return errorRedirect(request.url, action);
+    }
+
+    const expiresAt = new Date(
+      Date.now() + data.expires_in * 1000,
+    ).toISOString();
+
+    // --- Settings: save tokens to existing user's tiktok record ---
+    if (action === "settings") {
+      const existingConnection = await api.tiktok.meGetTiktoks();
+      if (existingConnection.data?.data) {
+        return successRedirect(request.url, "/settings?tiktok=connected");
+      }
+
+      await api.tiktok.mePostTiktoks({
+        data: {
+          openId: data.open_id,
+          accessToken: data.access_token,
+          refreshToken: data.refresh_token,
+          expiresAt,
+        },
+      });
+
+      return successRedirect(request.url, "/settings?tiktok=connected");
+    }
+
+    // --- Login / Signup: get user info, find or create user ---
+
+    const userInfoResponse = await fetch(
+      "https://open.tiktokapis.com/v2/user/info/?fields=open_id,display_name",
+      { headers: { Authorization: `Bearer ${data.access_token}` } },
+    );
+    const userInfo: TikTokUserResponse = await userInfoResponse.json();
+    const tiktokUsername = userInfo.data?.user?.display_name || undefined;
+
+    // Call Strapi to find or create user
+    const strapiUrl = process.env.STRAPI_URL || "http://localhost:1337";
+    const loginResponse = await fetch(`${strapiUrl}/api/tiktok-auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        openId: data.open_id,
+        accessToken: data.access_token,
+        refreshToken: data.refresh_token,
+        expiresAt,
+        username: tiktokUsername,
+      }),
+    });
+
+    if (!loginResponse.ok) {
+      const err = await loginResponse.json();
+      console.error("TikTok auth login failed:", err);
+      return errorRedirect(request.url, action);
+    }
+
+    const loginData = await loginResponse.json();
+
+    // Set JWT cookie and redirect to dashboard
+    const response = NextResponse.redirect(
+      new URL("/dashboard", request.url),
+    );
+    response.cookies.set(TOKEN_KEY, loginData.jwt, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+    response.cookies.delete(PKCE_COOKIE);
+    return response;
+  } catch (error) {
+    console.error("TikTok callback error:", error);
+    return errorRedirect(request.url, action);
+  }
+}

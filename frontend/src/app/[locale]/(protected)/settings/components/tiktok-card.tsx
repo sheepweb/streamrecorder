@@ -1,5 +1,6 @@
 "use client";
 
+import { getTikTokAuthUrl } from "@/app/actions/tiktok";
 import {
   Avatar,
   Button,
@@ -17,11 +18,7 @@ import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { startTransition, useEffect, useState } from "react";
 import { getCreatorInfo } from "../../my-clips/actions/share-tiktok";
-import {
-  disconnectTikTok,
-  getTikTokAuthUrl,
-  getTikTokConnection,
-} from "../actions/tiktok";
+import { disconnectTikTok, getTikTokConnection } from "../actions/tiktok";
 
 export function TikTokCard() {
   const t = useTranslations("protected.settings");
@@ -89,7 +86,7 @@ export function TikTokCard() {
   }, [searchParams, router, t]);
 
   const handleConnectTikTok = async () => {
-    const authUrl = await getTikTokAuthUrl();
+    const authUrl = await getTikTokAuthUrl("settings");
     window.location.href = authUrl;
   };
 

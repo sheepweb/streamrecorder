@@ -18,9 +18,17 @@
     "placeholder": "Crie uma senha",
     "hint": "A senha deve ter pelo menos 6 caracteres"
   },
+  "choices": {
+    "emailPassword": "Usar E-mail / Senha",
+    "tiktok": "Continuar com TikTok"
+  },
   "terms": {
     "agree": "Concordo com os",
-    "link": "Termos e Condições"
+    "link": "Termos e Condições",
+    "text": "Ao continuar, você concorda com os",
+    "tosLink": "Termos de Serviço",
+    "and": "e confirma que leu a",
+    "privacyLink": "Política de Privacidade"
   },
   "submit": {
     "default": "Criar conta",

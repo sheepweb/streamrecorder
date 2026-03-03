@@ -7,6 +7,81 @@ import { factories } from "@strapi/strapi";
 export default factories.createCoreController(
   "api::tiktok.tiktok",
   ({ strapi }) => ({
+    async login(ctx) {
+      const { openId, accessToken, refreshToken, expiresAt, username } =
+        ctx.request.body || {};
+
+      if (!openId || !accessToken || !refreshToken || !expiresAt) {
+        return ctx.badRequest("Missing required fields");
+      }
+
+      const existingTiktok = await strapi
+        .documents("api::tiktok.tiktok")
+        .findFirst({
+          filters: { openId },
+          populate: {
+            user: {
+              fields: ["id", "documentId", "username", "email", "blocked"],
+            },
+          },
+        });
+
+      let user: any;
+      let isNewUser = false;
+
+      if (existingTiktok?.user) {
+        if (existingTiktok.user.blocked) {
+          return ctx.badRequest("Your account has been blocked");
+        }
+
+        await strapi.documents("api::tiktok.tiktok").update({
+          documentId: existingTiktok.documentId,
+          data: { accessToken, refreshToken, expiresAt },
+        });
+
+        user = existingTiktok.user;
+      } else {
+        isNewUser = true;
+
+        const defaultRole = await strapi
+          .documents("plugin::users-permissions.role")
+          .findFirst({ filters: { type: "authenticated" } });
+
+        user = await strapi
+          .documents("plugin::users-permissions.user")
+          .create({
+            data: {
+              username: username || `tiktok_${openId.slice(0, 8)}`,
+              email: `tiktok_${openId}@noreply.tiktok`,
+              provider: "tiktok",
+              confirmed: true,
+              role: defaultRole?.documentId,
+            } as any,
+          });
+
+        await strapi.documents("api::tiktok.tiktok").create({
+          data: {
+            openId,
+            accessToken,
+            refreshToken,
+            expiresAt,
+            user: user.documentId,
+          },
+        });
+      }
+
+      const jwt = strapi
+        .plugin("users-permissions")
+        .service("jwt")
+        .issue({ id: user.id });
+
+      return {
+        jwt,
+        user: { id: user.id, username: user.username },
+        isNewUser,
+      };
+    },
+
     async meFind(ctx) {
       const user = ctx.state.user;
       if (!user) {

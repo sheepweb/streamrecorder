@@ -1,6 +1,6 @@
 import { generateAlternates } from "@/app/lib/seo";
 import { getLocale, getTranslations } from "next-intl/server";
-import { LoginForm } from "./components/login-form";
+import { LoginChoices } from "./components/login-choices";
 
 export async function generateMetadata() {
   const t = await getTranslations("login");
@@ -13,5 +13,5 @@ export async function generateMetadata() {
 }
 
 export default function LoginPage() {
-  return <LoginForm />;
+  return <LoginChoices />;
 }

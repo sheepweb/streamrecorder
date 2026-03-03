@@ -19,8 +19,18 @@
     "default": "Sign in",
     "loading": "Signing in..."
   },
+  "choices": {
+    "emailPassword": "Use Email / Password",
+    "tiktok": "Continue with TikTok"
+  },
+  "terms": {
+    "text": "By continuing, you agree to Live Stream Recorder's",
+    "tosLink": "Terms of Service",
+    "and": "and confirm that you have read Live Stream Recorder's",
+    "privacyLink": "Privacy Policy"
+  },
   "register": {
-    "text": "Do not have an account?",
-    "link": "Create one"
+    "text": "Don't have an account?",
+    "link": "Sign up"
   }
 }
