@@ -34,20 +34,19 @@ function parseAction(state: string | null): string {
   return "settings";
 }
 
-function errorRedirect(requestUrl: string, action: string): NextResponse {
-  const target =
-    action === "settings"
-      ? "/settings?tiktok=error"
-      : "/login?tiktok=error";
-  const response = NextResponse.redirect(new URL(target, requestUrl));
+function redirect(path: string): NextResponse {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+  const response = NextResponse.redirect(`${baseUrl}${path}`);
   response.cookies.delete(PKCE_COOKIE);
   return response;
 }
 
-function successRedirect(requestUrl: string, path: string): NextResponse {
-  const response = NextResponse.redirect(new URL(path, requestUrl));
-  response.cookies.delete(PKCE_COOKIE);
-  return response;
+function errorRedirect(action: string): NextResponse {
+  const target =
+    action === "settings"
+      ? "/settings?tiktok=error"
+      : "/login?tiktok=error";
+  return redirect(target);
 }
 
 export async function GET(request: NextRequest) {
@@ -59,7 +58,7 @@ export async function GET(request: NextRequest) {
   const action = parseAction(state);
 
   if (error || !code) {
-    return errorRedirect(request.url, action);
+    return errorRedirect(action);
   }
 
   try {
@@ -73,7 +72,7 @@ export async function GET(request: NextRequest) {
 
     if (!codeVerifier) {
       console.error("TikTok callback: PKCE cookie not found");
-      return errorRedirect(request.url, action);
+      return errorRedirect(action);
     }
 
     // Exchange code for tokens
@@ -97,7 +96,7 @@ export async function GET(request: NextRequest) {
 
     if (data.error) {
       console.error("TikTok token exchange failed:", data.error_description);
-      return errorRedirect(request.url, action);
+      return errorRedirect(action);
     }
 
     const expiresAt = new Date(
@@ -108,7 +107,7 @@ export async function GET(request: NextRequest) {
     if (action === "settings") {
       const existingConnection = await api.tiktok.meGetTiktoks();
       if (existingConnection.data?.data) {
-        return successRedirect(request.url, "/settings?tiktok=connected");
+        return redirect("/settings?tiktok=connected");
       }
 
       await api.tiktok.mePostTiktoks({
@@ -120,7 +119,7 @@ export async function GET(request: NextRequest) {
         },
       });
 
-      return successRedirect(request.url, "/settings?tiktok=connected");
+      return redirect("/settings?tiktok=connected");
     }
 
     // --- Login / Signup: get user info, find or create user ---
@@ -149,15 +148,14 @@ export async function GET(request: NextRequest) {
     if (!loginResponse.ok) {
       const err = await loginResponse.json();
       console.error("TikTok auth login failed:", err);
-      return errorRedirect(request.url, action);
+      return errorRedirect(action);
     }
 
     const loginData = await loginResponse.json();
 
     // Set JWT cookie and redirect to dashboard
-    const response = NextResponse.redirect(
-      new URL("/dashboard", request.url),
-    );
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
+    const response = NextResponse.redirect(`${baseUrl}/dashboard`);
     response.cookies.set(TOKEN_KEY, loginData.jwt, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
@@ -168,6 +166,6 @@ export async function GET(request: NextRequest) {
     return response;
   } catch (error) {
     console.error("TikTok callback error:", error);
-    return errorRedirect(request.url, action);
+    return errorRedirect(action);
   }
 }
