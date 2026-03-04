@@ -141,7 +141,6 @@ export function VideoPlayer({
           ref={videoRef}
           src={`/video/${recording.documentId}/playlist.m3u8`}
           slot="media"
-          crossOrigin="anonymous"
           playsInline
           autoPlay={initialAutoPlay || undefined}
           preload={initialAutoPlay ? undefined : "none"}
