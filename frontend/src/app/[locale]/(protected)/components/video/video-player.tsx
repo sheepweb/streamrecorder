@@ -11,6 +11,7 @@ import {
   MediaController,
   MediaLoadingIndicator,
   MediaMuteButton,
+  MediaPlayButton,
   MediaPosterImage,
   MediaSeekForwardButton,
   MediaTimeDisplay,
@@ -96,6 +97,8 @@ export function VideoPlayer({ recording }: { recording: Recording }) {
           slot="media"
           crossOrigin="anonymous"
           playsInline
+          autoPlay
+          muted
         >
           <track
             default
@@ -119,6 +122,7 @@ export function VideoPlayer({ recording }: { recording: Recording }) {
         />
 
         <MediaControlBar>
+          <MediaPlayButton />
           <MediaTimeRange />
           <MediaTimeDisplay showduration />
           <MediaSeekForwardButton seekoffset="10" />
