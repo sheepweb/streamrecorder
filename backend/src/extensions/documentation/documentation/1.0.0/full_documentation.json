@@ -20,7 +20,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-03-03T21:56:48.742Z"
+    "x-generation-date": "2026-03-04T23:34:05.353Z"
   },
   "servers": [
     {
@@ -14792,6 +14792,7 @@
                       "type": "string",
                       "enum": [
                         "recording",
+                        "uploading",
                         "done",
                         "failed"
                       ]
@@ -17115,6 +17116,7 @@
                           "type": "string",
                           "enum": [
                             "recording",
+                            "uploading",
                             "done",
                             "failed"
                           ]
@@ -20579,6 +20581,7 @@
                       "type": "string",
                       "enum": [
                         "recording",
+                        "uploading",
                         "done",
                         "failed"
                       ]
@@ -22726,6 +22729,7 @@
                           "type": "string",
                           "enum": [
                             "recording",
+                            "uploading",
                             "done",
                             "failed"
                           ]
@@ -27539,6 +27543,7 @@
                       "type": "string",
                       "enum": [
                         "recording",
+                        "uploading",
                         "done",
                         "failed"
                       ]
@@ -32068,6 +32073,7 @@
                 "type": "string",
                 "enum": [
                   "recording",
+                  "uploading",
                   "done",
                   "failed"
                 ]
@@ -32190,6 +32196,7 @@
             "type": "string",
             "enum": [
               "recording",
+              "uploading",
               "done",
               "failed"
             ]
@@ -33757,6 +33764,7 @@
                       "type": "string",
                       "enum": [
                         "recording",
+                        "uploading",
                         "done",
                         "failed"
                       ]
@@ -35677,6 +35685,7 @@
                       "type": "string",
                       "enum": [
                         "recording",
+                        "uploading",
                         "done",
                         "failed"
                       ]

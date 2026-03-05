@@ -6840,6 +6840,7 @@ export enum AiRequestPaymentProviderEnum {
 
 export enum AiRequestStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -6909,6 +6910,7 @@ export enum AiTaskPaymentProviderEnum {
 
 export enum AiTaskStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -6971,6 +6973,7 @@ export enum ClipPaymentProviderEnum {
 
 export enum ClipStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -7018,6 +7021,7 @@ export enum ClipSharePaymentProviderEnum {
 
 export enum ClipShareStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -7128,6 +7132,7 @@ export enum MemePaymentProviderEnum {
 
 export enum MemeStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -7213,12 +7218,14 @@ export enum SocialAccountPaymentProviderEnum {
 
 export enum SourceRequestStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
 
 export enum SourceStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -7260,6 +7267,7 @@ export enum SourcePaymentProviderEnum {
 
 export enum SourceStateEnum1 {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
@@ -7301,6 +7309,7 @@ export enum VisitorViewPaymentProviderEnum {
 
 export enum VisitorViewStateEnum {
   Recording = "recording",
+  Uploading = "uploading",
   Done = "done",
   Failed = "failed",
 }
