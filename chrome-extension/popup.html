@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=320">
+  <link rel="stylesheet" href="popup.css">
+  <title>LiveStreamRecorder</title>
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <div class="header">
+      <svg class="logo" width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="#6496ff" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4" fill="#E53935"/>
+        <circle cx="12" cy="12" r="2" fill="#fff"/>
+      </svg>
+      <span class="header-title">LiveStreamRecorder</span>
+      <span id="role-badge" class="role-badge hidden"></span>
+    </div>
+
+    <!-- Loading state -->
+    <div id="state-loading" class="state">
+      <div class="spinner"></div>
+      <p class="muted" data-i18n="checking"></p>
+    </div>
+
+    <!-- Not on a supported site -->
+    <div id="state-no-site" class="state hidden">
+      <div class="icon-circle icon-gray">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z" fill="#5c5f66"/>
+        </svg>
+      </div>
+      <p class="message" data-i18n="visitPlatform"></p>
+      <div class="platforms-list">
+        <span class="platform-chip">TikTok</span>
+        <span class="platform-chip">Twitch</span>
+        <span class="platform-chip">Kick</span>
+        <span class="platform-chip">YouTube</span>
+        <span class="platform-chip">AfreecaTV</span>
+        <span class="platform-chip">PandaLive</span>
+        <span class="platform-chip">Bigo</span>
+      </div>
+    </div>
+
+    <!-- On a supported site but not on a profile page -->
+    <div id="state-on-site" class="state hidden">
+      <div class="icon-circle icon-gray">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="#5c5f66"/>
+        </svg>
+      </div>
+      <p class="message" data-i18n="goToProfile"></p>
+    </div>
+
+    <!-- Not authenticated -->
+    <div id="state-not-authed" class="state hidden">
+      <div class="icon-circle icon-red">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1s3.1 1.39 3.1 3.1v2z" fill="#E53935"/>
+        </svg>
+      </div>
+      <p class="message" data-i18n="loginMessage"></p>
+      <div id="detected-profile-unauthed" class="detected-profile hidden">
+        <span class="detected-label" data-i18n="detected"></span>
+        <span id="unauthed-platform-icon" class="platform-icon"></span>
+        <span id="unauthed-username" class="username"></span>
+      </div>
+      <button id="btn-login" class="btn btn-primary" data-i18n="loginButton"></button>
+    </div>
+
+    <!-- Can add (on profile, not tracked) -->
+    <div id="state-can-add" class="state hidden">
+      <div class="profile-card">
+        <div id="add-platform-icon" class="platform-icon-large"></div>
+        <div class="profile-info">
+          <span id="add-platform-name" class="platform-name"></span>
+          <span id="add-username" class="username-large"></span>
+        </div>
+      </div>
+      <button id="btn-add" class="btn btn-primary btn-add">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" fill="currentColor"/>
+        </svg>
+        <span data-i18n="addButton"></span>
+      </button>
+      <p id="add-error" class="error hidden"></p>
+    </div>
+
+    <!-- Already tracked -->
+    <div id="state-tracked" class="state hidden">
+      <div class="profile-card">
+        <div id="tracked-platform-icon" class="platform-icon-large"></div>
+        <div class="profile-info">
+          <span id="tracked-platform-name" class="platform-name"></span>
+          <span id="tracked-username" class="username-large"></span>
+        </div>
+      </div>
+      <div class="tracked-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="#43A047"/>
+        </svg>
+        <span data-i18n="alreadyTracking"></span>
+      </div>
+      <button id="btn-refresh" class="btn btn-primary btn-refresh hidden">
+        <svg id="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M17.65 6.35A7.96 7.96 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" fill="currentColor"/>
+        </svg>
+        <span id="refresh-label" data-i18n="checkNow"></span>
+      </button>
+      <button id="btn-remove" class="btn btn-secondary btn-remove" data-i18n="stopTracking"></button>
+      <p id="remove-error" class="error hidden"></p>
+    </div>
+
+    <!-- Success state (after adding) -->
+    <div id="state-success" class="state hidden">
+      <div class="icon-circle icon-green">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="#43A047"/>
+        </svg>
+      </div>
+      <p class="message success-message" data-i18n="successMessage"></p>
+      <p id="success-detail" class="muted"></p>
+    </div>
+
+    <!-- Max followers limit reached -->
+    <div id="state-max-limit" class="state hidden">
+      <div class="icon-circle icon-red">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-2h2v2h-2zm0-4V7h2v6h-2z" fill="#E53935"/>
+        </svg>
+      </div>
+      <p class="message" data-i18n="maxLimitMessage"></p>
+      <button id="btn-upgrade" class="btn btn-primary" data-i18n="upgradeButton"></button>
+    </div>
+
+    <!-- Removed state -->
+    <div id="state-removed" class="state hidden">
+      <div class="icon-circle icon-gray">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M19 13H5v-2h14v2z" fill="#5c5f66"/>
+        </svg>
+      </div>
+      <p class="message" data-i18n="removedMessage"></p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
