@@ -19,15 +19,19 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirectLoginUri } from "../login/components/login-form";
 import { navConfig } from "./nav";
 
-interface HeaderProps {
-  isLoggedIn?: boolean;
-}
+export function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-export function Header({ isLoggedIn = false }: HeaderProps) {
+  useEffect(() => {
+    fetch("/api/auth/check")
+      .then((res) => res.json())
+      .then((data) => setIsLoggedIn(data.isLoggedIn))
+      .catch(() => setIsLoggedIn(false));
+  }, []);
   const t = useTranslations("footer");
   const locale = useLocale();
   const { switchLocale } = useChangeLanguage();
