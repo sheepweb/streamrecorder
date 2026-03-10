@@ -35,13 +35,14 @@ const defaultOptions = {
 
 export async function fetchLiveRecordings(
   scope: string = ScopeEnum.Following,
-  page: number = 1
+  page: number = 1,
 ) {
   const response = await api.recording.browseRecordings(
     deepMerge(defaultOptions, {
       "pagination[page]": page,
+      "pagination[withCount]": true,
       scope,
-    })
+    }),
   );
 
   return {
