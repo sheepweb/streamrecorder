@@ -4,7 +4,6 @@ import { generateAvatarUrl } from "@/app/lib/avatar-url";
 import { generateProfileUrl } from "@/app/lib/profile-url";
 import { generateAlternates } from "@/app/lib/seo";
 import { streamingPlatforms } from "@/app/lib/streaming-platforms";
-import publicApi from "@/lib/public-api";
 import {
   Button,
   Center,
@@ -16,6 +15,7 @@ import {
 } from "@mantine/core";
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
+import { getCreators } from "../../cache";
 import { CreatorsSimpleGrid } from "../../components/creators-simple-grid";
 
 interface PageProps {
@@ -82,15 +82,10 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const platformKey = platform.name ? type : "all";
 
-  const {
-    data: { data: followers, meta },
-  } = await publicApi.follower.getFollowers({
-    ...(!platform.name ? {} : { filters: { type } }),
-    "pagination[pageSize]": 20,
-    "pagination[page]": parseInt(page || "1", 10),
-    sort: "createdAt:desc",
-    populate: { avatar: true },
-  });
+  const { followers, meta } = await getCreators(
+    platform.name ? type : "all",
+    parseInt(page || "1", 10),
+  );
 
   const totalPages = meta?.pagination?.pageCount || 1;
 

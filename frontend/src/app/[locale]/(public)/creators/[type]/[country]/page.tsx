@@ -8,7 +8,6 @@ import {
 import { generateProfileUrl } from "@/app/lib/profile-url";
 import { generateAlternates } from "@/app/lib/seo";
 import { streamingPlatforms } from "@/app/lib/streaming-platforms";
-import publicApi from "@/lib/public-api";
 import {
   Button,
   Center,
@@ -21,6 +20,7 @@ import {
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { getCreatorsByCountry } from "../../cache";
 import { CreatorsSimpleGrid } from "../../components/creators-simple-grid";
 
 interface PageProps {
@@ -108,18 +108,11 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const countryName = getCountryName(countryCode, locale);
 
-  const {
-    data: { data: followers, meta },
-  } = await publicApi.follower.getFollowers({
-    filters: {
-      ...(platform.name ? { type } : {}),
-      countryCode: countryCode,
-    },
-    "pagination[pageSize]": 20,
-    "pagination[page]": parseInt(page || "1", 10),
-    sort: "createdAt:desc",
-    populate: { avatar: true },
-  });
+  const { followers, meta } = await getCreatorsByCountry(
+    platform.name ? type : "all",
+    countryCode,
+    parseInt(page || "1", 10),
+  );
 
   const totalPages = meta?.pagination?.pageCount || 1;
 

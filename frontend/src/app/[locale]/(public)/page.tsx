@@ -1,7 +1,6 @@
 import { generateProfileUrl } from "@/app/lib/profile-url";
 import { generateAlternates } from "@/app/lib/seo";
 import { getAlternateOgLocales, getOgLocale } from "@/i18n/routing";
-import publicApi from "@/lib/public-api";
 import {
   Button,
   Container,
@@ -16,6 +15,11 @@ import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
+import {
+  getFeaturedFollowers,
+  getLatestRecordings,
+  getRandomClips,
+} from "./cache";
 import { ClipSlider } from "./components/clip-slider";
 import { PlatformBadges } from "./components/platform-badge";
 import { CreatorsSlider } from "./creators/components/creators-slider";
@@ -72,53 +76,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function LandingPage() {
   const t = await getTranslations("home");
 
-  const {
-    data: { data: followers },
-  } = await publicApi.follower.getFollowers({
-    filters: {
-      description: { $notNull: true },
-    },
-    "pagination[limit]": 30,
-    "pagination[withCount]": false,
-    sort: "updatedAt:desc",
-    populate: { avatar: true },
-  });
-
-  const {
-    data: { data: recordings },
-  } = await publicApi.recording.getRecordings({
-    filters: {
-      sources: {
-        state: {
-          $eq: ["done"],
-        },
-      },
-    },
-    "pagination[limit]": 8,
-    "pagination[withCount]": false,
-    sort: "createdAt:desc",
-    populate: {
-      sources: {
-        fields: ["*"],
-        filters: {
-          state: {
-            $eq: "done",
-          },
-        },
-      },
-      follower: {
-        populate: {
-          avatar: true,
-        },
-      },
-    },
-  });
-
-  const {
-    data: { data: clips },
-  } = await publicApi.clip.getRandomClips({
-    limit: 8,
-  });
+  const followers = await getFeaturedFollowers();
+  const recordings = await getLatestRecordings();
+  const clips = await getRandomClips();
 
   const jsonLd = {
     "@context": "https://schema.org",

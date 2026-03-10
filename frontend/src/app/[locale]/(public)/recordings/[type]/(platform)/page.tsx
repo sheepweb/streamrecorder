@@ -1,12 +1,12 @@
 import PaginationControls from "@/app/components/pagination";
 import { generateProfileUrl } from "@/app/lib/profile-url";
-import publicApi from "@/lib/public-api";
 import { Center } from "@mantine/core";
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 
 import { generateAlternates } from "@/app/lib/seo";
 import { streamingPlatforms } from "@/app/lib/streaming-platforms";
+import { getRecordings } from "../../cache";
 import { RecordingsSimpleGrid } from "../../components/recordings-simple-grid";
 
 interface PageProps {
@@ -75,41 +75,10 @@ export default async function RecordingTypePage({
 
   const platformName = platform.name || "All";
 
-  const {
-    data: { data: recordings, meta },
-  } = await publicApi.recording.getRecordings({
-    filters: {
-      ...(type === "all"
-        ? {}
-        : {
-            follower: {
-              type,
-            },
-          }),
-      sources: {
-        state: {
-          $eq: ["done"],
-        },
-      },
-    },
-    "pagination[pageSize]": 20,
-    "pagination[page]": parseInt(page || "1", 10),
-
-    sort: "createdAt:desc",
-    populate: {
-      sources: {
-        fields: ["*"],
-        filters: {
-          state: {
-            $eq: "done",
-          },
-        },
-      },
-      follower: {
-        fields: ["*"],
-      },
-    },
-  });
+  const { recordings, meta } = await getRecordings(
+    type,
+    parseInt(page || "1", 10),
+  );
 
   const totalPages = meta?.pagination?.pageCount || 1;
 

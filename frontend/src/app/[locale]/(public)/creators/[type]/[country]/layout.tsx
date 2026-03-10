@@ -1,4 +1,3 @@
-import { getFollowerFilters } from "@/app/actions/followers";
 import {
   countryCodeToSlug,
   countrySlugToCode,
@@ -20,6 +19,7 @@ import { IconArrowLeft, IconMapPin } from "@tabler/icons-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
+import { getFollowerFilters } from "../../cache";
 
 interface LayoutProps {
   params: Promise<{

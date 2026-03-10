@@ -6,7 +6,6 @@ import {
   getCountryName,
 } from "@/app/lib/country-utils";
 import { streamingPlatforms } from "@/app/lib/streaming-platforms";
-import publicApi from "@/lib/public-api";
 import {
   Button,
   Center,
@@ -19,6 +18,7 @@ import {
 import { Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { getRecordingsByCountry } from "../../cache";
 import { RecordingsSimpleGrid } from "../../components/recordings-simple-grid";
 
 interface PageProps {
@@ -106,45 +106,11 @@ export default async function Page({ params, searchParams }: PageProps) {
 
   const countryName = getCountryName(countryCode, locale);
 
-  const {
-    data: { data: recordings, meta },
-  } = await publicApi.recording.getRecordings({
-    filters: {
-      ...(platform.name
-        ? {
-            follower: {
-              type,
-              countryCode: countryCode,
-            },
-          }
-        : {
-            follower: {
-              countryCode: countryCode,
-            },
-          }),
-      sources: {
-        state: {
-          $eq: ["done"],
-        },
-      },
-    },
-    "pagination[pageSize]": 20,
-    "pagination[page]": parseInt(page || "1", 10),
-    sort: "createdAt:desc",
-    populate: {
-      sources: {
-        fields: ["*"],
-        filters: {
-          state: {
-            $eq: "done",
-          },
-        },
-      },
-      follower: {
-        fields: ["*"],
-      },
-    },
-  });
+  const { recordings, meta } = await getRecordingsByCountry(
+    platform.name ? type : "all",
+    countryCode,
+    parseInt(page || "1", 10),
+  );
 
   const totalPages = meta?.pagination?.pageCount || 1;
 
