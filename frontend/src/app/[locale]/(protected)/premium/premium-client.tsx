@@ -65,6 +65,10 @@ export default function PremiumClient() {
     "stripe",
   );
 
+  const handlePaymentChange = (value: string | null) => {
+    setSelectedPayment(value);
+  };
+
   const user = useUser() as UserWithSubscription | null;
   const role = useRole();
   const router = useRouter();
@@ -78,22 +82,34 @@ export default function PremiumClient() {
     {
       id: "1month",
       label: t("billing1MonthLabel"),
-      price: 10,
-      perMonth: 10,
+      price: 15,
+      perMonth: 15,
       savings: null,
       badge: null,
       billingCycle: "monthly" as const,
+      stripeOnly: false,
+    },
+    {
+      id: "3months",
+      label: t("billing3MonthsLabel"),
+      price: 30,
+      perMonth: 10,
+      savings: t("billing3MonthsSavings"),
+      badge: null,
+      billingCycle: "quarterly" as const,
+      stripeOnly: true,
     },
     {
       id: "12months",
       label: t("billing12MonthsLabel"),
-      price: 84,
-      perMonth: 7,
+      price: 96,
+      perMonth: 8,
       savings: t("billing12MonthsSavings"),
       badge: t("billing12MonthsBadge"),
       billingCycle: "annual" as const,
+      stripeOnly: false,
     },
-    {
+    /*{
       id: "lifetime",
       label: t("billingLifetimeLabel"),
       price: 199,
@@ -101,8 +117,14 @@ export default function PremiumClient() {
       savings: t("billingLifetimeSavings"),
       badge: t("billingLifetimeBadge"),
       billingCycle: "lifetime" as const,
-    },
+      stripeOnly: false,
+    },*/
   ];
+
+  const filteredBillingOptions =
+    selectedPayment === "stripe"
+      ? BILLING_OPTIONS
+      : BILLING_OPTIONS.filter((o) => !o.stripeOnly);
 
   const PREMIUM_FEATURES = [
     { icon: IconUsers, label: t("premiumRecord100"), color: "#a78bfa" },
@@ -124,13 +146,17 @@ export default function PremiumClient() {
     { icon: IconHeadset, label: t("premiumPrioritySupport"), color: "#a78bfa" },
   ];
 
-  const selectedPlan = BILLING_OPTIONS.find((o) => o.id === selectedBilling);
+  const selectedPlan = filteredBillingOptions.find(
+    (o) => o.id === selectedBilling,
+  );
 
   // Translate billing period
   const getTranslatedBillingPeriod = (period?: string) => {
     switch (period) {
       case "monthly":
         return t("billingPeriodMonthly");
+      case "quarterly":
+        return t("billingPeriodQuarterly");
       case "annual":
         return t("billingPeriodAnnual");
       case "lifetime":
@@ -161,6 +187,10 @@ export default function PremiumClient() {
       });
     }
     setSelectedBilling(planId);
+    // 3 months is only available via Stripe, so auto-switch payment method
+    if (plan?.stripeOnly && selectedPayment !== "stripe") {
+      setSelectedPayment("stripe");
+    }
   };
 
   const handleCancelSubscription = async () => {
@@ -288,7 +318,7 @@ export default function PremiumClient() {
                   onChange={handlePlanSelect}
                 >
                   <Stack gap="sm">
-                    {BILLING_OPTIONS.map((option) => (
+                    {filteredBillingOptions.map((option) => (
                       <Paper
                         key={option.id}
                         p="md"
@@ -414,8 +444,6 @@ export default function PremiumClient() {
               radius="md"
               withBorder
               style={{
-                position: "sticky",
-                top: 20,
                 background:
                   "linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%)",
                 borderColor: "rgba(34, 197, 94, 0.3)",
@@ -431,7 +459,7 @@ export default function PremiumClient() {
 
                 <Radio.Group
                   value={selectedPayment}
-                  onChange={setSelectedPayment}
+                  onChange={handlePaymentChange}
                 >
                   <Stack gap="sm">
                     {/* Stripe Option */}
@@ -450,7 +478,7 @@ export default function PremiumClient() {
                             ? "rgba(34, 197, 94, 0.1)"
                             : "rgba(0,0,0,0.2)",
                       }}
-                      onClick={() => setSelectedPayment("stripe")}
+                      onClick={() => handlePaymentChange("stripe")}
                     >
                       <Stack gap="sm">
                         <Group justify="space-between" wrap="nowrap">
@@ -520,8 +548,8 @@ export default function PremiumClient() {
                       </Stack>
                     </Paper>
 
-                    {/* Freemius Option */}
-                    {
+                    {/* Freemius Option - hidden when 3 months (Stripe-only) is selected */}
+                    {selectedBilling !== "3months" && (
                       <Paper
                         p="md"
                         radius="md"
@@ -537,7 +565,7 @@ export default function PremiumClient() {
                               ? "rgba(34, 197, 94, 0.1)"
                               : "rgba(0,0,0,0.2)",
                         }}
-                        onClick={() => setSelectedPayment("freemius")}
+                        onClick={() => handlePaymentChange("freemius")}
                       >
                         <Stack gap="sm">
                           <Group justify="space-between" wrap="nowrap">
@@ -586,7 +614,7 @@ export default function PremiumClient() {
                           </Group>
                         </Stack>
                       </Paper>
-                    }
+                    )}
                   </Stack>
                 </Radio.Group>
 
