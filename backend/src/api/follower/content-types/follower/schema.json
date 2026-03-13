@@ -57,7 +57,8 @@
         "youtube",
         "afreecatv",
         "pandalive",
-        "bigo"
+        "bigo",
+        "tango"
       ]
     },
     "gender": {
@@ -67,11 +68,7 @@
           "localized": false
         }
       },
-      "enum": [
-        "male",
-        "female",
-        "unknown"
-      ]
+      "enum": ["male", "female", "unknown"]
     },
     "countryCode": {
       "type": "string",
@@ -97,12 +94,7 @@
         }
       },
       "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "lastCheckedAt": {
       "type": "datetime",
