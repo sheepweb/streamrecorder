@@ -23,6 +23,10 @@ export async function GET(
       abortSignal: abortController.signal,
     });
 
+    if (!response.Body) {
+      return new Response("Not found", { status: 404 });
+    }
+
     return new Response(response.Body as ReadableStream, {
       headers: {
         "Content-Type": response.ContentType || "application/octet-stream",
