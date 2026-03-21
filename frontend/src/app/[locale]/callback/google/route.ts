@@ -115,7 +115,7 @@ export async function GET(request: NextRequest) {
         refreshToken: data.refresh_token,
         expiresAt,
         email: userInfo.email,
-        displayName: userInfo.name,
+        displayName: userInfo.name.length < 3 ? userInfo.name.padEnd(3, "_") : userInfo.name,
       }),
     });
 
