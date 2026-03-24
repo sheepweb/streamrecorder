@@ -19,6 +19,7 @@ export const s3Nbg1 = new S3Client({
 });
 
 const S3_CUTOFF = new Date("2026-03-04T15:00:00Z");
+const S3_CUTOFF_2 = new Date("2026-03-24T12:00:00Z");
 
 export function getS3(createdAt?: Date | string | null): S3Client {
   if (!createdAt) return s3Fsn1;
@@ -30,5 +31,8 @@ export function getBucket(
   createdAt?: Date | string | null,
 ): string {
   if (!createdAt) return bucket;
-  return new Date(createdAt) >= S3_CUTOFF ? `${bucket}-nbg` : bucket;
+  const date = new Date(createdAt);
+  if (date >= S3_CUTOFF_2) return `${bucket}-nbg1`;
+  if (date >= S3_CUTOFF) return `${bucket}-nbg`;
+  return bucket;
 }

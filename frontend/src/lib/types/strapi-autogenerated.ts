@@ -18,7 +18,7 @@ export enum FollowerTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 /** Filter by follow status */
@@ -6783,7 +6783,7 @@ export enum ActivityTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum ActivityGenderEnum {
@@ -6826,7 +6826,7 @@ export enum AiRequestTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum AiRequestGenderEnum {
@@ -6897,7 +6897,7 @@ export enum AiTaskTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum AiTaskGenderEnum {
@@ -6961,7 +6961,7 @@ export enum ClipTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum ClipGenderEnum {
@@ -7010,7 +7010,7 @@ export enum ClipShareTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum ClipShareGenderEnum {
@@ -7065,7 +7065,7 @@ export enum FollowerRequestTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum FollowerRequestGenderEnum {
@@ -7123,7 +7123,7 @@ export enum MemeTypeEnum1 {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum MemeGenderEnum {
@@ -7210,7 +7210,7 @@ export enum SocialAccountTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum SocialAccountGenderEnum {
@@ -7260,7 +7260,7 @@ export enum SourceTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum SourceGenderEnum {
@@ -7303,7 +7303,7 @@ export enum VisitorViewTypeEnum {
   Afreecatv = "afreecatv",
   Pandalive = "pandalive",
   Bigo = "bigo",
-  Tango = "tango",
+
 }
 
 export enum VisitorViewGenderEnum {
