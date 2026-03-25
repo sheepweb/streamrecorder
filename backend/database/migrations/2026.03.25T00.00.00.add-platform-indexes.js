@@ -1,10 +1,14 @@
 async function up(knex) {
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_followers_lsr ON followers(lsr) WHERE lsr = true`,
-  );
-  await knex.raw(
-    `CREATE INDEX IF NOT EXISTS idx_followers_sar ON followers(sar) WHERE sar = true`,
-  );
+  const hasFollowers = await knex.schema.hasTable("followers");
+
+  if (hasFollowers) {
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_followers_lsr ON followers(lsr) WHERE lsr = true`,
+    );
+    await knex.raw(
+      `CREATE INDEX IF NOT EXISTS idx_followers_sar ON followers(sar) WHERE sar = true`,
+    );
+  }
 }
 
 async function down(knex) {
