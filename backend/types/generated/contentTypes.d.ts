@@ -907,7 +907,6 @@ export interface ApiFollowerFollower extends Struct.CollectionTypeSchema {
       'api::follower.follower'
     >;
     lsr: Schema.Attribute.Boolean &
-      Schema.Attribute.Private &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
@@ -947,7 +946,6 @@ export interface ApiFollowerFollower extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<false>;
     publishedAt: Schema.Attribute.DateTime;
     sar: Schema.Attribute.Boolean &
-      Schema.Attribute.Private &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
