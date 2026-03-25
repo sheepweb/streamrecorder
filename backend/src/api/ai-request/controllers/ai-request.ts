@@ -65,10 +65,11 @@ export default factories.createCoreController(
           return ctx.unauthorized();
         }
 
+        const isAdmin = user.role?.type === "admin";
         const { query } = ctx;
         const filters = {
           ...((query.filters as object) || {}),
-          user: { documentId: user.documentId },
+          ...(isAdmin ? {} : { user: { documentId: user.documentId } }),
         };
 
         const results = await strapi
@@ -106,12 +107,15 @@ export default factories.createCoreController(
           return ctx.unauthorized();
         }
 
+        const isAdmin = user.role?.type === "admin";
         const { id } = ctx.params;
-        const check = await checkOwnership(id, user.id);
 
-        if (check.error === "notFound") return ctx.notFound();
-        if (check.error === "forbidden")
-          return ctx.forbidden("You can only view your own");
+        if (!isAdmin) {
+          const check = await checkOwnership(id, user.id);
+          if (check.error === "notFound") return ctx.notFound();
+          if (check.error === "forbidden")
+            return ctx.forbidden("You can only view your own");
+        }
 
         return super.findOne(ctx);
       },
