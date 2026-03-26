@@ -13,11 +13,6 @@ import { IconPlayerPause, IconShieldX } from "@tabler/icons-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
 import { AdminMenu } from "./admin-menu";
-import {
-  LastCheckedButton,
-  LastCheckedText,
-  useLastChecked,
-} from "./last-checked";
 import { ProfileTabs } from "./profile-tabs";
 
 interface ProfileHeaderProps {
@@ -31,11 +26,6 @@ export function ProfileHeader({
 }: ProfileHeaderProps) {
   const t = useTranslations("protected.profile");
   const format = useFormatter();
-  const { lastCheckedAt, loading, fetch } = useLastChecked(
-    follower.username!,
-    follower.type!,
-  );
-
   return (
     <Stack mb="xl" gap="md">
       <Group>
@@ -91,7 +81,6 @@ export function ProfileHeader({
                 type={follower.type}
               />
             )}
-            <LastCheckedButton loading={loading} onClick={fetch} />
             <AdminMenu follower={follower} />
           </Group>
 
@@ -104,7 +93,16 @@ export function ProfileHeader({
                 ),
               })}
             </Text>
-            <LastCheckedText value={lastCheckedAt} />
+            {follower.lastCheckedAt && (
+              <Text size="sm" c="dimmed" suppressHydrationWarning>
+                {t("lastCheckedAgo", {
+                  time: format.relativeTime(
+                    new Date(follower.lastCheckedAt),
+                    new Date(),
+                  ),
+                })}
+              </Text>
+            )}
           </div>
         </Stack>
       </Group>
