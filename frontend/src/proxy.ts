@@ -31,7 +31,20 @@ function getProtectedRoutes(): string[] {
 
 const PROTECTED_ROUTES = getProtectedRoutes();
 
+const BLOCKED_ORIGINS = ["m3u8-player.net"];
+
 export function proxy(request: NextRequest) {
+  const origin = request.headers.get("origin") || "";
+  const referer = request.headers.get("referer") || "";
+
+  if (
+    BLOCKED_ORIGINS.some(
+      (domain) => origin.includes(domain) || referer.includes(domain),
+    )
+  ) {
+    return new NextResponse(null, { status: 403 });
+  }
+
   const path = request.nextUrl.pathname;
   const search = request.nextUrl.search;
 
