@@ -41,7 +41,7 @@ export const getFollower = cache(async function ({
   locale?: string;
 }) {
   const filters = {
-    username: decodeURIComponent(username).replace(/^@/, ""),
+    username: { $eqi: decodeURIComponent(username).replace(/^@/, "") },
     type,
   };
 
@@ -101,7 +101,7 @@ export const fetchProfileRecordings = cache(async function (
       filters: {
         hidden: { $ne: true },
         follower: {
-          username: { $eq: decodeURIComponent(username).replace(/^@/, "") },
+          username: { $eqi: decodeURIComponent(username).replace(/^@/, "") },
           type: { $eq: type },
         },
         sources: {
