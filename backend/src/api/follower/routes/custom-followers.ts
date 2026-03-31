@@ -31,11 +31,6 @@ export default {
       handler: "follower.unpauseMyFollowers",
     },
     {
-      method: "DELETE",
-      path: "/followers/cleanup",
-      handler: "follower.cleanup",
-    },
-    {
       method: "POST",
       path: "/followers/connect-user-with-follower/:userDocumentId",
       handler: "follower.connectUserWithFollower",

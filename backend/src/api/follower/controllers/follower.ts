@@ -462,16 +462,19 @@ export default factories.createCoreController(
         ? currentUser.followers.length
         : 0;
 
-      if (currentUser.role.type === "authenticated" && totalFollowers >= 3) {
-        return ctx.forbidden("MAX_3_FOLLOWERS");
-      }
+      const limits = {
+        authenticated: parseInt(
+          process.env.MAX_FOLLOWERS_AUTHENTICATED || "3",
+          10,
+        ),
+        champion: parseInt(process.env.MAX_FOLLOWERS_CHAMPION || "50", 10),
+        premium: parseInt(process.env.MAX_FOLLOWERS_PREMIUM || "100", 10),
+      };
 
-      if (currentUser.role.type === "champion" && totalFollowers >= 50) {
-        return ctx.forbidden("MAX_50_FOLLOWERS");
-      }
-
-      if (currentUser.role.type === "premium" && totalFollowers >= 100) {
-        return ctx.forbidden("MAX_100_FOLLOWERS");
+      const roleType = currentUser.role.type;
+      const maxFollowers = limits[roleType];
+      if (maxFollowers && totalFollowers >= maxFollowers) {
+        return ctx.forbidden(`MAX_${maxFollowers}_FOLLOWERS`);
       }
 
       // Get all existing documentIds + new one
@@ -619,8 +622,7 @@ export default factories.createCoreController(
           populate: { followers: { fields: ["id", "documentId", "pause"] } },
         });
 
-      const pausedFollowers =
-        fullUser?.followers?.filter((f) => f.pause) || [];
+      const pausedFollowers = fullUser?.followers?.filter((f) => f.pause) || [];
 
       if (pausedFollowers.length === 0) {
         return { updated: 0 };
@@ -636,164 +638,6 @@ export default factories.createCoreController(
         });
 
       return { updated: result.count };
-    },
-    async cleanup(ctx) {
-      // delete users who is 7 days old and still have no recordings
-      const days = Math.max(1, parseInt(ctx.query.days as string) || 14);
-      const limit = Math.min(
-        100,
-        Math.max(1, parseInt(ctx.query.limit as string) || 50),
-      );
-      const destroy = ctx.query.destroy === "true";
-
-      const knex = strapi.db.connection;
-
-      const cutoffDate = new Date();
-      cutoffDate.setDate(cutoffDate.getDate() - days);
-
-      // Step 1: get all follower integer IDs that have any recording link (no join, fast scan)
-      console.log(
-        "[cleanup] Step 1/2 - Fetching follower IDs with recordings...",
-      );
-      const linkedFollowerIds = await knex("recordings_follower_lnk")
-        .distinct("follower_id")
-        .pluck("follower_id");
-      console.log(
-        `[cleanup] ${linkedFollowerIds.length} follower IDs have recordings.`,
-      );
-
-      // Step 2: resolve their document_ids so we exclude all locales of those documents
-      console.log("[cleanup] Step 2/2 - Resolving document IDs...");
-      const docIdsWithRecordings =
-        linkedFollowerIds.length > 0
-          ? await knex("followers")
-              .whereIn("id", linkedFollowerIds)
-              .distinct("document_id")
-              .pluck("document_id")
-          : [];
-      console.log(
-        `[cleanup] ${docIdsWithRecordings.length} unique follower documents have recordings, excluding them.`,
-      );
-
-      const baseQuery = () => {
-        let q = knex("followers as f")
-          .where("f.locale", "en")
-          .where("f.created_at", "<", cutoffDate.toISOString());
-        if (docIdsWithRecordings.length > 0) {
-          q = q.whereNotIn("f.document_id", docIdsWithRecordings);
-        }
-        return q;
-      };
-
-      console.log("[cleanup] Counting stale followers...");
-      const [staleFollowers, countResult] = await Promise.all([
-        baseQuery()
-          .select(
-            "f.id",
-            "f.document_id",
-            "f.username",
-            "f.type",
-            "f.created_at",
-          )
-          .limit(limit),
-        baseQuery().countDistinct("f.id as total").first(),
-      ]);
-
-      const total = Number(countResult?.total || 0);
-
-      if (!destroy) {
-        const previewDocumentIds = staleFollowers.map(
-          (f: any) => f.document_id,
-        );
-        let previewAvatars = [];
-
-        if (previewDocumentIds.length > 0) {
-          const previewEnIds = staleFollowers.map((f: any) => f.id);
-
-          previewAvatars = await knex("files as f")
-            .distinct("f.id", "f.name", "f.url", "f.provider")
-            .innerJoin("files_related_mph as frm", "frm.file_id", "f.id")
-            .whereIn("frm.related_id", previewEnIds)
-            .where("frm.related_type", "api::follower.follower")
-            .where("frm.field", "avatar");
-        }
-
-        return {
-          message: "Preview - no deletions",
-          total,
-          count: staleFollowers.length,
-          limit,
-          avatarCount: previewAvatars.length,
-          cutoffDate: cutoffDate.toISOString(),
-          followers: staleFollowers,
-          avatars: previewAvatars,
-        };
-      }
-
-      const documentIds = staleFollowers.map((f: any) => f.document_id);
-      const enIds = staleFollowers.map((f: any) => f.id);
-      let deletedAvatars = 0;
-
-      console.log(
-        `[cleanup] Processing ${documentIds.length} stale followers...`,
-      );
-
-      if (documentIds.length > 0) {
-        console.log("[cleanup] Finding avatar files...");
-        const avatarFileIds = await knex("files as f")
-          .distinct("f.id")
-          .innerJoin("files_related_mph as frm", "frm.file_id", "f.id")
-          .whereIn("frm.related_id", enIds)
-          .where("frm.related_type", "api::follower.follower")
-          .where("frm.field", "avatar")
-          .then((rows: any[]) => rows.map((r) => r.id));
-
-        const avatarFiles =
-          avatarFileIds.length > 0
-            ? await knex("files").whereIn("id", avatarFileIds)
-            : [];
-
-        console.log(
-          `[cleanup] Deleting ${avatarFiles.length} avatar files from S3...`,
-        );
-        const results = await Promise.allSettled(
-          avatarFiles.map((file) =>
-            strapi.plugin("upload").service("upload").remove(file),
-          ),
-        );
-        deletedAvatars = results.filter((r) => r.status === "fulfilled").length;
-        results.forEach((r, i) => {
-          if (r.status === "rejected") {
-            console.error(
-              `[cleanup] Failed to delete avatar ${avatarFiles[i].id}:`,
-              r.reason,
-            );
-          }
-        });
-        console.log(
-          `[cleanup] Deleted ${deletedAvatars}/${avatarFiles.length} avatars.`,
-        );
-
-        console.log("[cleanup] Cleaning up file relations...");
-        await knex("files_related_mph")
-          .whereIn("related_id", enIds)
-          .where("related_type", "api::follower.follower")
-          .delete();
-
-        console.log("[cleanup] Deleting follower rows (all locales)...");
-        await knex("followers").whereIn("document_id", documentIds).delete();
-        console.log("[cleanup] Done.");
-      }
-
-      return {
-        message: "Deleted stale followers and their avatars",
-        total,
-        followersDeleted: documentIds.length,
-        remaining: total - documentIds.length,
-        avatarsDeleted: deletedAvatars,
-        cutoffDate: cutoffDate.toISOString(),
-        deleted: staleFollowers,
-      };
     },
   }),
 );
