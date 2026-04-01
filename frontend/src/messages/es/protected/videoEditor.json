@@ -4,6 +4,7 @@
     "description": "Recortar y exportar un clip de {username}"
   },
   "actions": {
+    "saveClip": "Guardar clip",
     "downloadClip": "Descargar clip",
     "export": "Exportar"
   },

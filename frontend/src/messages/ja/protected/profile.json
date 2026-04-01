@@ -12,5 +12,9 @@
   "emptyDefault": {
     "title": "まだ録画はありません",
     "description": "{username} の録画はまだありません。後ほど確認してください！"
+  },
+  "noClips": {
+    "title": "クリップはまだありません",
+    "description": "このストリーマーのクリップはまだ作成されていません。"
   }
 }

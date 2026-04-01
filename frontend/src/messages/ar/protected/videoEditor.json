@@ -4,6 +4,7 @@
     "description": "قص وتصدير مقطع من {username}"
   },
   "actions": {
+    "saveClip": "حفظ المقطع",
     "downloadClip": "تحميل المقطع",
     "export": "تصدير"
   },

@@ -2,6 +2,7 @@
   "beta": "Insights está actualmente en beta. Los datos pueden estar incompletos o cambiar mientras seguimos mejorando esta función.",
   "tabs": {
     "videos": "Videos",
+    "clips": "Clips",
     "insights": "Estadísticas"
   },
   "stats": {

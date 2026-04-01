@@ -4,6 +4,7 @@
     "description": "{username} yayınından klip kes ve dışa aktar"
   },
   "actions": {
+    "saveClip": "Klibi kaydet",
     "downloadClip": "Klibi indir",
     "export": "Dışa aktar"
   },

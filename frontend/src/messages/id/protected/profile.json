@@ -12,5 +12,9 @@
   "emptyDefault": {
     "title": "Belum ada rekaman",
     "description": "Belum ada rekaman dari {username}. Cek lagi nanti!"
+  },
+  "noClips": {
+    "title": "Belum ada klip",
+    "description": "Belum ada klip yang dibuat untuk streamer ini."
   }
 }

@@ -12,5 +12,9 @@
   "emptyDefault": {
     "title": "Henüz kayıt yok",
     "description": "{username}'dan henüz kayıt yok. Daha sonra tekrar kontrol edin!"
+  },
+  "noClips": {
+    "title": "Henüz klip yok",
+    "description": "Bu yayıncı için henüz klip oluşturulmamış."
   }
 }

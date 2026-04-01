@@ -18,11 +18,13 @@ import { ProfileTabs } from "./profile-tabs";
 interface ProfileHeaderProps {
   follower: Follower & { isFollowing: boolean };
   isRecording?: boolean;
+  clipsCount?: number;
 }
 
 export function ProfileHeader({
   follower,
   isRecording = false,
+  clipsCount,
 }: ProfileHeaderProps) {
   const t = useTranslations("protected.profile");
   const format = useFormatter();
@@ -122,7 +124,7 @@ export function ProfileHeader({
           </Alert>
         </Role>
       )}
-      <ProfileTabs type={follower.type!} username={follower.username!} />
+      <ProfileTabs type={follower.type!} username={follower.username!} clipsCount={clipsCount} />
     </Stack>
   );
 }

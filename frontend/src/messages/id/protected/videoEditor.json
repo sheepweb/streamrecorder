@@ -4,6 +4,7 @@
     "description": "Potong dan ekspor klip dari {username}"
   },
   "actions": {
+    "saveClip": "Simpan klip",
     "downloadClip": "Unduh klip",
     "export": "Ekspor"
   },

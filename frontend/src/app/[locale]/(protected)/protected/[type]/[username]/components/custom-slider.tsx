@@ -131,16 +131,19 @@ export function CustomSlider({
   }
 
   const handleMove = (x: number) => {
-    console.log("handleMove", { x, activeGrip: activeGrip.current, duration });
     if (!activeGrip.current) return;
     if (duration <= 0) return;
 
     if (activeGrip.current === "start") {
-      const newStart = Math.floor(clamp(x * duration, 0, endTimeRef.current - 1));
+      const newStart = Math.floor(
+        clamp(x * duration, 0, endTimeRef.current - 1),
+      );
       onRangeChange(newStart, endTimeRef.current);
       onSeek(newStart);
     } else if (activeGrip.current === "end") {
-      const newEnd = Math.floor(clamp(x * duration, startTimeRef.current + 1, duration));
+      const newEnd = Math.floor(
+        clamp(x * duration, startTimeRef.current + 1, duration),
+      );
       onRangeChange(startTimeRef.current, newEnd);
     } else if (activeGrip.current === "track") {
       const delta = x - dragStartX.current;
@@ -184,7 +187,8 @@ export function CustomSlider({
             display: "flex",
           }}
         >
-          {thumbnailCues.length > 0 && (() => {
+          {thumbnailCues.length > 0 &&
+            (() => {
               // Calculate exact number of thumbnails and their width to fill container perfectly
               const totalWidth = containerWidth + 40;
               const numThumbs = Math.round(totalWidth / thumbDisplayWidth);
@@ -194,7 +198,10 @@ export function CustomSlider({
               const sampledCues: ThumbnailCue[] = [];
               const step = thumbnailCues.length / numThumbs;
               for (let i = 0; i < numThumbs; i++) {
-                const index = Math.min(Math.floor(i * step), thumbnailCues.length - 1);
+                const index = Math.min(
+                  Math.floor(i * step),
+                  thumbnailCues.length - 1,
+                );
                 sampledCues.push(thumbnailCues[index]);
               }
 

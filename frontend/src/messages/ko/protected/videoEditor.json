@@ -4,6 +4,7 @@
     "description": "{username}에서 클립 자르기 및 내보내기"
   },
   "actions": {
+    "saveClip": "클립 저장",
     "downloadClip": "클립 다운로드",
     "export": "내보내기"
   },

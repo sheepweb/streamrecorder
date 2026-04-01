@@ -12,5 +12,9 @@
   "emptyDefault": {
     "title": "Sin grabaciones todavía",
     "description": "Aún no hay grabaciones de {username}. ¡Vuelve más tarde!"
+  },
+  "noClips": {
+    "title": "Sin clips aún",
+    "description": "Aún no se han creado clips para este streamer."
   }
 }

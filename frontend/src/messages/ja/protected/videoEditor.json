@@ -4,6 +4,7 @@
     "description": "{username}からクリップをトリミングしてエクスポート"
   },
   "actions": {
+    "saveClip": "クリップを保存",
     "downloadClip": "クリップをダウンロード",
     "export": "エクスポート"
   },
