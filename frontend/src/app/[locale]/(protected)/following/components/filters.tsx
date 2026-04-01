@@ -28,6 +28,7 @@ import {
   IconGenderMale,
   IconQuestionMark,
   IconSearch,
+  IconStarFilled,
   IconUsers,
   IconX,
 } from "@tabler/icons-react";
@@ -117,7 +118,7 @@ export default function Filters({ filterOptions }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [opened, { open, close }] = useDisclosure(false);
-  const [filters] = useQueryStates(followingParsers);
+  const [filters, setFilters] = useQueryStates(followingParsers);
   const [searchValue, setSearchValue] = useState(filters.search || "");
 
   const navigate = (updates: Record<string, string | null>) => {
@@ -145,6 +146,7 @@ export default function Filters({ filterOptions }: Props) {
     filters.language,
     filters.type,
     filters.dateRange,
+    filters.favorites,
   ].filter(Boolean).length;
 
   const clearFilters = () => {
@@ -316,6 +318,16 @@ export default function Filters({ filterOptions }: Props) {
             )}
           </Group>
         ) : null}
+
+        <Button
+          variant={filters.favorites ? "filled" : "light"}
+          color={filters.favorites ? "yellow" : "gray"}
+          size="md"
+          leftSection={<IconStarFilled size={20} />}
+          onClick={() => setFilters({ favorites: !filters.favorites })}
+        >
+          {t("actions.favorites")}
+        </Button>
 
         <Indicator
           disabled={activeFilterCount === 0}

@@ -582,6 +582,14 @@ export default ({ env }) => ({
               "Filter to only return followers with at least 1 recording",
           };
 
+          const favoritesParam = {
+            name: "favorites",
+            in: "query",
+            required: false,
+            schema: { type: "boolean" },
+            description: "Filter to only return favorited followers",
+          };
+
           // Extend Follower with isFollowing and totalRecordings
           draft.components.schemas.FollowerWithMeta = {
             allOf: [
@@ -589,6 +597,7 @@ export default ({ env }) => ({
                 type: "object",
                 properties: {
                   isFollowing: { type: "boolean" },
+                  isFavorite: { type: "boolean" },
                   totalRecordings: { type: "integer" },
                   recordings: {
                     type: "array",
@@ -630,6 +639,7 @@ export default ({ env }) => ({
                   ...(draft.paths["/followers"].get.parameters || []),
                   scopeParam,
                   hasRecordingsParam,
+                  favoritesParam,
                 ],
                 responses: {
                   ...draft.paths["/followers"].get.responses,
@@ -681,6 +691,7 @@ export default ({ env }) => ({
                 parameters: [
                   ...(draft.paths["/recordings"].get.parameters || []),
                   scopeParam,
+                  favoritesParam,
                 ],
                 responses: {
                   ...draft.paths["/recordings"].get.responses,
@@ -783,6 +794,87 @@ export default ({ env }) => ({
             },
           };
 
+          // Endpoint: POST /followers/favorite
+          draft.paths["/followers/favorite"] = {
+            post: {
+              tags: ["Follower"],
+              operationId: "favoriteFollower",
+              summary: "Add a follower to favorites",
+              security: [{ bearerAuth: [] }],
+              requestBody: {
+                required: true,
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "object",
+                      required: ["documentId"],
+                      properties: {
+                        documentId: { type: "string" },
+                      },
+                    },
+                  },
+                },
+              },
+              responses: {
+                "200": {
+                  description: "Success",
+                  content: {
+                    "application/json": {
+                      schema: {
+                        type: "object",
+                        properties: {
+                          success: { type: "boolean" },
+                        },
+                      },
+                    },
+                  },
+                },
+                "401": { description: "Unauthorized" },
+                "403": { description: "Must be following the creator first" },
+              },
+            },
+          };
+
+          // Endpoint: POST /followers/unfavorite
+          draft.paths["/followers/unfavorite"] = {
+            post: {
+              tags: ["Follower"],
+              operationId: "unfavoriteFollower",
+              summary: "Remove a follower from favorites",
+              security: [{ bearerAuth: [] }],
+              requestBody: {
+                required: true,
+                content: {
+                  "application/json": {
+                    schema: {
+                      type: "object",
+                      required: ["documentId"],
+                      properties: {
+                        documentId: { type: "string" },
+                      },
+                    },
+                  },
+                },
+              },
+              responses: {
+                "200": {
+                  description: "Success",
+                  content: {
+                    "application/json": {
+                      schema: {
+                        type: "object",
+                        properties: {
+                          success: { type: "boolean" },
+                        },
+                      },
+                    },
+                  },
+                },
+                "401": { description: "Unauthorized" },
+              },
+            },
+          };
+
           draft.paths["/followers/unpause-my-followers"] = {
             post: {
               tags: ["Follower"],
@@ -856,6 +948,10 @@ export default ({ env }) => ({
                       type: "array",
                       items: { $ref: "#/components/schemas/Follower" },
                     },
+                    favorites: {
+                      type: "array",
+                      items: { $ref: "#/components/schemas/Follower" },
+                    },
                     socialAccounts: {
                       type: "array",
                       items: { $ref: "#/components/schemas/SocialAccount" },
@@ -880,6 +976,11 @@ export default ({ env }) => ({
                       description:
                         "JSON string with Freemius subscription data",
                     },
+                    mollie: {
+                      type: "string",
+                      nullable: true,
+                      description: "JSON string with Mollie subscription data",
+                    },
                     stripe: {
                       type: "string",
                       nullable: true,
@@ -887,7 +988,7 @@ export default ({ env }) => ({
                     },
                     paymentProvider: {
                       type: "string",
-                      enum: ["freemius", "stripe"],
+                      enum: ["freemius", "stripe", "mollie"],
                       nullable: true,
                     },
                     trialClaimed: {

@@ -9,6 +9,7 @@ export default factories.createCoreController(
       // Parse params
       const scope = ctx.query.scope as string | undefined;
       const hasRecordings = ctx.query.hasRecordings === "true";
+      const favoritesOnly = ctx.query.favorites === "true";
       const sort = ctx.query.sort as string | undefined;
       const includeRecordings = scope === "discover";
 
@@ -33,17 +34,31 @@ export default factories.createCoreController(
       const pageSize = parseInt(pagination?.pageSize || "25");
       const offset = (page - 1) * pageSize;
 
-      // Get following IDs
+      // Get following IDs and favorite IDs
       let followingIds = [];
+      let favoriteIds = [];
       if (user) {
         const fullUser = await strapi
           .documents("plugin::users-permissions.user")
           .findOne({
             documentId: user?.documentId,
             fields: ["id"],
-            populate: { followers: { fields: ["id"] } },
+            populate: {
+              followers: { fields: ["id"] },
+              favorites: { fields: ["id"] },
+            },
           });
         followingIds = fullUser?.followers?.map((f) => f.id) || [];
+        favoriteIds = fullUser?.favorites?.map((f) => f.id) || [];
+      }
+
+      if (favoritesOnly && favoriteIds.length === 0) {
+        return {
+          data: [],
+          meta: {
+            pagination: { page, pageSize, pageCount: 0, total: 0 },
+          },
+        };
       }
 
       if (scope === "following" && followingIds.length === 0) {
@@ -66,7 +81,10 @@ export default factories.createCoreController(
       const applyBaseFilters = (q: any) => {
         q = q.where("f.locale", ctx.query.locale || "en");
 
-        if (scope === "following" && followingIds.length > 0) {
+        if (favoritesOnly && favoriteIds.length > 0) {
+          // Favorites override scope — favorites are always from followed creators
+          q = q.whereIn("f.id", favoriteIds);
+        } else if (scope === "following" && followingIds.length > 0) {
           q = q.whereIn("f.id", followingIds);
         } else if (scope === "discover" && followingIds.length > 0) {
           q = q.whereNotIn("f.id", followingIds);
@@ -357,6 +375,7 @@ export default factories.createCoreController(
         owner: row.owner_id ? { id: row.owner_id } : null,
         recordings: recordingsMap.get(row.id) || [],
         isFollowing: followingIds.includes(row.id),
+        isFavorite: favoriteIds.includes(row.id),
       }));
 
       return {
@@ -556,6 +575,71 @@ export default factories.createCoreController(
 
       return { data: follower };
     },
+    async favorite(ctx) {
+      const user = ctx.state.user;
+      if (!user) return ctx.unauthorized();
+
+      const { documentId } = ctx.request.body;
+      if (!documentId || typeof documentId !== "string") {
+        return ctx.badRequest("INVALID_DOCUMENT_ID");
+      }
+
+      const fullUser = await strapi
+        .documents("plugin::users-permissions.user")
+        .findOne({
+          documentId: user.documentId,
+          populate: {
+            followers: { fields: ["documentId"] },
+            favorites: { fields: ["documentId"] },
+          },
+        });
+
+      const isFollowing = fullUser.followers?.some(
+        (f) => f.documentId === documentId,
+      );
+
+      if (!isFollowing) {
+        return ctx.forbidden("MUST_BE_FOLLOWING");
+      }
+
+      const alreadyFavorite = fullUser.favorites?.some(
+        (f) => f.documentId === documentId,
+      );
+
+      if (alreadyFavorite) {
+        return { success: true };
+      }
+
+      const existingFavIds = fullUser.favorites?.map((f) => f.documentId) || [];
+      existingFavIds.push(documentId);
+
+      await strapi.documents("plugin::users-permissions.user").update({
+        documentId: user.documentId,
+        data: {
+          favorites: { connect: existingFavIds },
+        },
+      });
+
+      return { success: true };
+    },
+    async unfavorite(ctx) {
+      const user = ctx.state.user;
+      if (!user) return ctx.unauthorized();
+
+      const { documentId } = ctx.request.body;
+      if (!documentId || typeof documentId !== "string") {
+        return ctx.badRequest("INVALID_DOCUMENT_ID");
+      }
+
+      await strapi.documents("plugin::users-permissions.user").update({
+        documentId: user.documentId,
+        data: {
+          favorites: { disconnect: [documentId] },
+        },
+      });
+
+      return { success: true };
+    },
     async unfollow(ctx) {
       const user = ctx.state.user;
       if (!user) return ctx.unauthorized();
@@ -585,10 +669,14 @@ export default factories.createCoreController(
         return ctx.notFound("FOLLOWER_NOT_FOUND");
       }
 
+      // Remove from both followers and favorites
       await strapi.documents("plugin::users-permissions.user").update({
         documentId: user.documentId,
         data: {
           followers: {
+            disconnect: [followerToRemove.documentId],
+          },
+          favorites: {
             disconnect: [followerToRemove.documentId],
           },
         },
