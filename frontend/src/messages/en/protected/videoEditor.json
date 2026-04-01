@@ -8,6 +8,7 @@
     "downloadClip": "Download clip",
     "export": "Export"
   },
+  "maxDuration": "Maximum clip duration: {minutes} minutes",
   "notifications": {
     "exportStarted": {
       "title": "Export started",
