@@ -74,7 +74,6 @@ export function CustomSlider({
   vttUrl,
 }: CustomSliderProps) {
   const [thumbnailCues, setThumbnailCues] = useState<ThumbnailCue[]>([]);
-  const [resolvedUrls, setResolvedUrls] = useState<Map<string, string>>(new Map());
   const [trackWidth, setTrackWidth] = useState(800);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -91,31 +90,8 @@ export function CustomSlider({
     if (!vttUrl) return;
     fetch(vttUrl)
       .then((res) => res.text())
-      .then((text) => {
-        const cues = parseVTT(text);
-        setThumbnailCues(cues);
-        // Preload unique sprite URLs and resolve redirects
-        const uniqueUrls = [...new Set(cues.map((c) => c.url))];
-        Promise.all(
-          uniqueUrls.map(async (url) => {
-            try {
-              const res = await fetch(url, { redirect: "follow" });
-              const blob = await res.blob();
-              return [url, URL.createObjectURL(blob)] as const;
-            } catch {
-              return [url, url] as const;
-            }
-          })
-        ).then((entries) => setResolvedUrls(new Map(entries)));
-      })
+      .then((text) => setThumbnailCues(parseVTT(text)))
       .catch(() => {});
-
-    return () => {
-      // Revoke blob URLs on cleanup
-      resolvedUrls.forEach((url) => {
-        if (url.startsWith("blob:")) URL.revokeObjectURL(url);
-      });
-    };
   }, [vttUrl]);
 
   const spriteMeta = useMemo(() => {
@@ -195,13 +171,22 @@ export function CustomSlider({
       >
         <Box style={{ position: "absolute", inset: 0, background: "#333", display: "flex" }}>
           {(() => {
-            const maxThumbs = 30;
-            const cues = thumbnailCues.length <= maxThumbs
-              ? thumbnailCues
-              : Array.from({ length: maxThumbs }, (_, i) =>
-                  thumbnailCues[Math.floor(i * thumbnailCues.length / maxThumbs)]
-                );
-            return cues;
+            if (thumbnailCues.length === 0) return [];
+            const cellW = Math.round((thumbnailCues[0].w / thumbnailCues[0].h) * TRACK_HEIGHT);
+            const maxVisible = trackWidth > 0 ? Math.max(1, Math.floor(trackWidth / cellW)) : thumbnailCues.length;
+            if (thumbnailCues.length <= maxVisible) return thumbnailCues;
+            // Sample but keep time proportions by merging adjacent cues
+            const step = Math.ceil(thumbnailCues.length / maxVisible);
+            const sampled: typeof thumbnailCues = [];
+            for (let j = 0; j < thumbnailCues.length; j += step) {
+              const last = Math.min(j + step - 1, thumbnailCues.length - 1);
+              sampled.push({ ...thumbnailCues[j], end: thumbnailCues[last].end });
+            }
+            // Ensure last cue covers to the end
+            if (sampled.length > 0) {
+              sampled[sampled.length - 1].end = thumbnailCues[thumbnailCues.length - 1].end;
+            }
+            return sampled;
           })().map((cue, i) => {
             const meta = spriteMeta.get(cue.url) || { cols: 2, rows: 2 };
             // Clamp to last valid cell in cols×rows grid (workflow uses cols×cols tile).
@@ -216,8 +201,8 @@ export function CustomSlider({
             const cellW = Math.round(cue.w * scale);
             const cueDuration = cue.end - cue.start;
             const flexGrow = vttDuration > 0 ? cueDuration / vttDuration : 1;
-            const cueWidthEstimate = Math.round(flexGrow * trackWidth);
-            const repeats = Math.max(1, Math.ceil(cueWidthEstimate / cellW) + 1);
+            const cueWidthEst = Math.round(flexGrow * trackWidth);
+            const repeats = cueWidthEst > cellW ? Math.ceil(cueWidthEst / cellW) + 1 : 1;
             return (
               <div
                 key={`thumb-${i}`}
@@ -241,7 +226,7 @@ export function CustomSlider({
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={resolvedUrls.get(cue.url) || cue.url}
+                      src={cue.url}
                       alt=""
                       style={{
                         position: "absolute",
@@ -259,33 +244,6 @@ export function CustomSlider({
           })}
         </Box>
 
-        {startPct > 0 && (
-          <Box
-            style={{
-              position: "absolute",
-              left: 0,
-              top: 0,
-              width: `${startPct}%`,
-              height: "100%",
-              background: "rgba(0, 0, 0, 0.75)",
-              pointerEvents: "none",
-            }}
-          />
-        )}
-
-        {endPct < 100 && (
-          <Box
-            style={{
-              position: "absolute",
-              left: `${endPct}%`,
-              top: 0,
-              width: `${100 - endPct}%`,
-              height: "100%",
-              background: "rgba(0, 0, 0, 0.75)",
-              pointerEvents: "none",
-            }}
-          />
-        )}
 
         <Box
           style={{
