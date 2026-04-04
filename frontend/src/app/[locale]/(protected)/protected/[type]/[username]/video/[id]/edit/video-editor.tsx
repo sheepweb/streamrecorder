@@ -117,8 +117,22 @@ export default function VideoEditor({ recording }: Props) {
   const handleSeek = (time: number) => {
     const video = videoRef.current;
     if (!video) return;
-    video.currentTime = time;
-    setCurrentTime(time);
+    const clampedTime = Math.min(Math.round(time), duration - 1);
+    video.currentTime = clampedTime;
+    setCurrentTime(clampedTime);
+
+    // If seeking outside the range, move the range to include this position
+    if (clampedTime < startTime || clampedTime >= endTime) {
+      const rangeSize = endTime - startTime;
+      let newStart = Math.round(Math.max(0, time - rangeSize / 2));
+      let newEnd = Math.round(newStart + rangeSize);
+      if (newEnd > duration) {
+        newEnd = Math.round(duration);
+        newStart = Math.round(Math.max(0, newEnd - rangeSize));
+      }
+      setStartTime(newStart);
+      setEndTime(newEnd);
+    }
   };
 
   const handleExport = async () => {
@@ -181,7 +195,7 @@ export default function VideoEditor({ recording }: Props) {
       <Box
         style={{
           width: "100%",
-          height: "55vh",
+          height: "clamp(200px, 35vh, 400px)",
           borderRadius: "var(--mantine-radius-md)",
           overflow: "hidden",
           background: "#000",
@@ -219,7 +233,7 @@ export default function VideoEditor({ recording }: Props) {
       </Box>
 
       {duration === 0 && (
-        <Skeleton height={142} radius="md" />
+        <Skeleton height={142} radius="md" my="md" />
       )}
       {duration > 0 && (
         <CustomSlider
@@ -235,7 +249,7 @@ export default function VideoEditor({ recording }: Props) {
         />
       )}
 
-      <Text size="xs" c="dimmed" ta="center">
+      <Text size="xs" c="dimmed" ta="center" mb="md">
         {t("maxDuration", { minutes: MAX_CLIP_DURATION / 60 })} — {formatTime(clipDuration)} / {formatTime(MAX_CLIP_DURATION)}
       </Text>
 
