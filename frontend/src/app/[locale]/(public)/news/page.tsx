@@ -21,7 +21,7 @@ export default async function NewsPage() {
   const format = await getFormatter();
 
   const response = await publicApi.article.getArticles({
-    "pagination[limit]": 10,
+    "pagination[limit]": 15,
     sort: "createdAt:desc",
     locale: locale,
   });
@@ -120,7 +120,7 @@ export default async function NewsPage() {
                     <Title order={4} style={{ color: "#f1f5f9" }}>
                       {article.title}
                     </Title>
-                    <Text size="xs" style={{ color: "#64748b", flexShrink: 0 }}>
+                    <Text size="sm" style={{ color: "#64748b", flexShrink: 0 }}>
                       {article.createdAt
                         ? format.relativeTime(new Date(article.createdAt))
                         : ""}

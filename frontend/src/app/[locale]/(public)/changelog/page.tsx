@@ -162,7 +162,11 @@ export default async function ChangelogPage() {
 
               <Text size="xs" mt="md" style={{ color: "#64748b" }}>
                 {t("published", {
-                  date: dayjs(entry.publishedAt).format("MMMM D, YYYY"),
+                  date: entry.publishedAt
+                    ? format.dateTime(new Date(entry.publishedAt), {
+                        dateStyle: "long",
+                      })
+                    : "",
                 })}
               </Text>
             </Paper>
