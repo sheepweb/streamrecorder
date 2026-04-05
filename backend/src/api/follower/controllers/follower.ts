@@ -334,7 +334,7 @@ export default factories.createCoreController(
             ranked.document_id,
             ranked.created_at,
             ranked.follower_id,
-            json_agg(json_build_object('documentId', s.document_id, 'state', s.state)) AS sources
+            json_agg(json_build_object('documentId', s.document_id, 'state', s.state, 'duration', s.duration)) AS sources
           FROM ranked
           INNER JOIN sources_recording_lnk srl ON srl.recording_id = ranked.id
           INNER JOIN sources s ON srl.source_id = s.id

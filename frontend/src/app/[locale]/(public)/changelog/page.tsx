@@ -1,4 +1,3 @@
-import dayjs from "@/app/lib/dayjs";
 import { generateAlternates } from "@/app/lib/seo";
 import publicApi from "@/lib/public-api";
 import {
@@ -11,7 +10,7 @@ import {
   Title,
 } from "@mantine/core";
 import { IconCalendar, IconGitBranch } from "@tabler/icons-react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import ReactMarkdown from "react-markdown";
 
 export async function generateMetadata() {
@@ -27,6 +26,7 @@ export async function generateMetadata() {
 export default async function ChangelogPage() {
   const t = await getTranslations("changelog");
   const locale = await getLocale();
+  const format = await getFormatter();
 
   const response = await publicApi.changeLog.getChangeLogs({
     sort: "createdAt:desc",
@@ -127,10 +127,18 @@ export default async function ChangelogPage() {
                   <IconCalendar size={14} />
                   <Text
                     size="sm"
-                    title={dayjs(entry.createdAt).format("MMMM D, YYYY")}
+                    title={
+                      entry.createdAt
+                        ? format.dateTime(new Date(entry.createdAt), {
+                            dateStyle: "long",
+                          })
+                        : ""
+                    }
                     style={{ color: "#64748b" }}
                   >
-                    {dayjs(entry.createdAt).fromNow()}
+                    {entry.createdAt
+                      ? format.relativeTime(new Date(entry.createdAt))
+                      : ""}
                   </Text>
                 </Flex>
               </Flex>

@@ -1,9 +1,8 @@
-import dayjs from "@/app/lib/dayjs";
 import { generateAlternates } from "@/app/lib/seo";
 import publicApi from "@/lib/public-api";
 import { Container, Flex, Paper, Stack, Text, Title } from "@mantine/core";
 import { IconArticle } from "@tabler/icons-react";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getFormatter, getLocale, getTranslations } from "next-intl/server";
 import ReactMarkdown from "react-markdown";
 
 export async function generateMetadata() {
@@ -19,6 +18,7 @@ export async function generateMetadata() {
 export default async function NewsPage() {
   const t = await getTranslations("news");
   const locale = await getLocale();
+  const format = await getFormatter();
 
   const response = await publicApi.article.getArticles({
     "pagination[limit]": 10,
@@ -51,7 +51,6 @@ export default async function NewsPage() {
         <Text
           size="xl"
           ta="center"
-          maw={600}
           style={{ color: "#94a3b8", lineHeight: 1.7 }}
         >
           {t("subtitle")}
@@ -117,17 +116,21 @@ export default async function NewsPage() {
                   <IconArticle size={20} />
                 </div>
                 <div style={{ flex: 1 }}>
-                  <Title order={4} mb="xs" style={{ color: "#f1f5f9" }}>
-                    {article.title}
-                  </Title>
+                  <Flex justify="space-between" align="center" gap="sm" mb="xs">
+                    <Title order={4} style={{ color: "#f1f5f9" }}>
+                      {article.title}
+                    </Title>
+                    <Text size="xs" style={{ color: "#64748b", flexShrink: 0 }}>
+                      {article.createdAt
+                        ? format.relativeTime(new Date(article.createdAt))
+                        : ""}
+                    </Text>
+                  </Flex>
                   {article.content && (
                     <div style={{ color: "#94a3b8", lineHeight: 1.7 }}>
                       <ReactMarkdown>{article.content}</ReactMarkdown>
                     </div>
                   )}
-                  <Text size="xs" mt="sm" style={{ color: "#64748b" }}>
-                    {dayjs(article.createdAt).fromNow()}
-                  </Text>
                 </div>
               </Flex>
             </Paper>
