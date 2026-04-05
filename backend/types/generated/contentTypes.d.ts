@@ -928,6 +928,13 @@ export interface ApiFollowerFollower extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    encode: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<false>;
     faq: Schema.Attribute.JSON &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

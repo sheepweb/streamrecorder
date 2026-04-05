@@ -299,6 +299,7 @@ export interface Activity {
     pause?: boolean;
     description?: string;
     tagline?: string;
+    encode?: boolean;
     faq?: any;
     category?: string;
     migration?: number;
@@ -784,6 +785,7 @@ export interface AiRequest {
     pause?: boolean;
     description?: string;
     tagline?: string;
+    encode?: boolean;
     faq?: any;
     category?: string;
     migration?: number;
@@ -1406,6 +1408,7 @@ export interface AiTask {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
@@ -2518,6 +2521,7 @@ export interface Clip {
     pause?: boolean;
     description?: string;
     tagline?: string;
+    encode?: boolean;
     faq?: any;
     category?: string;
     migration?: number;
@@ -3096,6 +3100,7 @@ export interface ClipShare {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
@@ -3609,6 +3614,7 @@ export interface FollowerRequest {
     pause?: boolean;
     description?: string;
     tagline?: string;
+    encode?: boolean;
     faq?: any;
     category?: string;
     migration?: number;
@@ -3871,6 +3877,7 @@ export interface Follower {
   pause?: boolean;
   description?: string;
   tagline?: string;
+  encode?: boolean;
   faq?: any;
   category?: string;
   migration?: number;
@@ -4011,6 +4018,7 @@ export interface Follower {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
@@ -4421,6 +4429,7 @@ export interface Meme {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
@@ -4980,6 +4989,7 @@ export interface Recording {
     pause?: boolean;
     description?: string;
     tagline?: string;
+    encode?: boolean;
     faq?: any;
     category?: string;
     migration?: number;
@@ -5696,6 +5706,7 @@ export interface SocialAccount {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
@@ -6107,6 +6118,7 @@ export interface Source {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
@@ -6626,6 +6638,7 @@ export interface VisitorView {
       pause?: boolean;
       description?: string;
       tagline?: string;
+      encode?: boolean;
       faq?: any;
       category?: string;
       migration?: number;
