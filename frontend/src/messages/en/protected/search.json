@@ -23,7 +23,12 @@
     "enterUsername": "Enter your stream URL or username",
     "selectPlatform": "Select the platform you stream on",
     "changeUsername": "Change username",
-    "newSearch": "New Search"
+    "newSearch": "New Search",
+    "premiumOnly": "Premium only"
+  },
+  "upgrade": {
+    "title": "{platform} requires Premium",
+    "description": "Upgrade to Premium to add {platform} creators and start recording your live streams."
   },
   "hints": {
     "tryFormats": "Try these examples:",

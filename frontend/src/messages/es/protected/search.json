@@ -23,7 +23,12 @@
     "enterUsername": "Ingresa tu URL de stream o usuario",
     "selectPlatform": "Selecciona la plataforma donde transmites",
     "changeUsername": "Cambiar usuario",
-    "newSearch": "Nueva Búsqueda"
+    "newSearch": "Nueva Búsqueda",
+    "premiumOnly": "Solo Premium"
+  },
+  "upgrade": {
+    "title": "{platform} requiere Premium",
+    "description": "Actualiza a Premium para agregar creadores de {platform} a tu lista y comenzar a grabar tus transmisiones en vivo."
   },
   "hints": {
     "tryFormats": "Prueba estos ejemplos:",

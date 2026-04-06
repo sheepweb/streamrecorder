@@ -23,7 +23,12 @@
     "enterUsername": "配信 URL またはユーザー名を入力してください",
     "selectPlatform": "配信しているプラットフォームを選択してください",
     "changeUsername": "ユーザー名を変更",
-    "newSearch": "新しい検索"
+    "newSearch": "新しい検索",
+    "premiumOnly": "プレミアム限定"
+  },
+  "upgrade": {
+    "title": "{platform} にはプレミアムが必要です",
+    "description": "プレミアムにアップグレードして、{platform} のクリエイターをリストに追加し、ライブ配信の録画を開始しましょう。"
   },
   "hints": {
     "tryFormats": "例：",

@@ -23,7 +23,12 @@
     "enterUsername": "Yayın URL'nizi veya kullanıcı adınızı girin",
     "selectPlatform": "Yayın yaptığınız platformu seçin",
     "changeUsername": "Kullanıcı adını değiştir",
-    "newSearch": "Yeni Arama"
+    "newSearch": "Yeni Arama",
+    "premiumOnly": "Sadece Premium"
+  },
+  "upgrade": {
+    "title": "{platform} Premium gerektirir",
+    "description": "{platform} içerik üreticilerini listenize eklemek ve canlı yayınlarınızı kaydetmeye başlamak için Premium'a yükseltin."
   },
   "hints": {
     "tryFormats": "Bu örnekleri deneyin:",

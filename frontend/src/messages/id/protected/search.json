@@ -23,7 +23,12 @@
     "enterUsername": "Masukkan URL stream atau username Anda",
     "selectPlatform": "Pilih platform tempat Anda streaming",
     "changeUsername": "Ubah username",
-    "newSearch": "Pencarian Baru"
+    "newSearch": "Pencarian Baru",
+    "premiumOnly": "Khusus Premium"
+  },
+  "upgrade": {
+    "title": "{platform} memerlukan Premium",
+    "description": "Upgrade ke Premium untuk menambahkan kreator {platform} ke daftar Anda dan mulai merekam live stream Anda."
   },
   "hints": {
     "tryFormats": "Coba contoh berikut:",

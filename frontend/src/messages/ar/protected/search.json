@@ -23,7 +23,12 @@
     "enterUsername": "أدخل رابط البث أو اسم المستخدم الخاص بك",
     "selectPlatform": "اختر المنصة التي تبث عليها",
     "changeUsername": "تغيير اسم المستخدم",
-    "newSearch": "بحث جديد"
+    "newSearch": "بحث جديد",
+    "premiumOnly": "للمشتركين فقط"
+  },
+  "upgrade": {
+    "title": "{platform} يتطلب اشتراك Premium",
+    "description": "قم بالترقية إلى Premium لإضافة صانعي محتوى {platform} إلى قائمتك والبدء في تسجيل بثوثك المباشرة."
   },
   "hints": {
     "tryFormats": "جرب هذه الأمثلة:",

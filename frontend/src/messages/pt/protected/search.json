@@ -23,7 +23,12 @@
     "enterUsername": "Cole a URL da transmissão ou o nome de usuário",
     "selectPlatform": "Selecione a plataforma onde você transmite",
     "changeUsername": "Alterar usuário",
-    "newSearch": "Nova Busca"
+    "newSearch": "Nova Busca",
+    "premiumOnly": "Apenas Premium"
+  },
+  "upgrade": {
+    "title": "{platform} requer Premium",
+    "description": "Faça upgrade para o Premium para adicionar criadores do {platform} à sua lista e começar a gravar suas transmissões ao vivo."
   },
   "hints": {
     "tryFormats": "Experimente os seguintes formatos:",
