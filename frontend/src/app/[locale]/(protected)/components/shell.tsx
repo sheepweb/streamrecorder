@@ -25,7 +25,7 @@ import { Navbar } from "./navbar";
 
 const NAVBAR_WIDTH_EXPANDED = 310;
 const NAVBAR_WIDTH_COLLAPSED = 80;
-const ANDROID_TEST_CUTOFF = new Date("2026-03-10T00:00:00Z");
+const ANDROID_TEST_CUTOFF = new Date("2026-04-09T00:00:00Z");
 
 export function Shell({
   children,
