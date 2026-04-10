@@ -257,6 +257,55 @@
           "answer": "Sí. Los usuarios premium pueden usar ClipAI para convertir automáticamente sus grabaciones de Bigo Live en clips destacados cortos listos para TikTok, YouTube Shorts o Reels. Es una excelente forma de reutilizar tu contenido en vivo y hacer crecer tu audiencia en todas las plataformas."
         }
       ]
+    },
+    "buzzcast": {
+      "title": "Grabaciones de Buzzcast Live",
+      "description": "Mira y descarga grabaciones de Buzzcast Live en LiveStreamRecorder. Tus Buzzcast Lives se capturan automáticamente en la nube — sin problemas de pantalla negra, sin grabador de pantalla necesario. El grabador de Buzzcast Live más fácil para creadores.",
+      "keywords": [
+        "grabador de buzzcast",
+        "grabador de buzzcast live",
+        "grabar buzzcast live",
+        "grabador de pantalla buzzcast live",
+        "grabar pantalla buzzcast live",
+        "grabador de pantalla para buzzcast live",
+        "grabar pantalla de buzzcast",
+        "grabación buzzcast pantalla negra",
+        "grabador de pantalla buzzcast live pantalla negra",
+        "grabar buzzcast pantalla negra",
+        "grabador de pantalla buzzcast pantalla negra",
+        "grabar buzzcast pantalla negra",
+        "guardar buzzcast live"
+      ],
+      "faqs": [
+        {
+          "question": "¿Cómo grabo mis Buzzcast Lives?",
+          "answer": "Con LiveStreamRecorder, tus Buzzcast Lives se graban automáticamente en la nube. Regístrate, agrega tu nombre de usuario de Buzzcast Live y cada vez que estés en vivo se captura. Sin APK de grabador de Buzzcast Live que instalar, sin grabar pantalla — todo ocurre en el servidor."
+        },
+        {
+          "question": "¿Por qué me aparece pantalla negra al grabar Buzzcast Live?",
+          "answer": "Los problemas de pantalla negra son comunes al usar grabadores de pantalla en Buzzcast Live. LiveStreamRecorder evita esto por completo porque captura tus Buzzcast Lives directamente desde la nube — sin pantalla negra, sin soluciones alternativas, sin apps de grabación poco confiables."
+        },
+        {
+          "question": "¿Cómo soluciono la pantalla negra del grabador de pantalla de Buzzcast Live?",
+          "answer": "La solución más fácil es dejar de grabar la pantalla del todo. LiveStreamRecorder es un grabador de Buzzcast en la nube que captura tus Lives desde el servidor en alta calidad. Sin problemas de pantalla negra, sin apps que configurar — solo agrega tu nombre de usuario y tus Buzzcast Lives se graban automáticamente."
+        },
+        {
+          "question": "¿Necesito un grabador de pantalla para Buzzcast Live?",
+          "answer": "No. Los grabadores de pantalla para Buzzcast Live suelen resultar en pantalla negra o capturas de baja calidad. LiveStreamRecorder es un grabador de Buzzcast Live en la nube que captura tus streams automáticamente en alta calidad — sin app que instalar, sin pantalla negra."
+        },
+        {
+          "question": "¿Puedo grabar mis Buzzcast Lives gratis?",
+          "answer": "Sí. Regístrate gratis en LiveStreamRecorder y empieza a grabar tus Buzzcast Lives de inmediato. Los planes premium desbloquean la descarga de grabaciones, ClipAI para clips destacados automáticos y almacenamiento extendido."
+        },
+        {
+          "question": "¿Puedo descargar mis grabaciones de Buzzcast Live?",
+          "answer": "Sí. Los usuarios premium pueden descargar sus grabaciones de Buzzcast Live como archivos de video para verlos sin conexión. Cada grabación también se puede ver al instante en tu navegador sin necesidad de descargar."
+        },
+        {
+          "question": "¿Puedo convertir mis grabaciones de Buzzcast Live en clips cortos?",
+          "answer": "Sí. Los usuarios premium pueden usar ClipAI para convertir automáticamente sus grabaciones de Buzzcast Live en clips destacados cortos listos para TikTok, YouTube Shorts o Reels. Es una excelente forma de reutilizar tu contenido en vivo y hacer crecer tu audiencia en todas las plataformas."
+        }
+      ]
     }
   },
   "hero": {
@@ -268,7 +317,8 @@
       "kick": "Grabaciones de Kick",
       "afreecatv": "Grabaciones de AfreecaTV",
       "pandalive": "Grabaciones de Pandalive",
-      "bigo": "Grabaciones de Bigo"
+      "bigo": "Grabaciones de Bigo",
+      "buzzcast": "Grabaciones de Buzzcast"
     },
     "subtitle": {
       "all": "Mira grabaciones de transmisiones en vivo de creadores en nuestra plataforma. Descarga y descubre nuevo contenido.",
@@ -278,7 +328,8 @@
       "kick": "Mira grabaciones de streams de Kick de creadores en nuestra plataforma. Descarga y descubre nuevo contenido.",
       "afreecatv": "Mira grabaciones de AfreecaTV de creadores en nuestra plataforma. Descarga y descubre nuevo contenido.",
       "pandalive": "Mira grabaciones de Pandalive de creadores en nuestra plataforma. Descarga y descubre nuevo contenido.",
-      "bigo": "Mira grabaciones de Bigo de creadores en nuestra plataforma. Descarga y descubre nuevo contenido."
+      "bigo": "Mira grabaciones de Bigo de creadores en nuestra plataforma. Descarga y descubre nuevo contenido.",
+      "buzzcast": "Mira grabaciones de Buzzcast de creadores en nuestra plataforma. Descarga y descubre nuevo contenido."
     }
   },
   "cta": {
@@ -290,7 +341,8 @@
       "kick": "Graba Tus Streams de Kick",
       "pandalive": "Graba Tus Streams de Pandalive",
       "afreecatv": "Graba Tus Streams de AfreecaTV",
-      "bigo": "Graba Tus Streams de Bigo"
+      "bigo": "Graba Tus Streams de Bigo",
+      "buzzcast": "Graba Tus Streams de Buzzcast"
     },
     "subtitle": {
       "all": "Guarda automáticamente tus streams de TikTok, Twitch, YouTube y Kick. Descarga grabaciones, crea clips cortos y haz crecer tu audiencia.",
@@ -300,7 +352,8 @@
       "kick": "Guarda automáticamente tus streams de Kick. Descarga grabaciones, crea clips cortos con ClipAI y haz crecer tu audiencia.",
       "pandalive": "Guarda automáticamente tus streams de Pandalive. Descarga grabaciones y crea clips cortos con ClipAI.",
       "afreecatv": "Guarda automáticamente tus streams de AfreecaTV. Descarga grabaciones y crea clips cortos con ClipAI.",
-      "bigo": "Guarda automáticamente tus streams de Bigo. Descarga grabaciones y crea clips cortos con ClipAI."
+      "bigo": "Guarda automáticamente tus streams de Bigo. Descarga grabaciones y crea clips cortos con ClipAI.",
+      "buzzcast": "Guarda automáticamente tus streams de Buzzcast. Descarga grabaciones y crea clips cortos con ClipAI."
     },
     "button": "Empieza a Grabar Gratis"
   },
@@ -314,7 +367,8 @@
       "kick": "¡Sé el primer creador en grabar un stream de Kick!",
       "afreecatv": "¡Sé el primer creador en grabar un stream de AfreecaTV!",
       "pandalive": "¡Sé el primer creador en grabar un stream de Pandalive!",
-      "bigo": "¡Sé el primer creador en grabar un stream de Bigo!"
+      "bigo": "¡Sé el primer creador en grabar un stream de Bigo!",
+      "buzzcast": "¡Sé el primer creador en grabar un stream de Buzzcast!"
     },
     "button": "Comenzar"
   },
@@ -323,10 +377,11 @@
     "tiktok": "## Grabaciones de TikTok Live\n\nMira grabaciones de TikTok Live de creadores que usan LiveStreamRecorder para guardar sus propios Lives. Cada TikTok Live se captura automáticamente y se almacena para verlo cuando quieras.\n\n### TikTok Lives Guardados Automáticamente\n\nLos TikTok Lives desaparecen en el momento en que terminan — no hay forma integrada de guardarlos. Los creadores usan nuestro grabador de TikTok para capturar sus propios TikTok Lives automáticamente en la nube. Sin grabador de pantalla para TikTok, sin dejar el teléfono encendido toda la noche. Solo agrega tu nombre de usuario y tus Lives se graban.\n\n### Mira y Descarga Tus Grabaciones de TikTok\n\nCada grabación de TikTok Live está disponible para ver al instante en tu navegador. Los usuarios premium pueden descargar sus grabaciones de TikTok como archivos de video para verlos sin conexión — perfecto para reutilizar tu propio contenido o mantener un archivo personal.\n\n### Graba Tus TikTok Lives en Cualquier Dispositivo\n\n¿Te preguntas cómo grabar tus TikTok Lives en una computadora o laptop? LiveStreamRecorder funciona completamente en la nube. No hay nada que instalar — sin app de escritorio, sin extensión de navegador. Ya sea en PC, laptop o móvil, tus TikTok Lives se capturan en alta calidad automáticamente.\n\n### Convierte Tus Lives en Clips con ClipAI\n\n¿Quieres convertir tus grabaciones de TikTok Live en clips cortos? ClipAI analiza tus Lives grabados y crea clips destacados que puedes publicar como videos de TikTok, Reels o Shorts. Es la mejor forma de hacer crecer tu audiencia con tu contenido en vivo.\n\n### Tu Grabador de TikTok — Sin Necesidad de Grabar Pantalla\n\nOlvídate de apps de grabación de pantalla poco confiables y herramientas de captura de escritorio. LiveStreamRecorder es un grabador de TikTok diseñado específicamente que captura tus Lives desde el servidor. Regístrate gratis, agrega tu nombre de usuario de TikTok y nunca pierdas un Live.",
     "twitch": "## Grabaciones de Streams de Twitch\n\nMira grabaciones de streams de Twitch de creadores que usan LiveStreamRecorder para guardar sus propios streams. Cada live stream de Twitch se captura automáticamente y se almacena de forma permanente.\n\n### VODs de Twitch Que Nunca Vencen\n\nLos VODs de Twitch vencen después de 14–60 días y se eliminan si borras tu canal. Nuestro grabador de Twitch guarda tus streams permanentemente en la nube — sin vencimiento, sin archivos eliminados. Tu contenido sigue siendo tuyo.\n\n### Mira y Descarga Tus Grabaciones de Twitch\n\nCada grabación de stream de Twitch está disponible para ver al instante en tu navegador — sin anuncios, sin interrupciones. Los usuarios premium pueden descargar sus grabaciones de Twitch como archivos de video para verlos sin conexión o reutilizar el contenido.\n\n### Graba Tus Streams de Twitch — Sin Grabador de Pantalla\n\nOlvídate de ejecutar software de captura de pantalla junto a OBS. LiveStreamRecorder es un grabador de streams de Twitch en la nube que captura tus live streams desde el servidor. Sin carga extra de CPU, sin app de escritorio, sin Bandicam funcionando en segundo plano. Ya sea que transmitas desde PC, consola o móvil, tus streams de Twitch se graban automáticamente en alta calidad.\n\n### Convierte Tus Streams en Clips con ClipAI\n\n¿Quieres convertir tus grabaciones de streams de Twitch en clips cortos? ClipAI analiza tus streams grabados y crea clips destacados listos para publicar como YouTube Shorts, videos de TikTok o Reels. Haz crecer tu audiencia en todas las plataformas con tu contenido de Twitch.\n\n### El Mejor Grabador de Twitch para Creadores\n\nLiveStreamRecorder está diseñado específicamente para guardar streams de Twitch. Regístrate gratis, conecta tu canal y nunca pierdas un stream por VODs vencidos. Cada live stream se graba automáticamente — tu archivo permanente de Twitch.",
     "youtube": "## Grabaciones de YouTube Live\n\nMira grabaciones de YouTube Live de creadores que usan LiveStreamRecorder para guardar sus propios live streams. Cada YouTube Live se captura automáticamente y se almacena para verlo cuando quieras.\n\n### YouTube Lives Guardados Automáticamente\n\nLas repeticiones de live streams de YouTube pueden desaparecer — los creadores las eliminan, los streams no se procesan correctamente o los canales se vuelven privados. Nuestro grabador de YouTube captura tus Lives automáticamente en la nube para que siempre tengas una copia de tu contenido.\n\n### Mira y Descarga Tus Grabaciones de YouTube\n\nCada grabación de YouTube Live está disponible para ver al instante en tu navegador. Los usuarios premium pueden descargar sus grabaciones como archivos de video para verlos sin conexión — perfecto para reutilizar tu contenido en vivo.\n\n### Graba Tus YouTube Lives — Sin Grabador de Pantalla\n\nOlvídate del software de grabación de pantalla tradicional para YouTube. LiveStreamRecorder es un grabador de YouTube en línea que captura tus live streams desde el servidor. Sin app de escritorio, sin extensión de navegador, sin computadora encendida toda la noche. Ya sea en PC, laptop o móvil, tus YouTube Lives se graban en alta calidad.\n\n### Convierte Tus Lives en YouTube Shorts con ClipAI\n\n¿Quieres convertir tus grabaciones de YouTube Live en Shorts? ClipAI analiza tus Lives grabados y crea clips destacados listos para publicar. Es la mejor forma de hacer crecer tus suscriptores con tu contenido en vivo.\n\n### El Mejor Grabador de YouTube Live para Creadores\n\nLiveStreamRecorder está diseñado específicamente para capturar live streams de YouTube. Regístrate gratis, conecta tu canal y nunca pierdas un Live. Cada stream se graba automáticamente — incluso si te olvidas de darle grabar.",
-    "kick": "## Grabaciones de Streams de Kick\n\nMira grabaciones de Kick de creadores que usan LiveStreamRecorder para guardar sus streams.\n\n### VODs de Kick Guardados\n\nKick está creciendo rápido. Los creadores usan nuestro grabador de Kick para guardar sus streams y construir su biblioteca de contenido. Mira su contenido aquí.\n\n### Mira Grabaciones de Kick\n\nCada grabación de Kick está disponible para ver al instante. Los usuarios premium pueden descargar VODs de Kick para verlos sin conexión.\n\n### Graba Tus Streams de Kick\n\n¿Quieres tus streams de Kick aquí? Regístrate gratis y agrega tu canal. Grabamos cada transmisión automáticamente. Usa ClipAI para convertir tus streams en clips cortos y hacer crecer tu audiencia.\n\n### Grabador de Streams de Kick\n\nGrabación automática de cada stream de Kick. Sin software necesario. Solo sal en vivo y guardamos todo.",
-    "pandalive": "## Grabaciones de Pandalive\n\nMira grabaciones de Pandalive de creadores que usan LiveStreamRecorder para guardar sus streams.\n\n### Streams Coreanos Guardados\n\nLos creadores de Pandalive usan nuestro grabador para guardar sus transmisiones. Mira contenido coreano aquí.\n\n### Mira Grabaciones de Pandalive\n\nCada grabación de Pandalive está disponible para ver al instante. Los usuarios premium pueden descargar grabaciones para verlas sin conexión.\n\n### Graba Tus Streams de Pandalive\n\n¿Quieres tus streams aquí? Regístrate gratis y agrega tu canal. Grabamos cada transmisión automáticamente.",
-    "afreecatv": "## Grabaciones de AfreecaTV\n\nMira grabaciones de AfreecaTV de creadores que usan LiveStreamRecorder para guardar sus streams.\n\n### Streams Coreanos Guardados\n\nLos creadores de AfreecaTV usan nuestro grabador para guardar sus transmisiones. Mira contenido coreano aquí.\n\n### Mira Grabaciones de AfreecaTV\n\nCada grabación de AfreecaTV está disponible para ver al instante. Los usuarios premium pueden descargar grabaciones para verlas sin conexión.\n\n### Graba Tus Streams de AfreecaTV\n\n¿Quieres tus streams aquí? Regístrate gratis y agrega tu canal. Grabamos cada transmisión automáticamente.",
-    "bigo": "## Grabaciones de Bigo Live\n\nMira grabaciones de Bigo Live de creadores que usan LiveStreamRecorder para guardar sus propios Lives. Cada Bigo Live se captura automáticamente en la nube y se almacena para verlo cuando quieras.\n\n### Bigo Lives Guardados Automáticamente\n\nLos Bigo Lives desaparecen cuando terminan, y las apps de grabación de pantalla suelen causar problemas de pantalla negra. Nuestro grabador de Bigo Live captura tus Lives directamente desde la nube — sin pantalla negra, sin apps de grabación de pantalla, sin complicaciones. Solo agrega tu nombre de usuario y tus Bigo Lives se graban.\n\n### Mira y Descarga Tus Grabaciones de Bigo\n\nCada grabación de Bigo Live está disponible para ver al instante en tu navegador. Los usuarios premium pueden descargar sus grabaciones como archivos de video para verlos sin conexión — perfecto para reutilizar tu contenido en vivo.\n\n### Sin Pantalla Negra — Nunca\n\n¿Cansado de los problemas de pantalla negra al intentar grabar tus Bigo Lives? LiveStreamRecorder captura todo desde el servidor en alta calidad. Sin grabador de pantalla para Bigo Live, sin descargar APKs, sin la frustración de la pantalla negra. Simplemente funciona.\n\n### Convierte Tus Bigo Lives en Clips con ClipAI\n\n¿Quieres convertir tus grabaciones de Bigo Live en clips cortos? ClipAI analiza tus Lives grabados y crea destacados listos para publicar como videos de TikTok, YouTube Shorts o Reels. Haz crecer tu audiencia más allá de Bigo.\n\n### El Grabador de Bigo Live Más Fácil para Creadores\n\nLiveStreamRecorder es un grabador de Bigo en la nube — sin app que instalar, sin teléfono encendido, sin pantalla negra. Regístrate gratis, agrega tu nombre de usuario de Bigo y nunca pierdas un Live."
+    "kick": "## Grabaciones de Directos de Kick\n\nMira grabaciones de directos de Kick de creadores que usan LiveStreamRecorder para guardar sus propios directos. Cada directo de Kick se captura automáticamente y se almacena de forma permanente.\n\n### VODs de Kick que no desaparecen\n\nLos VODs de Kick no siempre son fiables: las repeticiones pueden fallar, los canales cambian y tu contenido puede desvanecerse sin previo aviso. Nuestro grabador de Kick guarda tus directos de forma permanente en la nube, para que tu contenido no dependa del sistema de VOD de Kick. Tus directos siguen siendo tuyos, para siempre.\n\n### Mira y descarga tus grabaciones de Kick\n\nCada grabación de Kick se puede ver al instante en el navegador: sin anuncios, sin interrupciones. Los usuarios Premium pueden descargar sus grabaciones de Kick como archivos de vídeo para verlas sin conexión, editarlas o reutilizarlas.\n\n### Graba tus directos de Kick sin programas adicionales\n\nOlvídate de tener OBS grabando mientras haces tu directo. LiveStreamRecorder es un grabador de directos de Kick basado en la nube que captura tus transmisiones del lado del servidor. Sin carga extra en tu CPU, sin software de captura de escritorio, sin nada corriendo en segundo plano. Transmite desde PC, consola o móvil: tus directos de Kick se graban automáticamente en alta calidad.\n\n### Convierte tus directos en clips con ClipAI\n\n¿Quieres convertir tus grabaciones de directos de Kick en clips cortos? ClipAI analiza tus directos grabados y crea clips destacados listos para publicar como vídeos de TikTok, YouTube Shorts o Reels. Haz crecer tu audiencia más allá de Kick convirtiendo tu contenido en vivo en contenido corto para cada plataforma.\n\n### El mejor grabador de Kick para creadores\n\nLiveStreamRecorder está pensado para guardar directos de Kick de forma independiente. Regístrate gratis, añade tu canal de Kick y no vuelvas a perder un directo nunca más. Cada transmisión se graba automáticamente: una copia de seguridad permanente que no depende del sistema de VOD de Kick.",
+    "pandalive": "## Grabaciones de Directos de Pandalive\n\nMira grabaciones de directos de Pandalive de BJs que usan LiveStreamRecorder para guardar sus propios directos. Cada directo de Pandalive se captura automáticamente y se almacena para verlo cuando quieras.\n\n### Directos de Pandalive guardados automáticamente\n\nLos directos de Pandalive desaparecen cuando termina la emisión: no hay un sistema de repeticiones garantizado. Nuestro grabador de Pandalive guarda tus directos automáticamente en la nube, para que nada se pierda cuando acabe tu emisión. Bailes, canciones, charlas: todo sigue disponible.\n\n### Mira y descarga tus grabaciones de Pandalive\n\nCada grabación de Pandalive se puede ver al instante en el navegador. Los usuarios Premium pueden descargar sus grabaciones de Pandalive como archivos de vídeo para verlas sin conexión: perfecto para reutilizar tu propio contenido o guardar una copia personal.\n\n### Graba tus directos de Pandalive sin software extra\n\nOlvídate de apps de grabación de pantalla y herramientas de captura móvil. LiveStreamRecorder es un grabador de Pandalive en línea que captura tus directos del lado del servidor. Sin software de escritorio, sin móvil corriendo toda la noche, sin extensiones de navegador. Ya sea que transmitas desde el móvil, tablet o PC, tus directos de Pandalive se graban automáticamente en alta calidad.\n\n### Convierte tus directos en clips con ClipAI\n\n¿Quieres convertir tus grabaciones de directos de Pandalive en clips cortos? ClipAI analiza tus directos grabados y crea clips destacados listos para publicar en TikTok, Instagram Reels o YouTube Shorts. Haz crecer tu comunidad en todo el mundo reutilizando tus mejores momentos de Pandalive.\n\n### El mejor grabador de Pandalive para BJs\n\nLiveStreamRecorder está pensado para guardar directos de Pandalive. Regístrate gratis, añade tu usuario de Pandalive y no vuelvas a perder un directo. Cada directo se captura automáticamente: tu biblioteca permanente de contenido de Pandalive.",
+    "afreecatv": "## Grabaciones de Directos de AfreecaTV\n\nMira grabaciones de directos de AfreecaTV de BJs que usan LiveStreamRecorder para guardar sus propios directos. Cada directo de AfreecaTV se captura automáticamente y se almacena para verlo cuando quieras.\n\n### Directos de AfreecaTV guardados de forma independiente\n\nAfreecaTV tiene su propio sistema de VOD, pero no siempre se guardan las repeticiones, el contenido puede eliminarse y las políticas de almacenamiento cambian. Nuestro grabador de AfreecaTV guarda tus directos automáticamente en la nube como copia de seguridad independiente: tu contenido permanece intacto, pase lo que pase en AfreecaTV.\n\n### Mira y descarga tus grabaciones de AfreecaTV\n\nCada grabación de AfreecaTV se puede ver al instante en el navegador: sin anuncios, sin interrupciones. Los usuarios Premium pueden descargar sus grabaciones de AfreecaTV como archivos de vídeo para verlas sin conexión o reutilizarlas.\n\n### Graba tus directos de AfreecaTV sin programas adicionales\n\nOlvídate de tener software de captura corriendo durante largas sesiones de AfreecaTV. LiveStreamRecorder es un grabador de AfreecaTV basado en la nube que captura tus directos del lado del servidor. Sin app de escritorio, sin grabación en segundo plano, sin carga extra en tu CPU. Transmite desde PC o móvil: tus directos de AfreecaTV se graban automáticamente en alta calidad.\n\n### Convierte directos largos en clips cortos con ClipAI\n\nLos directos de AfreecaTV pueden durar horas. ClipAI analiza tus grabaciones y extrae los mejores momentos: jugadas clave, reacciones, momentos divertidos, highlights. Publícalos como clips de TikTok, YouTube Shorts o Reels para llegar a audiencias más allá de AfreecaTV.\n\n### El mejor grabador de AfreecaTV para BJs\n\nLiveStreamRecorder está pensado para guardar directos de AfreecaTV de forma independiente. Regístrate gratis, añade tu usuario de AfreecaTV y no vuelvas a perder un directo. Cada directo se captura automáticamente: una copia de seguridad permanente que no depende del sistema de VOD de AfreecaTV.",
+    "bigo": "## Grabaciones de Directos de Bigo Live\n\nMira grabaciones de directos de Bigo Live de creadores que usan LiveStreamRecorder para guardar sus propios directos. Cada directo de Bigo se captura automáticamente y se almacena para verlo cuando quieras.\n\n### Directos de Bigo guardados antes de que desaparezcan\n\nLos directos de Bigo existen solo mientras están en vivo: en cuanto cierras la sesión, el contenido desaparece por completo de la app. Nuestro grabador de Bigo guarda tus directos automáticamente en la nube, para que tu contenido no se esfume en cuanto termina el directo. Bailes, canciones, charlas, momentos de regalos: todo sigue disponible.\n\n### Mira y descarga tus grabaciones de Bigo\n\nCada grabación de Bigo se puede ver al instante en el navegador. Los usuarios Premium pueden descargar sus grabaciones de Bigo como archivos de vídeo para verlas sin conexión: perfecto para reutilizar tu propio contenido o guardar una copia personal.\n\n### Graba tus directos de Bigo sin grabación de pantalla\n\nOlvídate de grabar la pantalla del móvil o dejar otro dispositivo grabando toda la noche. LiveStreamRecorder es un grabador de Bigo en línea que captura tus directos del lado del servidor. Sin gasto de batería, sin configuración manual, sin software adicional. Ya sea que transmitas desde iPhone, Android o PC, tus directos de Bigo se graban automáticamente en alta calidad.\n\n### Convierte tus directos en clips con ClipAI\n\n¿Quieres convertir tus grabaciones de directos de Bigo en clips cortos? ClipAI analiza tus directos grabados y crea clips destacados listos para publicar en TikTok, Instagram Reels o YouTube Shorts. Haz crecer tu audiencia global reutilizando tus mejores momentos de Bigo.\n\n### El mejor grabador de Bigo para creadores\n\nLiveStreamRecorder está pensado para guardar directos de Bigo. Regístrate gratis, añade tu usuario de Bigo y no vuelvas a perder un directo. Cada directo se captura automáticamente: un lugar permanente para tu contenido de Bigo que no depende de que la app lo conserve por ti.",
+    "buzzcast": "## Grabaciones de Directos de Buzzcast\n\nMira grabaciones de directos de Buzzcast de creadores que usan LiveStreamRecorder para guardar sus propios directos. Cada directo de Buzzcast se captura automáticamente y se almacena para verlo cuando quieras.\n\n### Directos de Buzzcast guardados antes de que desaparezcan\n\nLos directos de Buzzcast son solo en vivo: en cuanto terminas la emisión, el contenido desaparece de la app. Nuestro grabador de Buzzcast guarda tus directos automáticamente en la nube, para que nada se pierda cuando acabe tu directo. Charlas, momentos musicales, contenido diario: todo sigue disponible para tus fans.\n\n### Mira y descarga tus grabaciones de Buzzcast\n\nCada grabación de Buzzcast se puede ver al instante en el navegador. Los usuarios Premium pueden descargar sus grabaciones de Buzzcast como archivos de vídeo para verlas sin conexión: perfecto para reutilizar tu propio contenido o guardar una copia personal.\n\n### Graba tus directos de Buzzcast sin apps adicionales\n\nOlvídate de grabar la pantalla del móvil o tener software de captura en segundo plano. LiveStreamRecorder es un grabador de Buzzcast en línea que captura tus directos del lado del servidor. Sin gasto de batería, sin configuración manual, sin software adicional. Tus directos de Buzzcast se graban automáticamente en alta calidad desde cualquier dispositivo.\n\n### Convierte tus directos en clips con ClipAI\n\n¿Quieres convertir tus grabaciones de directos de Buzzcast en clips cortos? ClipAI analiza tus directos grabados y crea clips destacados listos para publicar en TikTok, Instagram Reels o YouTube Shorts. Haz crecer tu comunidad más allá de Buzzcast reutilizando tus mejores momentos.\n\n### El mejor grabador de Buzzcast para creadores\n\nLiveStreamRecorder está pensado para guardar directos de Buzzcast. Regístrate gratis, añade tu usuario de Buzzcast y no vuelvas a perder un directo. Cada directo se captura automáticamente: tu biblioteca permanente de contenido de Buzzcast."
   },
   "jsonLd": {
     "name": {
@@ -337,7 +392,8 @@
       "kick": "Grabaciones de Streams de Kick",
       "afreecatv": "Grabaciones de Streams de AfreecaTV",
       "pandalive": "Grabaciones de Streams de Pandalive",
-      "bigo": "Grabaciones de Streams de Bigo"
+      "bigo": "Grabaciones de Streams de Bigo",
+      "buzzcast": "Grabaciones de Streams de Buzzcast"
     },
     "description": {
       "all": "Mira grabaciones de transmisiones en vivo de creadores en LiveStreamRecorder.",
@@ -347,7 +403,8 @@
       "kick": "Mira grabaciones de streams de Kick de creadores en LiveStreamRecorder.",
       "afreecatv": "Mira grabaciones de AfreecaTV de creadores en LiveStreamRecorder.",
       "pandalive": "Mira grabaciones de Pandalive de creadores en LiveStreamRecorder.",
-      "bigo": "Mira grabaciones de Bigo de creadores en LiveStreamRecorder."
+      "bigo": "Mira grabaciones de Bigo de creadores en LiveStreamRecorder.",
+      "buzzcast": "Mira grabaciones de Buzzcast de creadores en LiveStreamRecorder."
     },
     "streamTitle": "Stream de {nickname} - {date}",
     "streamDescription": {
@@ -358,7 +415,8 @@
       "afreecatv": "Grabación de AfreecaTV de {nickname}",
       "pandalive": "Grabación de Pandalive de {nickname}",
       "bigo": "Grabación de Bigo de {nickname}",
-      "unknown": "Grabación de transmisión en vivo de {nickname}"
+      "unknown": "Grabación de transmisión en vivo de {nickname}",
+      "buzzcast": "Grabación de Buzzcast de {nickname}"
     }
   },
   "recordedOn": "Grabado el {date}",
