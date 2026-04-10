@@ -108,9 +108,9 @@ export function parseUsername(input: string): ParsedUsername {
     };
   }
 
-  // Buzzcast URL pattern (personalInfo or livePlayer)
+  // Buzzcast URL pattern
   const buzzcastRegex =
-    /(?:https?:\/\/)?(?:www\.)?buzzcast\.com\/web\/(?:personalInfo|livePlayer)\/([^\/\s?]+)/i;
+    /(?:https?:\/\/)?(?:www\.)?buzzcast\.com\/web\/personalInfo\/([^\/\s?]+)/i;
   const buzzcastMatch = trimmed.match(buzzcastRegex);
 
   if (buzzcastMatch) {
