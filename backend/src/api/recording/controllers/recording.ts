@@ -32,7 +32,8 @@ export default factories.createCoreController(
 
       ctx.query.locale = ctx.query.locale || "en";
 
-      const followingIds = (fullUser as any)?.followers?.map((f: any) => f.id) || [];
+      const followingIds =
+        (fullUser as any)?.followers?.map((f: any) => f.id) || [];
       const favoriteIds = favoritesOnly
         ? (fullUser as any)?.favorites?.map((f: any) => f.id) || []
         : [];
@@ -41,9 +42,13 @@ export default factories.createCoreController(
       let followerIdFilter: object | null = null;
 
       if (favoritesOnly) {
-        followerIdFilter = { $in: favoriteIds.length === 0 ? [0] : favoriteIds };
+        followerIdFilter = {
+          $in: favoriteIds.length === 0 ? [0] : favoriteIds,
+        };
       } else if (scope === "following") {
-        followerIdFilter = { $in: followingIds.length === 0 ? [0] : followingIds };
+        followerIdFilter = {
+          $in: followingIds.length === 0 ? [0] : followingIds,
+        };
       } else if (scope === "discover" && followingIds.length > 0) {
         followerIdFilter = { $notIn: followingIds };
       }
@@ -84,12 +89,13 @@ export default factories.createCoreController(
         .leftJoin("sources_cmps as sc", "sc.entity_id", "s.id")
         .leftJoin("components_videos_videos as cv", "cv.id", "sc.cmp_id")
         .whereIn("f.type", [
-          "pandalive",
-          "youtube",
-          "twitch",
           "tiktok",
-          "afreecatv",
+          "twitch",
           "kick",
+          "youtube",
+          "afreecatv",
+          "pandalive",
+          "bigo",
         ])
         .groupBy("f.type")
         .orderBy("f.type")) as any[];

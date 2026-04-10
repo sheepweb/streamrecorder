@@ -1045,6 +1045,7 @@ export interface ApiFollowerFollower extends Struct.CollectionTypeSchema {
         'pandalive',
         'bigo',
         'tango',
+        'buzzcast',
       ]
     > &
       Schema.Attribute.Required &
