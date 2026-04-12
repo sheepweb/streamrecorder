@@ -67,15 +67,15 @@ async function buildPlaylist(documentId: string, updatedAt: string, quality: "hi
 async function checkLowQualityExists(documentId: string, updatedAt: string): Promise<boolean> {
   const cached = await fetchSourcePlaylists(documentId, updatedAt, "low");
   if (!cached) return false;
-  return cached.sourcesWithPlaylists.some((s) => s.playlist != null);
+  return cached.sourcesWithPlaylists.every((s) => s.playlist != null);
 }
 
 function buildMasterPlaylist(documentId: string): string {
   const base = `/video/${documentId}/playlist.m3u8`;
   return `#EXTM3U
-#EXT-X-STREAM-INF:BANDWIDTH=2000000,NAME="High"
+#EXT-X-STREAM-INF:BANDWIDTH=2000000,RESOLUTION=960x1920,NAME="High"
 ${base}?q=high
-#EXT-X-STREAM-INF:BANDWIDTH=600000,NAME="Low"
+#EXT-X-STREAM-INF:BANDWIDTH=600000,RESOLUTION=720x1280,NAME="Low"
 ${base}?q=low
 `;
 }
