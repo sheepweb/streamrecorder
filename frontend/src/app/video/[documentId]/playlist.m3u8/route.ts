@@ -34,14 +34,14 @@ const fetchSourcePlaylists = unstable_cache(
         state: { $eq: "done" },
       },
       sort: "createdAt:asc",
-      fields: ["path", "createdAt"],
+      fields: ["path", "createdAt", "bucket"],
     } as any);
 
     const sources = response.data.data ?? [];
     if (!sources.length) return null;
 
     const s3Client = getS3();
-    const bucket = getBucket(process.env.MEDIA_BUCKET!, sources[0].createdAt, sources[0].path);
+    const bucket = getBucket(process.env.MEDIA_BUCKET!, sources[0].createdAt, sources[0].path, sources[0].bucket);
     const sourcesWithPlaylists = await fetchPlaylistsFromS3(
       s3Client,
       bucket,
@@ -49,7 +49,7 @@ const fetchSourcePlaylists = unstable_cache(
       quality,
     );
 
-    return { sourcesWithPlaylists, createdAt: sources[0].createdAt, path: sources[0].path };
+    return { sourcesWithPlaylists, createdAt: sources[0].createdAt, path: sources[0].path, bucket: sources[0].bucket };
   },
   ["playlist-sources"],
   { revalidate: 3600 },
@@ -60,7 +60,7 @@ async function buildPlaylist(documentId: string, updatedAt: string, quality: "hi
   if (!cached) return null;
 
   const s3Client = getS3();
-  const bucket = getBucket(process.env.MEDIA_BUCKET!, cached.createdAt, cached.path);
+  const bucket = getBucket(process.env.MEDIA_BUCKET!, cached.createdAt, cached.path, cached.bucket);
   return combinePlaylistsWithSignedUrls(s3Client, bucket, cached.sourcesWithPlaylists);
 }
 

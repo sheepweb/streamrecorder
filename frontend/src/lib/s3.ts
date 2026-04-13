@@ -45,7 +45,10 @@ export function getBucket(
   bucket: string,
   createdAt?: Date | string | null,
   path?: string | null,
+  sourceBucket?: string | null,
 ): string {
+  if (sourceBucket) return sourceBucket;
+
   if (!createdAt) return `${bucket}-nbg`;
   const date = new Date(createdAt);
 
