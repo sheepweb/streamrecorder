@@ -74,6 +74,7 @@ export function ProfileTabs({ type, username, clipsCount }: ProfileTabsProps) {
           />
           {activeTab === "videos" && (
             <SegmentedControl
+              size="md"
               value={filters.sort}
               onChange={(value) => setFilters({ sort: value as SortOptions })}
               data={[
@@ -139,6 +140,7 @@ export function ProfileTabs({ type, username, clipsCount }: ProfileTabsProps) {
                 }}
               >
                 <SegmentedControl
+                  size="md"
                   value={filters.sort}
                   onChange={(value) =>
                     setFilters({ sort: value as SortOptions })
