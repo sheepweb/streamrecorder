@@ -20,8 +20,6 @@ import {
 } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getProfileUrl } from "../../../../components/open-social";
-import { FollowerTypeIcon } from "../follower-type-icon";
 import {
   useCallback,
   useEffect,
@@ -30,6 +28,8 @@ import {
   useRef,
   useState,
 } from "react";
+import { getProfileUrl } from "../../../../components/open-social";
+import { FollowerTypeIcon } from "../follower-type-icon";
 import { VideoPlayer } from "./video-player";
 
 interface VideoScrollPlayerProps {
@@ -319,9 +319,10 @@ export function VideoScrollPlayer({
           </ActionIcon>
         )}
         {visibleIndex !== null && recordings[visibleIndex]?.follower && (
-          <Stack
+          <Flex
             align="center"
             gap={4}
+            direction="column"
             component={Link}
             href={getProfileUrl(recordings[visibleIndex].follower)}
             style={{ textDecoration: "none" }}
@@ -330,7 +331,9 @@ export function VideoScrollPlayer({
               <Avatar size={48} radius="xl">
                 {recordings[visibleIndex].follower?.avatar?.url && (
                   <Image
-                    src={generateAvatarUrl(recordings[visibleIndex].follower!.avatar!.url!)}
+                    src={generateAvatarUrl(
+                      recordings[visibleIndex].follower!.avatar!.url!,
+                    )}
                     alt=""
                     width={48}
                     height={48}
@@ -346,9 +349,11 @@ export function VideoScrollPlayer({
               </Box>
             </Box>
             <Text size="xs" c="white" fw={500} maw={80} truncate ta="center">
-              {decodeURIComponent(recordings[visibleIndex].follower?.username || "")}
+              {decodeURIComponent(
+                recordings[visibleIndex].follower?.username || "",
+              )}
             </Text>
-          </Stack>
+          </Flex>
         )}
         {showNext && (
           <ActionIcon
