@@ -18,8 +18,8 @@ export const s3Nbg1 = new S3Client({
   },
   requestHandler: new NodeHttpHandler({
     httpsAgent: agent,
-    connectionTimeout: 5000,
-    requestTimeout: 15000,
+    connectionTimeout: 10000,
+    requestTimeout: 30000,
   }),
 });
 

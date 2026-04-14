@@ -30,6 +30,14 @@ api.instance.interceptors.request.use((config) => {
 api.instance.interceptors.response.use(
   (response) => response,
   (error) => {
+    if (
+      error.code === "ECONNRESET" &&
+      error.config &&
+      !error.config.__retried
+    ) {
+      error.config.__retried = true;
+      return api.instance.request(error.config);
+    }
     if (error.response?.status === 403) {
       console.error("403 Forbidden:", error.config?.url, error.config?.params);
     }
