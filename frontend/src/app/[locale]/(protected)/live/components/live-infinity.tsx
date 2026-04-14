@@ -135,24 +135,32 @@ export default function LiveInfinity({ scope, type }: Props) {
               </Button>
             </Menu.Target>
             <Menu.Dropdown>
-              <Menu.Item component={Link} href="?">
+              <Menu.Item
+                component={Link}
+                href={scope === "all" ? "?scope=all" : "?"}
+              >
                 {t("allPlatforms")}
               </Menu.Item>
-              {streamingPlatforms.map((platform) => (
-                <Menu.Item
-                  key={platform.name}
-                  component={Link}
-                  href={`?type=${platform.name.toLowerCase()}`}
-                  leftSection={
-                    <FollowerTypeIcon
-                      type={platform.name.toLowerCase() as FollowerTypeEnum}
-                      size={20}
-                    />
-                  }
-                >
-                  {platform.name}
-                </Menu.Item>
-              ))}
+              {streamingPlatforms.map((platform) => {
+                const params = new URLSearchParams();
+                if (scope === "all") params.set("scope", "all");
+                params.set("type", platform.name.toLowerCase());
+                return (
+                  <Menu.Item
+                    key={platform.name}
+                    component={Link}
+                    href={`?${params}`}
+                    leftSection={
+                      <FollowerTypeIcon
+                        type={platform.name.toLowerCase() as FollowerTypeEnum}
+                        size={20}
+                      />
+                    }
+                  >
+                    {platform.name}
+                  </Menu.Item>
+                );
+              })}
             </Menu.Dropdown>
           </Menu>
           <Tooltip label={t("refresh")}>
@@ -167,7 +175,7 @@ export default function LiveInfinity({ scope, type }: Props) {
               variant="light"
               leftSection={<IconPlayerRecord size={18} />}
               size="lg"
-              href={"?scope=all"}
+              href={type ? `?scope=all&type=${type}` : "?scope=all"}
             >
               {t("showAll")}
             </Button>
