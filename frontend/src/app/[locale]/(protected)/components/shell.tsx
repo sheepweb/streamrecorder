@@ -146,7 +146,7 @@ export function Shell({
           />
         </AppShell.Navbar>
         <AppShell.Main>
-          {!mirrorBannerDismissed && (
+          {mounted && !mirrorBannerDismissed && (
             <Flex
               align="center"
               justify="center"

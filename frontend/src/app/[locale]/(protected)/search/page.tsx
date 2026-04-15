@@ -202,7 +202,6 @@ export default function Page() {
 
     const result = await follow(user.username, user.type as FollowerTypeEnum);
 
-    console.log(result);
     setIsFollowing(false);
 
     if (result.success) {
@@ -226,7 +225,11 @@ export default function Page() {
         title: tCommon("follow.errorTitle"),
         message: tCommon.rich("follow.blockedMessage", {
           terms: (chunks) => (
-            <a href="/terms" target="_blank" style={{ color: "white", textDecoration: "underline" }}>
+            <a
+              href="/terms"
+              target="_blank"
+              style={{ color: "white", textDecoration: "underline" }}
+            >
               {chunks}
             </a>
           ),
