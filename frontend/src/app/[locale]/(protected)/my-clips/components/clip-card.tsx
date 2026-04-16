@@ -59,11 +59,16 @@ function PlatformButton({
 
   if (state === ClipShareStateEnum1.Processing) {
     return (
-      <Progress.Root size={40} radius="md">
-        <Progress.Section value={100} color="yellow" animated>
-          <Progress.Label lh={1.4}>{t("share.processing")}</Progress.Label>
-        </Progress.Section>
-      </Progress.Root>
+      <Button
+        size="md"
+        variant="light"
+        color="yellow"
+        leftSection={icon}
+        fullWidth
+        loading
+      >
+        {t("share.processing")}
+      </Button>
     );
   }
 

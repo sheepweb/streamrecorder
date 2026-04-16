@@ -45,8 +45,12 @@ export async function GET(
 
   const getCachedClip = unstable_cache(
     async (id: string) => {
-      const { data } = await publicApi.clip.getClipsId({ id });
-      return data.data ?? null;
+      try {
+        const { data } = await publicApi.clip.getClipsId({ id });
+        return data.data ?? null;
+      } catch {
+        return null;
+      }
     },
     ["clip", documentId],
     { revalidate: 3600 },
