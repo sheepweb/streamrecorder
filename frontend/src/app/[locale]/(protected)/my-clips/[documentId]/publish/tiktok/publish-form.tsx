@@ -37,7 +37,7 @@ import {
   CreatorInfo,
   getCreatorInfo,
   shareToTikTok,
-} from "../../actions/share-tiktok";
+} from "../../../actions/share-tiktok";
 
 interface PublishFormProps {
   clip: Clip;
@@ -130,6 +130,7 @@ export function PublishForm({ clip, videoUrl }: PublishFormProps) {
         title: t("success"),
         message: t("successMessage"),
         color: "green",
+        autoClose: 5000,
       });
       router.push("/my-clips");
     } else {

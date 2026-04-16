@@ -7289,8 +7289,8 @@ export type UsersPermissionsPermissionsTree = Record<
 >;
 
 export type ClipWithShare = Clip & {
-  /** User's latest share for this clip */
-  clipShare?: ClipShare | null;
+  /** Shares grouped by platform (e.g. { tiktok: {...}, youtube: {...} }) */
+  clipShares?: Record<string, ClipShare>;
 };
 
 export type FollowerWithMeta = {

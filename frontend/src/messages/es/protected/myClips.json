@@ -9,13 +9,14 @@
     "tiktok": "Publicar en TikTok",
     "uploaded": "Publicado en TikTok",
     "processing": "Publicando...",
-    "completed": "Publicado en TikTok",
+    "completed": "Publicado",
     "shared": "Publicado",
     "failed": "Fallido",
     "retry": "Reintentar",
     "failedTooltip": "Publicación fallida. Haz clic para reintentar.",
     "check": "Verificar",
-    "checkStatus": "Verificar estado en TikTok"
+    "checkStatus": "Verificar estado en TikTok",
+    "youtube": "Publicar en YouTube"
   },
   "actions": {
     "edit": "Editar video",
@@ -90,5 +91,40 @@
     },
     "upgradeButton": "Actualizar Ahora",
     "hint": "Desbloquea la publicación de clips con una suscripción premium"
+  },
+  "youtubePublishPage": {
+    "title": "Publicar en YouTube",
+    "description": "Revisa tu video y publícalo como YouTube Short",
+    "titleLabel": "Título",
+    "titlePlaceholder": "Escribe un título para tu video...",
+    "descriptionLabel": "Descripción",
+    "descriptionPlaceholder": "Añade una descripción (opcional)...",
+    "privacyLabel": "Privacidad",
+    "privacy": {
+      "public": "Público",
+      "unlisted": "No listado",
+      "private": "Privado"
+    },
+    "tagsLabel": "Etiquetas",
+    "tagsPlaceholder": "gaming, highlights, directo",
+    "tagsDescription": "Etiquetas separadas por comas para ayudar a los espectadores a encontrar tu video",
+    "quotaWarning": "YouTube tiene un límite diario de subidas. Si falla con un error de cuota, inténtalo mañana.",
+    "confirmationPrefix": "Al publicar, aceptas",
+    "termsOfServiceLink": "los Términos de Servicio de LiveStreamRecorder",
+    "andText": "y",
+    "youtubeTermsLink": "los Términos de Servicio de YouTube",
+    "uploadButton": "Publicar en YouTube",
+    "cancel": "Cancelar",
+    "success": "Publicado",
+    "successMessage": "Tu video ha sido subido a YouTube.",
+    "error": "Error",
+    "validation": {
+      "titleRequired": "Escribe un título para tu video"
+    },
+    "noYoutubeConnection": {
+      "title": "Cuenta de YouTube no conectada",
+      "description": "Para publicar clips en YouTube, ve a Configuración y conecta tu cuenta de YouTube primero.",
+      "goToSettings": "Ir a Configuración"
+    }
   }
 }
