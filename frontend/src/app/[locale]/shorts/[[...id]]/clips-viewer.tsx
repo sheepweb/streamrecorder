@@ -28,7 +28,7 @@ import {
 } from "@tabler/icons-react";
 import { useLocale } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/app/components/link";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import "./clips-viewer.css";
 
